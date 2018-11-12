@@ -1,0 +1,35 @@
+<!--
+  <mat-toolbar color="primary" class="mat-elevation-z1">
+    <span>{{title}}</span>
+  </mat-toolbar>
+-->
+
+<section class="login-input mat-elevation-z5">
+  <form class="form-login" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+    <ul class="form-fields">
+      <li>
+        <input
+          class="text-input"
+          type="text"
+          name="username"
+          placeholder="Username"
+          formControlName="username"
+        />
+      </li>
+      <li>
+        <input
+          type="password"
+          name="password"
+          class="text-input"
+          placeholder="Password"
+          formControlName="password"
+        />
+      </li>
+      <li>
+        <button class="login-btn" type="submit" name="submit" [disabled]="!loginForm.valid">
+          Login
+        </button>
+      </li>
+    </ul>
+  </form>
+</section>

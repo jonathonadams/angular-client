@@ -1,0 +1,15 @@
+:host {
+  width: 90%;
+  align-self: flex-start;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.mat-card {
+  margin-bottom: 1em;
+  :last-of-type {
+    margin-bottom: none;
+  }
+}

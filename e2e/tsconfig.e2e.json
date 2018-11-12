@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "module": "commonjs",
+    "target": "es5",
+    "typeRoots": ["../node_modules/testcafe", "../node_modules/testcafe-angular-selectors"]
+  },
+  "files": ["src/*"],
+  "include": ["**/*.e2e-spec.ts", "**/*.d.ts"],
+  "exclude": ["../node_modules/@types/jest/index.d.ts"]
+}

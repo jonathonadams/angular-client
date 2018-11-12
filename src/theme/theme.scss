@@ -1,0 +1,284 @@
+// For more information on angular material thememing, visit the below link
+// https://material.angular.io/guide/theming
+
+// Angular Theme
+@import '~@angular/material/theming';
+
+// Example of definining your own custom pallet
+
+$light-primary-pallet: (
+  50: #ffe6ec,
+  100: #ffbfcf,
+  200: #ff96b0,
+  300: #ff6b90,
+  400: #ff4c77,
+  500: #ff3460,
+  600: #ee2e5d,
+  700: #d8285a,
+  800: #c32257,
+  900: #9f1652,
+  A100: #ffffff,
+  A200: #ffffff,
+  A400: #ffcdd7,
+  A700: #ffb3c3,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white
+  )
+);
+$light-accent-pallet: (
+  50: #dafff4,
+  100: #a1ffe3,
+  200: #34ffd2,
+  300: #00fcbf,
+  400: #00f4b0,
+  500: #00eea1,
+  600: #00dc93,
+  700: #00c782,
+  800: #00b574,
+  900: #009259,
+  A100: #a7ffeb,
+  A200: #64ffda,
+  A400: #1de9b6,
+  A700: #00bfa5,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white
+  )
+);
+$dark-primary-pallet: (
+  50: #eaffec,
+  100: #cbffd0,
+  200: #a5ffb0,
+  300: #73ff8c,
+  400: #34ff6d,
+  500: #00fc4e,
+  600: #00ea45,
+  700: #00d33b,
+  800: #00be2f,
+  900: #009822,
+  A100: #ffffff,
+  A200: #fff9f3,
+  A400: #ffddc0,
+  A700: #ffcfa7,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white
+  )
+);
+$dark-accent-pallet: (
+  50: #e0f5ff,
+  100: #afe6ff,
+  200: #78d6ff,
+  300: #34c5ff,
+  400: #00b9ff,
+  500: #00acff,
+  600: #009df0,
+  700: #008adb,
+  800: #0079c7,
+  900: #0059a5,
+  A100: #82b1ff,
+  A200: #448aff,
+  A400: #2979ff,
+  A700: #2962ff,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white
+  )
+);
+// Example of definining your own custom pallet
+$triadic-main-pallet: (
+  50: #e8e9ff,
+  100: #c3c7fe,
+  200: #98a3fe,
+  300: #667eff,
+  400: #3460ff,
+  500: #0040fb,
+  600: #0037f0,
+  700: #002be3,
+  800: #001cd9,
+  900: #0000bf,
+  A100: #a7ffeb,
+  A200: #64ffda,
+  A400: #1de9b6,
+  A700: #00bfa5,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white
+  )
+);
+$triadic-accent-pallet: (
+  50: #f9e1ff,
+  100: #edb4fe,
+  200: #e17dfe,
+  300: #d334ff,
+  400: #c700ff,
+  500: #b400f2,
+  600: #a000ee,
+  700: #8300e9,
+  800: #6600e3,
+  900: #0000d9,
+  A100: #ffffff,
+  A200: #ffffff,
+  A400: #ffcdd7,
+  A700: #ffb3c3,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white
+  )
+);
+$light-background: (
+  50: #fafafa,
+  100: #f5f5f5,
+  200: #eeeeee,
+  300: #e0e0e0,
+  400: #bdbdbd,
+  500: #9e9e9e,
+  600: #757575,
+  700: #616161,
+  800: #424242,
+  900: #212121,
+  A100: #82b1ff,
+  A200: #448aff,
+  A400: #2979ff,
+  A700: #2962ff,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white
+  )
+);
+$dark-background: (
+  50: #fafafa,
+  100: #f5f5f5,
+  200: #eeeeee,
+  300: #e0e0e0,
+  400: #bdbdbd,
+  500: #9e9e9e,
+  600: #757575,
+  700: #616161,
+  800: #424242,
+  900: #212121,
+  A100: #82b1ff,
+  A200: #448aff,
+  A400: #2979ff,
+  A700: #2962ff,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white
+  )
+);
+$app-primary: mat-palette($light-primary-pallet, 500);
+$app-accent: mat-palette($light-accent-pallet, 200);
+// Create the theme object (a Sass map containing all of the palettes).
+$app-theme: mat-light-theme($app-primary, $app-accent);
+// Include the default theme styles.
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($app-theme);
+// Define an alternate dark theme.
+$dark-primary: mat-palette($dark-primary-pallet, 400);
+// $dark-accent: mat-palette($light-accent-pallet, A200, A100, A400);
+$dark-accent: mat-palette($dark-accent-pallet, 300);
+$dark-warn: mat-palette($mat-deep-orange);
+// Create the theme object (a Sass map containing all of the palettes).
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+.dark-theme {
+  @include angular-material-theme($app-theme);
+}

@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="column-2">
+    <client-todo-detail
+      [todo]="selectedTodo"
+      (cancelled)="resetTodo()"
+      (saved)="saveTodo($event)"
+    ></client-todo-detail>
+  </div>
+  <div class="column">
+    <client-todo-list
+      [todos]="todo$ | async"
+      (selected)="selectTodo($event)"
+      (deleted)="deleteTodo($event)"
+    ></client-todo-list>
+  </div>
+</div>

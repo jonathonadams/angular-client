@@ -1,0 +1,18 @@
+<StackLayout [formGroup]="loginForm">
+  <TextField
+    formControlName="username"
+    hint="username"
+    autocorrect="false"
+    autocapitalizationType="none"
+  ></TextField>
+  <TextField formControlName="password" hint="password" secure="true"></TextField>
+  <button text="login" (tap)="onSubmit(loginForm)"></button>
+</StackLayout>
+
+<!--
+  <FlexboxLayout [formGroup]="loginForm" height="22" flexDirection="column">
+    <TextField formControlName="username" hint="username" autocorrect="false" autocapitalizationType="none"></TextField>
+    <TextField formControlName="password" hint="password" secure="true"></TextField>
+    <Button text="login" (tap)="onSubmit(loginForm)"></Button>
+  </FlexboxLayout>
+-->
