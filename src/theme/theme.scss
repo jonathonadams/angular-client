@@ -267,11 +267,6 @@ $app-primary: mat-palette($light-primary-pallet, 500);
 $app-accent: mat-palette($light-accent-pallet, 200);
 // Create the theme object (a Sass map containing all of the palettes).
 $app-theme: mat-light-theme($app-primary, $app-accent);
-// Include the default theme styles.
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include angular-material-theme($app-theme);
 // Define an alternate dark theme.
 $dark-primary: mat-palette($dark-primary-pallet, 400);
 // $dark-accent: mat-palette($light-accent-pallet, A200, A100, A400);
@@ -279,6 +274,3 @@ $dark-accent: mat-palette($dark-accent-pallet, 300);
 $dark-warn: mat-palette($mat-deep-orange);
 // Create the theme object (a Sass map containing all of the palettes).
 $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
-.dark-theme {
-  @include angular-material-theme($app-theme);
-}

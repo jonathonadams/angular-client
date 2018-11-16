@@ -1,6 +1,6 @@
 const fs = require('fs');
+const fsPromise = fs.promises;
 const bcrypt = require('bcryptjs');
-const data = require('./db.json');
 
 module.exports = (req, res, next) => {
   const user = Object.assign({}, req.body);
@@ -12,10 +12,22 @@ module.exports = (req, res, next) => {
       user.id = Math.floor(Math.random() * Math.floor(1000));
       user.hashedPassword = hashedPassword;
       delete user.password;
-      data.users.push(user);
-      fs.writeFile(__dirname + '/api/db.json', JSON.stringify(data, null, 2), 'utf8', () => {
-        res.json(user);
-      });
+
+      fsPromise
+        .readFile(__dirname + '/db.json', 'utf-8')
+        .then(file => {
+          let data = JSON.parse(file);
+          data.users.push(user);
+          return data;
+        })
+        .then(data => {
+          return fsPromise.writeFile(__dirname + '/db.json', JSON.stringify(data, null, 2), {
+            encoding: 'utf-8'
+          });
+        })
+        .then(() => {
+          res.json(user);
+        });
     })
     .catch(err => {
       error(err);

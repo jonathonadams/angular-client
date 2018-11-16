@@ -1,8 +1,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
+      "~/*": ["src/*"],
+      "*": ["./node_modules/tns-core-modules/*", "./node_modules/*"],
       "@env/*": ["src/environments/*"],
       "@app/*": ["src/app/*"],
       "@app-core/*": ["src/app/core/*"],

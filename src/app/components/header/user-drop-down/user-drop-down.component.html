@@ -1,0 +1,6 @@
+<div fxLayout="column">
+  <mat-slide-toggle (change)="toggleDarkTheme.emit($event.checked)" [checked]="darkTheme$ | async"
+    >Dark Mode</mat-slide-toggle
+  >
+  <button mat-button type="button" (click)="logout.emit()">Logout</button>
+</div>

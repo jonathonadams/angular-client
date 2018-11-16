@@ -10,8 +10,6 @@ export class AuthGuard implements CanActivate {
   constructor(private auth: AuthService, private store: Store<AppState>) {}
 
   canActivate() {
-    console.log('inside log guard');
-    console.log(this.auth.checkUserIsLoggedIn());
     if (this.auth.checkUserIsLoggedIn()) {
       return true;
     } else {

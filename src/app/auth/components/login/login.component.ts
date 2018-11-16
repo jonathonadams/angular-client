@@ -1,11 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AuthService } from '@auth/auth.service';
-import { Login, LoginRedirect } from '@auth/auth.actions';
 import { AppState } from '@store/reducers';
 import { LoginCredentials } from '@app/auth/auth.model';
-// import { LoginCredentials } from '@features/user';
+import { Login, LoginRedirect } from '@auth/auth.actions';
+import { AuthService } from '@auth/auth.service';
 
 @Component({
   selector: 'client-login',
@@ -14,8 +13,6 @@ import { LoginCredentials } from '@app/auth/auth.model';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
-  title = 'BRANDING TITLE';
-
   public loginForm: FormGroup;
 
   constructor(
@@ -37,24 +34,20 @@ export class LoginComponent implements OnInit {
     });
 
     // Check user is logged in.
-    if (this.checkUserIsLoggedIn()) {
+    this.checkUserIsLoggedIn();
+  }
+
+  checkUserIsLoggedIn(): void {
+    if (this.auth.checkUserIsLoggedIn()) {
       this.store.dispatch(new LoginRedirect());
     }
   }
 
-  checkUserIsLoggedIn(): boolean {
-    return this.auth.checkUserIsLoggedIn();
-  }
-
-  reset() {
-    this.loginForm.reset({
-      username: '',
-      password: ''
-    });
+  reset(): void {
+    this.loginForm.reset();
   }
 
   public onSubmit({ value, valid }: { value: LoginCredentials; valid: boolean }): void {
-    console.log(value, valid);
     if (valid) {
       this.store.dispatch(new Login(value));
     }

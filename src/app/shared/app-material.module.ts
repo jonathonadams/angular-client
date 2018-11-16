@@ -13,7 +13,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatToolbarModule,
-  MatMenuModule
+  MatMenuModule,
+  MatSlideToggleModule
   // MatIconRegistry
 } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -35,7 +36,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatToolbarModule,
     MatGridListModule,
     MatMenuModule,
-    LayoutModule
+    LayoutModule,
+    MatSlideToggleModule
   ],
   declarations: [],
   exports: [
@@ -53,7 +55,8 @@ import { LayoutModule } from '@angular/cdk/layout';
     MatToolbarModule,
     MatGridListModule,
     MatMenuModule,
-    LayoutModule
+    LayoutModule,
+    MatSlideToggleModule
   ]
 })
 export class AppMaterialModule {
