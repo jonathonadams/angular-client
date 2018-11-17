@@ -34,9 +34,11 @@ module.exports = (req, res, next) => {
               }
             );
 
+            const clonedUser = Object.assign({}, user);
+            delete clonedUser.hashedPassword;
             // send the user and JWT back
             res.json({
-              user: user,
+              user: clonedUser,
               token: token
             });
           } else {

@@ -19,4 +19,4 @@ export function usersReducer(state: User, action: UserActionUnion): User {
 }
 
 // A function to select the current investor from the state
-export const selectUserr = (state: AppState) => state.user;
+export const selectUser = (state: AppState) => state.user;

@@ -1,4 +1,5 @@
-<div fxLayout="column">
+<div fxLayout="column" class="user-dropdown-overlay-container mat-elevation-z6">
+  <h3>{{ (user$ | async)?.username }}</h3>
   <mat-slide-toggle (change)="toggleDarkTheme.emit($event.checked)" [checked]="darkTheme$ | async"
     >Dark Mode</mat-slide-toggle
   >

@@ -1,0 +1,15 @@
+@import 'src/theme/theme.scss';
+@import 'user-drop-down.theme';
+
+// Light theme
+@include user-drop-down-theme($app-theme);
+
+// Dark theme
+.dark-theme {
+  @include user-drop-down-theme($dark-theme);
+}
+
+.user-dropdown-overlay-container {
+  padding: 0.5em;
+  border-radius: 0.2em;
+}

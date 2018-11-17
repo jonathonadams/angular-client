@@ -1,3 +1,4 @@
-export * from './user.model';
+export { User } from './user.model';
 export * from './user.actions';
-export * from './user.reducer';
+export { usersReducer, selectUser } from './user.reducer';
+export { UserService } from './user.service';

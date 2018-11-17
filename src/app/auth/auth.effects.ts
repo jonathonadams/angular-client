@@ -13,6 +13,7 @@ import {
 } from './auth.actions';
 import { AuthService } from './auth.service';
 import { LoginCredentials } from './auth.model';
+import { LoadUserSuccess } from '../features/users';
 
 @Injectable()
 export class AuthEffects {
@@ -36,11 +37,12 @@ export class AuthEffects {
     tap(() => this.router.navigate(['/login']))
   );
 
-  @Effect({ dispatch: false })
+  @Effect()
   loginSuccess$ = this.actions$.pipe(
     ofType<LoginSuccess>(AuthActionTypes.LoginSuccess),
     tap(action => this.authService.setAuthorizationToken(action.payload.token)),
-    tap(() => this.router.navigate(['/home']))
+    tap(() => this.router.navigate(['/home'])),
+    map(action => new LoadUserSuccess(action.payload.user))
   );
 
   @Effect({ dispatch: false })
