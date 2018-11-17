@@ -1,12 +1,12 @@
-<div class="container">
-  <div class="column-2">
+<div fxLayout="column" fxLayout.gt-xs="row" class="container">
+  <div fxFlex="1 0 0" class="column">
     <client-todo-detail
       [todo]="selectedTodo"
       (cancelled)="resetTodo()"
       (saved)="saveTodo($event)"
     ></client-todo-detail>
   </div>
-  <div class="column">
+  <div class="column list" fxFlex="2 0 0">
     <client-todo-list
       [todos]="todo$ | async"
       (selected)="selectTodo($event)"

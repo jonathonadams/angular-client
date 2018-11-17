@@ -1,32 +1,44 @@
-<div class="login-input mat-elevation-z3">
-  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
-    <mat-form-field color="primary">
-      <input
-        matInput
-        type="text"
-        name="username"
-        placeholder="Username"
-        formControlName="username"
-      />
-    </mat-form-field>
-    <mat-form-field color="primary">
-      <input
-        matInput
-        type="password"
-        name="password"
-        placeholder="Password"
-        formControlName="password"
-      />
-    </mat-form-field>
-    <button
-      mat-raised-button
-      color="primary"
-      class="login-btn"
-      type="submit"
-      name="submit"
-      [disabled]="!loginForm.valid"
+<div
+  class="page-content"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+  [ngClass]="{ 'dark-theme': darkTheme$ | async }"
+>
+  <div class="login-input mat-elevation-z3">
+    <form
+      fxLayout="column"
+      class="login-form"
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit(loginForm)"
     >
-      Login
-    </button>
-  </form>
+      <mat-form-field color="primary">
+        <input
+          matInput
+          type="text"
+          name="username"
+          placeholder="Username"
+          formControlName="username"
+        />
+      </mat-form-field>
+      <mat-form-field color="primary">
+        <input
+          matInput
+          type="password"
+          name="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        class="login-btn"
+        type="submit"
+        name="submit"
+        [disabled]="!loginForm.valid"
+      >
+        Login
+      </button>
+    </form>
+  </div>
 </div>

@@ -11,24 +11,30 @@ export class WebSocketService {
   private socket: Socket;
 
   initSocket(): void {
-    if (!this.socket) {
-      this.socket = io(this.baseUrl, {
-        timeout: 10000,
-        upgrade: true,
-        transports: ['websocket']
-      });
+    try {
+      if (!this.socket) {
+        this.socket = io(this.baseUrl, {
+          timeout: 10000,
+          upgrade: true,
+          transports: ['websocket']
+        });
 
-      this.socket.on('connect', () => {
-        console.log('socket connected');
-      });
+        this.socket.on('connect', () => {
+          console.log('socket connected');
+        });
 
-      this.socket.on('disconnect', () => {
-        console.log('socket connected');
-      });
+        this.socket.on('disconnect', () => {
+          console.log('socket connected');
+        });
 
-      this.socket.on('connect_error', err => {
-        console.log('connect error', err);
-      });
+        this.socket.on('connect_error', err => {
+          console.log('connect error', err);
+        });
+      }
+    } catch (err) {
+      // Do somethin with the error
+      // For some reasong the 'connect_error' does not catch the connect error
+      // And still logs an error to the cnsole. hence the try catch
     }
   }
 

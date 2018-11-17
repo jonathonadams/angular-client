@@ -82,3 +82,9 @@ import 'hammerjs';
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+
+// This is requird for socket.io at the moment as the @angular/cli v6.
+// This will be removed once the fix has been made.
+// https://github.com/socketio/socket.io-client/issues/1166
+// Add global to window, assigning the value of window itself.
+(window as any).global = window;

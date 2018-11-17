@@ -35,3 +35,12 @@ remove the NSAppTransportSecurity from the info.plist in the ios directory
 android:networkSecurityConfig="@xml/network_security_config"
 
 - change the prefix to from client -> whatever
+
+## Known Errors
+
+Nativescript build process -> Pattern must be a string. Copy webpack plugin has a fix in 4.6, waiting for release.
+
+## Cutome theme mixins for angular material
+
+-> Login component
+-> dark theme view encapulation does not apply for material components

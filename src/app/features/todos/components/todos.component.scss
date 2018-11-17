@@ -4,18 +4,9 @@
   flex-direction: column;
 }
 
-.container {
-  display: flex;
-  flex-direction: row; // <- change this to column for all screens
-}
-
 .column {
-  flex: 2;
   padding: 0.5em;
-  overflow: auto;
-}
-
-.column-2 {
-  flex: 1;
-  padding: 0.5em;
+  &.list {
+    overflow: auto;
+  }
 }

@@ -5,6 +5,8 @@ import { AppState } from '@store/reducers';
 import { LoginCredentials } from '@app/auth/auth.model';
 import { Login, LoginRedirect } from '@auth/auth.actions';
 import { AuthService } from '@auth/auth.service';
+import { ThemeService } from '~/app/core/theme/theme.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'client-login',
@@ -15,11 +17,16 @@ import { AuthService } from '@auth/auth.service';
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
 
+  private darkTheme$: Observable<boolean>;
+
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthService,
-    private store: Store<AppState>
-  ) {}
+    private store: Store<AppState>,
+    private theme: ThemeService
+  ) {
+    this.darkTheme$ = this.theme.darkTheme$;
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({

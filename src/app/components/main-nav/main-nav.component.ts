@@ -15,7 +15,7 @@ export class MainNavComponent {
     { path: '/todos', icon: 'list', label: 'Todos' }
   ];
 
-  prepareRouterState(router: RouterOutlet) {
+  routerAnimations(router: RouterOutlet) {
     return router.activatedRouteData['animation'] || 'initial';
   }
 }

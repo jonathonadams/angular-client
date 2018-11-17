@@ -1,17 +1,20 @@
-<!-- <div class="container"> -->
 <client-header (toggleNavigation)="mainNav.toggle()" class="header"></client-header>
 
-<mat-sidenav-container hasBackdrop="true">
-  <mat-sidenav #mainNav mode="push" class="mat-main-nav mat-elevation-z6">
+<mat-sidenav-container fxFlex="1 0 0" hasBackdrop="true">
+  <mat-sidenav #mainNav mode="push" class="mat-elevation-z6">
     <client-nav-list [navLinks]="navLinks"></client-nav-list>
   </mat-sidenav>
 
   <!-- Content of rest of section -->
-  <mat-sidenav-content class="app-content">
+  <mat-sidenav-content fxLayout="column" class="app-content">
     <!-- Router outlet for the rest of the app -->
-    <div class="page-content" [@routerAnimations]="prepareRouterState(routerOutlet)">
+    <div
+      fxLayout="column"
+      fxFlex="1 1 0"
+      class="page-content"
+      [@routerAnimations]="routerAnimations(routerOutlet)"
+    >
       <router-outlet #routerOutlet="outlet"></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<!-- </div> -->
