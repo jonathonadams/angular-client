@@ -4,6 +4,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavigationComponent } from '../navigation/navigation.component';
+import { TodosComponent } from '../features/todos/components/todos.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
       {
         path: 'home',
         component: DashboardComponent
+      },
+      {
+        path: 'todos',
+        component: TodosComponent
       },
       {
         path: '',
