@@ -33,11 +33,6 @@
       "title": "Yellow Todo",
       "description": "This is a Yellow Todo!",
       "id": 360
-    },
-    {
-      "description": "This is a Green Todo!",
-      "title": "Green Todo",
-      "id": 921
     }
   ]
 }

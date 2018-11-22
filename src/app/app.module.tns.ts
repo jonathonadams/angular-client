@@ -15,12 +15,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { ComponentsModule } from '@components/components.module';
 import { AuthModule } from './auth';
 import { CoreModule } from './core/core.module';
+import { NavigationModule } from './navigation/navigation.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     NativeScriptModule,
     ComponentsModule,
+    NavigationModule,
     AppRoutingModule,
     CoreModule.forRoot(),
     AuthModule.forRoot(),

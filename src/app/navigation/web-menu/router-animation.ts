@@ -11,14 +11,14 @@ export const ROUTER_ANIMATIONS = trigger('routerAnimations', [
       optional: true
     }),
 
-    query(':enter mat-card', [style({ opacity: 0, transform: 'translateY(100%)' })], {
+    query(':enter', [style({ opacity: 0, transform: 'translateY(100%)' })], {
       optional: true
     }),
 
     // animate away an in each of the cards on the components
     group([
       query(
-        ':leave mat-card',
+        ':leave',
         stagger('100ms', [
           animate(
             '400ms cubic-bezier(.35,0,.25,1)',
@@ -28,7 +28,7 @@ export const ROUTER_ANIMATIONS = trigger('routerAnimations', [
         { optional: true }
       ),
       query(
-        ':enter mat-card',
+        ':enter',
         stagger('100ms', [
           animate(
             '400ms cubic-bezier(.35,0,.25,1)',

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import LocalStorage from './local-storage';
 
+// The appropriate local storage will be imported depending on if you are
+// building for the web or for native web development
 @Injectable({
   providedIn: 'root'
 })

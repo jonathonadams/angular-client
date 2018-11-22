@@ -1,5 +1,6 @@
 {
   "typescript.disableAutomaticTypeAcquisition": true,
   "typescript.check.npmIsInstalled": false,
-  "typescript.autoClosingTags": false
+  "typescript.autoClosingTags": false,
+  "editor.formatOnSave": false
 }

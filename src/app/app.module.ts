@@ -12,6 +12,7 @@ import { reducers, metaReducers, AppState } from '@store/reducers';
 import { ComponentsModule } from '@components/components.module';
 import { AuthModule } from './auth';
 import { CoreModule } from '@app-core/core.module';
+import { NavigationModule } from './navigation/navigation.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { CoreModule } from '@app-core/core.module';
     EffectsModule.forRoot([]),
     CoreModule.forRoot(),
     AuthModule.forRoot(),
+    NavigationModule,
     ComponentsModule,
     AppRoutingModule.forRoot()
   ],
