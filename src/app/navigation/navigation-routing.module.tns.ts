@@ -2,9 +2,9 @@ import { Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AuthGuard } from '../auth/auth.guard';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { NavigationComponent } from '../navigation/navigation.component';
-import { TodosComponent } from '../features/todos/components/todos.component';
+import { NavigationComponent } from '@nav/navigation.component';
+import { TodosComponent } from '@features/todos/components/todos.component';
+import { DashboardComponent } from '@components/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -33,4 +33,4 @@ const routes: Routes = [
   imports: [NativeScriptRouterModule.forChild(routes)],
   exports: [NativeScriptRouterModule]
 })
-export class ComponentsRoutingModule {}
+export class NavigationRoutingModule {}

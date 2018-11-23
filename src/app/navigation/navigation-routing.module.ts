@@ -1,8 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AuthGuard } from '@auth/auth.guard';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { NavigationComponent } from '../navigation/navigation.component';
+import { NavigationComponent } from '@nav/navigation.component';
+import { DashboardComponent } from '@components/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -31,4 +31,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ComponentsRoutingModule {}
+export class NavigationRoutingModule {}

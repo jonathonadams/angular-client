@@ -7,7 +7,6 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { ThemeService } from '@app-core/theme/theme.service';
 import { User, UserService } from '@features/users';
 
@@ -33,6 +32,6 @@ export class UserDropDownComponent {
 
   constructor(private theme: ThemeService, private userService: UserService) {
     this.darkTheme$ = this.theme.darkTheme$;
-    this.user$ = this.userService.user$.pipe(tap(user => console.log(user)));
+    this.user$ = this.userService.user$;
   }
 }

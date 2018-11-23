@@ -9,6 +9,7 @@
       "@app/*": ["src/app/*"],
       "@app-core/*": ["src/app/core/*"],
       "@auth/*": ["src/app/auth/*"],
+      "@nav/*": ["src/app/navigation/*"],
       "@components/*": ["src/app/components/*"],
       "@features/*": ["src/app/features/*"],
       "@shared/*": ["src/app/shared/*"],
