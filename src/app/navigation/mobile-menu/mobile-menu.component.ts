@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'client-mobile-menu',
@@ -8,4 +8,6 @@ import { Component, Input } from '@angular/core';
 export class MobileMenuComponent {
   @Input()
   public navLinks;
+
+  @Output() public logout = new EventEmitter<void>();
 }

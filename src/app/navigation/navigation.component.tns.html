@@ -1,7 +1,1 @@
-<!-- <client-mobile-menu [navLinks]="navLinks"></client-mobile-menu> -->
-<StackLayout>
-  <button text="GO TO HOME" [nsRouterLink]="['/home']" class="link"></button>
-  <button text="GO TO TODO" [nsRouterLink]="['/todos']" class="link"></button>
-  <button text="logout" (tap)="logout()"></button>
-  <router-outlet #routerOutlet="outlet"></router-outlet>
-</StackLayout>
+<client-mobile-menu [navLinks]="navLinks" (logout)="logout()"></client-mobile-menu>

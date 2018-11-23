@@ -1,10 +1,7 @@
 @import '~@angular/material/theming';
 
 @mixin login-page-theme($theme) {
-  $primary: map-get($theme, primary);
-  $warn: map-get($theme, warn);
   $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
 
   :host {
     background-color: mat-color($background, background);
@@ -14,16 +11,3 @@
     background-color: mat-color($background, card);
   }
 }
-
-// divider
-// dialog
-// hover
-// card
-// can also use some predinded opacity, i.e A400
-// darker
-// lighter
-// background
-// text
-
-// https://blog.thoughtram.io/angular/2017/05/23/custom-themes-with-angular-material.html
-// https://github.com/angular/material2/issues/9069
