@@ -2,17 +2,20 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { ApiService } from '@app/core';
-import { Todo } from './todos.model';
+import { Todo } from '../todos.model';
 import { AppState } from '@app/store/reducers';
-import { selectTodos } from './todos.reducer';
-import { UpdateTodo, CreateTodo } from '@app/features/todos/todos.actions';
+import { selectTodos, selectUserTodos } from '../reducers/todos.reducer';
+import { UpdateTodo, CreateTodo } from '../actions/todos.actions';
+import { AuthService } from '~/app/auth';
 
 @Injectable()
 export class TodoService {
   public todo$: Observable<Todo[]>;
+  public userTodo$: Observable<Todo[]>;
 
-  constructor(private store: Store<AppState>, private api: ApiService) {
+  constructor(private store: Store<AppState>, private api: ApiService, private auth: AuthService) {
     this.todo$ = this.store.pipe(select(selectTodos));
+    this.userTodo$ = this.store.pipe(select(selectUserTodos));
   }
 
   public loadTodos(): Observable<Todo[]> {
@@ -29,6 +32,8 @@ export class TodoService {
   }
 
   public createTodo(todo: Todo): Observable<Todo> {
+    // Set the user is of the current JWT id
+    todo.userId = this.auth.getDecodedToken().sub;
     return this.api.post<Todo>('todos', todo);
   }
 

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { TodoService } from '@app/features/todos/todos.service';
 import { ApiService } from '@app/core';
 import { Store } from '@ngrx/store';
+import { TodoService } from '../services/todos.service';
 import { Todo } from '@app/features/todos';
 import { storeProviderStub } from '@test/helper-functions';
 import { HttpStub } from '@test/http.stubs';

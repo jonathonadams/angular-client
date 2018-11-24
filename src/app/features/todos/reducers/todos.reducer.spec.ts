@@ -10,7 +10,7 @@ import {
   CreateTodoSuccess,
   UpdateTodoSuccess,
   DeleteTodoSuccess
-} from './todos.actions';
+} from '../actions/todos.actions';
 
 describe('TodoReducer', () => {
   describe('undefined action', () => {

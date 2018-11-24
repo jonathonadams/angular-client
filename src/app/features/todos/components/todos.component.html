@@ -8,7 +8,7 @@
   </div>
   <div class="column list" fxFlex="2 0 0">
     <client-todo-list
-      [todos]="todo$ | async"
+      [todos]="userTodo$ | async"
       (selected)="selectTodo($event)"
       (deleted)="deleteTodo($event)"
     ></client-todo-list>

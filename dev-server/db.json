@@ -1,20 +1,20 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "Some User",
       "email": "email@domiain.com",
-      "hashedPassword": "someHash"
+      "hashedPassword": "$2a$10$yTVUkddFs4sT2CBAiWkbGOp3Y5R4MMUrQ/IQo0nSbDHQfJuYNwMJu"
     },
     {
-      "id": 2,
+      "id": "2",
       "username": "admin",
       "email": "admin@domiain.com",
       "hashedPassword": "$2a$10$yTVUkddFs4sT2CBAiWkbGOp3Y5R4MMUrQ/IQo0nSbDHQfJuYNwMJu"
     },
     {
       "username": "Another Uadsfasdfasdfser",
-      "id": 454,
+      "id": "454",
       "hashedPassword": "$2a$10$aP/DFy/yW5RV8lzPq/9j3e6QKQc4x0DSphIfOM9b3snJiW9fUg2RK"
     }
   ],
@@ -22,17 +22,38 @@
     {
       "title": "Red Todo",
       "description": "This is a Red Todo!",
-      "id": 297
+      "id": "297",
+      "userId": "1"
     },
     {
       "title": "Blue Todo",
       "description": "This is a Blue Todo!",
-      "id": 719
+      "id": "719",
+      "userId": "1"
     },
     {
       "title": "Yellow Todo",
       "description": "This is a Yellow Todo!",
-      "id": 360
+      "id": "360",
+      "userId": "1"
+    },
+    {
+      "title": "Orange Todo",
+      "description": "This is an Orange Todo!",
+      "userId": "2",
+      "id": "585"
+    },
+    {
+      "title": "Green Todo",
+      "description": "This is a Green Todo!",
+      "userId": "2",
+      "id": "990"
+    },
+    {
+      "title": "Pink Todo",
+      "description": "This is a Pink Todo!",
+      "userId": "2",
+      "id": "503"
     }
   ]
 }

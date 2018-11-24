@@ -17,8 +17,8 @@ import {
   DeleteTodoSuccess,
   DeleteTodoFail,
   UpdateTodoFail
-} from '@app/features/todos/todos.actions';
-import { TodoService } from '@app/features/todos/todos.service';
+} from '../actions/todos.actions';
+import { TodoService } from '../services/todos.service';
 import { AppState } from '@app/store/reducers';
 import { HttpErrorAction } from '@app/store/effects/error-effects';
 

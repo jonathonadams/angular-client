@@ -1,6 +1,8 @@
-import { Todo } from './todos.model';
+import { Todo } from '../todos.model';
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
-import { TodoActionTypes, TodoActionUnion } from './todos.actions';
+import { TodoActionTypes, TodoActionUnion } from '../actions/todos.actions';
+import { AppState } from '~/app/store';
+import { selectUser, User } from '../../users';
 
 const COMPARATOR = 'id';
 
@@ -8,7 +10,9 @@ export interface TodoState {
   todos: Todo[];
 }
 
-export function todosReducer(state: Todo[] = [], action: TodoActionUnion): Todo[] {
+export const initialState: Todo[] = [];
+
+export function todosReducer(state: Todo[] = initialState, action: TodoActionUnion): Todo[] {
   switch (action.type) {
     case TodoActionTypes.LoadSuccess:
       return <Todo[]>action.payload;
@@ -45,4 +49,12 @@ export const selectTodoState = createFeatureSelector<TodoState>('todos');
 export const selectTodos = createSelector(
   selectTodoState,
   (state: TodoState) => state.todos
+);
+
+export const selectUserTodos = createSelector(
+  selectUser,
+  selectTodos,
+  (user: User, todos: Todo[]) => {
+    return user && todos ? todos.filter(todo => todo.userId === user.id) : [];
+  }
 );

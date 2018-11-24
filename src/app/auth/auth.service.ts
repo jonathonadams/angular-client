@@ -34,6 +34,10 @@ export class AuthService {
     return jwtDecode<DecodedJWT>(token);
   }
 
+  getDecodedToken(): DecodedJWT {
+    return this.decodeToken(this.getAuthorizationToken());
+  }
+
   checkTokenIsValid(token: string): boolean {
     const now = Math.floor(Date.now() / 1000);
     const expTime: number = this.decodeToken(token).exp;

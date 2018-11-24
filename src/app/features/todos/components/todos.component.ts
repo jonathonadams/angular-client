@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@app/store/reducers';
 import { Observable } from 'rxjs';
 import { Todo } from '../todos.model';
-import { TodoService } from '../todos.service';
-import { LoadTodos, DeleteTodo } from '../todos.actions';
+import { TodoService } from '../services/todos.service';
+import { LoadTodos, DeleteTodo } from '../actions/todos.actions';
 
 @Component({
   selector: 'client-todos',
@@ -13,11 +13,11 @@ import { LoadTodos, DeleteTodo } from '../todos.actions';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodosComponent implements OnInit {
-  public todo$: Observable<Todo[]>;
+  public userTodo$: Observable<Todo[]>;
   public selectedTodo: Todo;
 
   constructor(private store: Store<AppState>, private todoService: TodoService) {
-    this.todo$ = this.todoService.todo$;
+    this.userTodo$ = this.todoService.userTodo$;
   }
 
   ngOnInit() {

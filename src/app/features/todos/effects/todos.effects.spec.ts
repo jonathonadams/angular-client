@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { TodoEffects } from '@app/features/todos/todos.effects';
+import { TodoEffects } from '../effects/todos.effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 import { Actions } from '@ngrx/effects';
 import { hot, cold } from 'jest-marbles';
-import { Todo } from './todos.model';
+import { Todo } from '../todos.model';
 import {
   LoadTodosSuccess,
   LoadTodos,
@@ -18,8 +18,8 @@ import {
   DeleteTodo,
   DeleteTodoSuccess,
   DeleteTodoFail
-} from './todos.actions';
-import { TodoService } from './todos.service';
+} from '../actions/todos.actions';
+import { TodoService } from '../services/todos.service';
 import { createSpyObj, storeProviderStub } from '@test/helper-functions';
 import { HttpErrorAction } from '@app/store/effects/error-effects';
 
