@@ -22,8 +22,8 @@ import { NavigationModule } from './navigation/navigation.module';
   imports: [
     NativeScriptModule,
     ComponentsModule,
-    NavigationModule,
     AppRoutingModule,
+    NavigationModule,
     CoreModule.forRoot(),
     AuthModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
