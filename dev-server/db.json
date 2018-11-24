@@ -11,11 +11,6 @@
       "username": "admin",
       "email": "admin@domiain.com",
       "hashedPassword": "$2a$10$yTVUkddFs4sT2CBAiWkbGOp3Y5R4MMUrQ/IQo0nSbDHQfJuYNwMJu"
-    },
-    {
-      "username": "Another Uadsfasdfasdfser",
-      "id": "454",
-      "hashedPassword": "$2a$10$aP/DFy/yW5RV8lzPq/9j3e6QKQc4x0DSphIfOM9b3snJiW9fUg2RK"
     }
   ],
   "todos": [
