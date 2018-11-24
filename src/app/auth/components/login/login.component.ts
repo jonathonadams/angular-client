@@ -5,7 +5,7 @@ import { AppState } from '@store/reducers';
 import { LoginCredentials } from '@app/auth/auth.model';
 import { Login, LoginRedirect } from '@auth/actions/auth.actions';
 import { AuthService } from '@auth/services/auth.service';
-import { ThemeService } from '~/app/core/theme/theme.service';
+import { ThemeService } from '@app-core/theme/theme.service';
 import { Observable } from 'rxjs';
 
 @Component({

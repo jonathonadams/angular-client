@@ -15,7 +15,7 @@
     "test:watch": "jest --coverage --watch",
     "test:push": "jest --ci=true --coverage --bail",
     "test:staged": "jest --ci=true --passWithNoTests --coverage --bail --findRelatedTests",
-    "test:snapshot:update": "jest --updateSnapshot --testPathPattern",
+    "snapshot:update": "jest --updateSnapshot --testPathPattern",
     "test:ci": "jest --runInBand",
     "e2e:chrome": "testcafe -c 3 chrome e2e/src/ --r json:e2e/report.json",
     "e2e:firefox": "testcafe -c 3 firefox e2e/src/",

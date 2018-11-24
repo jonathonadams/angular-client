@@ -6,7 +6,7 @@ exports[`UsersReducer LoadSucces action should add the user to the user state 1`
 Object {
   "email": "some@email.com",
   "id": "2",
-  "name": "someUser",
+  "username": "someUser",
 }
 `;
 
@@ -14,7 +14,7 @@ exports[`UsersReducer UpdateSucces action should update the existing user state 
 Object {
   "email": "some@email.com",
   "id": "1",
-  "name": "updatedName",
+  "username": "updatedName",
 }
 `;
 

@@ -14,7 +14,7 @@
       "@features/*": ["src/app/features/*"],
       "@shared/*": ["src/app/shared/*"],
       "@store/*": ["src/app/store/*"],
-      "@test/*": ["src/test/*"]
+      "@tests/*": ["src/tests/*"]
     },
     "module": "es2015",
     "moduleResolution": "node"

@@ -10,7 +10,7 @@
   },
   "exclude": [
     "setupJest.ts",
-    "**/test/**",
+    "**/tests/**",
     "test.ts",
     "**/*.spec.ts",
     "**/*.tns.ts",

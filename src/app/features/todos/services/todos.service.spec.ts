@@ -3,22 +3,30 @@ import { ApiService } from '@app/core';
 import { Store } from '@ngrx/store';
 import { TodoService } from '../services/todos.service';
 import { Todo } from '@app/features/todos';
-import { storeProviderStub } from '@test/helper-functions';
-import { HttpStub } from '@test/http.stubs';
+import { storeProviderStub, authProviderStub } from '@tests/helper-functions';
+import { HttpStub } from '@tests/http.stubs';
+import { AuthService } from '~/app/auth';
 
 describe('TodoService', () => {
   let service: TodoService;
   let store: Store<any>;
   let apiService: ApiService;
+  let authService: AuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [TodoService, storeProviderStub, { provide: ApiService, useClass: HttpStub }]
+      providers: [
+        TodoService,
+        storeProviderStub,
+        { provide: ApiService, useClass: HttpStub },
+        authProviderStub
+      ]
     });
 
     service = TestBed.get(TodoService);
     store = TestBed.get(Store);
     apiService = TestBed.get(ApiService);
+    authService = TestBed.get(AuthService);
   });
 
   it('should be created', () => {
@@ -56,12 +64,17 @@ describe('TodoService', () => {
       const spy = jest.spyOn(apiService, 'post');
 
       const todo: Todo = {
-        id: 1,
+        userId: '1',
         title: 'some title',
         description: 'some description',
         completed: true
-      };
+      } as Todo;
 
+      authService.getDecodedToken = jest.fn(() => {
+        return {
+          sub: '1'
+        };
+      });
       service.createTodo(todo);
 
       expect(spy).toHaveBeenCalled();
@@ -77,7 +90,8 @@ describe('TodoService', () => {
       const spy = jest.spyOn(apiService, 'put');
 
       const todo: Todo = {
-        id: 1,
+        id: '1',
+        userId: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -98,7 +112,8 @@ describe('TodoService', () => {
       const spy = jest.spyOn(apiService, 'delete');
 
       const todo: Todo = {
-        id: 1,
+        id: '1',
+        userId: '1',
         title: 'some title',
         description: 'some description',
         completed: true

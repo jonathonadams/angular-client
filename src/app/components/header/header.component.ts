@@ -27,7 +27,7 @@ export class HeaderComponent {
   @Output() toggleNavigation = new EventEmitter<void>();
 
   public toggleDarkTheme(active: boolean): void {
-    this.themeService.toggle(active);
+    this.themeService.setActiveStatus(active);
   }
 
   public showUserDropDown() {
@@ -37,7 +37,7 @@ export class HeaderComponent {
     );
 
     componentRef.instance.toggleDarkTheme.subscribe(active => {
-      this.themeService.toggle(active);
+      this.themeService.setActiveStatus(active);
     });
 
     componentRef.instance.logout.subscribe(() => {

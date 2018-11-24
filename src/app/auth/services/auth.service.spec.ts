@@ -7,11 +7,14 @@ import { AuthService } from './auth.service';
 import { LoginCredentials, LoginResponse } from '../auth.model';
 // import { GraphQLStub } from 'test';
 import { GraphQLService } from '@app-core/graphql';
-import { GraphQLStub } from '@test/graphql.stubs';
+import { GraphQLStub } from '@tests/graphql.stubs';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { environment } from '@env/environment';
 
 describe('AuthService', () => {
   let authService: AuthService;
   let graphQLStub: GraphQLStub;
+  let httpTestingController: HttpTestingController;
   let JWT: string;
   const storageKey = 'access_token';
   const tokenSecret = 'this-is-a-test-secret';
@@ -19,10 +22,11 @@ describe('AuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AuthService, { provide: GraphQLService, useClass: GraphQLStub }],
-      imports: [RouterTestingModule.withRoutes([])]
+      imports: [HttpClientTestingModule, RouterTestingModule.withRoutes([])]
     });
     authService = TestBed.get(AuthService);
     graphQLStub = TestBed.get(GraphQLService);
+    httpTestingController = TestBed.get(HttpTestingController);
 
     // Create a JWT for each test that is valid and has not expired
     JWT = sign(
@@ -168,6 +172,43 @@ describe('AuthService', () => {
   });
 
   describe('login', () => {
+    it('should make a POST request with LoginCredentials to the /authorize route', () => {
+      const loginCredentials: LoginCredentials = {
+        username: 'admin',
+        password: 'secret'
+      };
+
+      const expectedResponse: LoginResponse = {
+        user: {
+          id: '1',
+          username: 'admin',
+          email: 'email@test.com'
+        },
+        token: JWT
+      };
+
+      // Make an HTTP GET request
+      authService.login(loginCredentials).subscribe(data => {
+        // When observable resolves, result should match test data
+        expect(data).toEqual(expectedResponse);
+      });
+
+      // The following `expectOne()` will match the request's URL.
+      // If no requests or multiple requests matched that URL
+      // `expectOne()` would throw.
+      const req = httpTestingController.expectOne(`${environment.serverUrl}/authorize`);
+
+      // Assert that the request is a POST.
+      expect(req.request.method).toEqual('POST');
+
+      // Respond with mock data, causing Observable to resolve.
+      // Subscribe callback asserts that correct data was returned.
+      req.flush(expectedResponse);
+
+      // Finally, assert that there are no outstanding requests.
+      httpTestingController.verify();
+    });
+
     /// GraphQL login response check
     // it('should return a LoginResponse if called with valid credentials', () => {
     //   const spy = jest.spyOn(graphQLStub, 'mutation');

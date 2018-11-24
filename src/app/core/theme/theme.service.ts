@@ -23,7 +23,7 @@ export class ThemeService implements OnDestroy {
     });
   }
 
-  public toggle(active: boolean): void {
+  public setActiveStatus(active: boolean): void {
     this.darkTheme.next(active);
   }
 

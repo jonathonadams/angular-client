@@ -20,7 +20,7 @@ import {
   DeleteTodoFail
 } from '../actions/todos.actions';
 import { TodoService } from '../services/todos.service';
-import { createSpyObj, storeProviderStub } from '@test/helper-functions';
+import { createSpyObj, storeProviderStub } from '@tests/helper-functions';
 import { HttpErrorAction } from '@app/store/effects/error-effects';
 
 describe('TodoEffects', () => {
@@ -49,7 +49,8 @@ describe('TodoEffects', () => {
     action$ = TestBed.get(Actions);
     todoService = TestBed.get(TodoService);
     mockTodo = {
-      id: 1,
+      id: '1',
+      userId: '1',
       title: 'some title',
       description: 'some description',
       completed: true
@@ -64,13 +65,15 @@ describe('TodoEffects', () => {
     it('should retun a LoadTodoSuccess action with a payload of todos', () => {
       const todos: Todo[] = [
         {
-          id: 1,
+          id: '1',
+          userId: '1',
           title: 'some title',
           description: 'some description',
           completed: true
         },
         {
-          id: 2,
+          id: '2',
+          userId: '1',
           title: 'another title',
           description: 'another description',
           completed: false

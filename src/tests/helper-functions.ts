@@ -1,5 +1,5 @@
 import { defer } from 'rxjs';
-import { AuthService } from '@auth/auth.service';
+import { AuthService } from '@auth/services/auth.service';
 import { Store } from '@ngrx/store';
 import { DebugElement } from '@angular/core';
 
@@ -51,7 +51,8 @@ export const storeStub = {
 
 const authServiceStub = {
   userIsLoggedIn: jest.fn(),
-  userIsAdmin: jest.fn()
+  userIsAdmin: jest.fn(),
+  getDecodedToken: jest.fn()
 };
 
 export const authProviderStub = { provide: AuthService, useValue: authServiceStub };

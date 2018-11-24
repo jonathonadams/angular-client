@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Actions } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { cold, hot } from 'jest-marbles';
-import { createSpyObj } from '@test/helper-functions';
+import { createSpyObj } from '@tests/helper-functions';
 import {
   Login,
   LoginFailure,
@@ -57,11 +57,13 @@ describe('AuthEffects', () => {
       const completion = new LoginSuccess({ user, token });
 
       actions$ = hot('-a---', { a: action });
-      const response = cold('-a|', { a: { data: { login: { user, token } } } });
+      // Example graphql response below
+      // const response = cold('-a|', { a: { data: { login: { user, token } } } });
+      const response = cold('-a|', { a: { user, token } });
       const expected = cold('--b', { b: completion });
       authService.login = jest.fn(() => response);
 
-      (expect(effects.login$) as any).toBeObservable(expected);
+      expect(effects.login$).toBeObservable(expected);
     });
 
     it('should return a new LoginFailure if the login service throws', () => {
@@ -75,7 +77,7 @@ describe('AuthEffects', () => {
       const expected = cold('--b', { b: completion });
       authService.login = jest.fn(() => response);
 
-      (expect(effects.login$) as any).toBeObservable(expected);
+      expect(effects.login$).toBeObservable(expected);
     });
   });
 

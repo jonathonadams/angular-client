@@ -5,34 +5,45 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthService } from '@auth/services/auth.service';
+import { ThemeService } from '@app-core/theme/theme.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-
-  const authService = { userIsLoggedIn: jest.fn() };
-  const store = { dispatch: jest.fn() };
+  let debugEl: DebugElement;
+  let nativeEl: HTMLElement;
+  let authService: AuthService;
+  let store: Store<any>;
+  let theme: ThemeService;
+  const authServiceSpy = { userIsLoggedIn: jest.fn() };
+  const storeSpy = { dispatch: jest.fn() };
+  const themeSpy = { darkTheme$: jest.fn() };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule, ReactiveFormsModule, FormsModule],
       declarations: [LoginComponent],
       providers: [
-        { provide: AuthService, useValue: authService },
-        { provide: Store, useValue: store }
+        { provide: AuthService, useValue: authServiceSpy },
+        { provide: Store, useValue: storeSpy },
+        { provide: ThemeService, useValue: themeSpy }
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
-    });
-    TestBed.compileComponents();
+    }).compileComponents();
+
+    authService = TestBed.get(AuthService);
+    store = TestBed.get(Store);
+    theme = TestBed.get(ThemeService);
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    debugEl = fixture.debugElement;
+    nativeEl = fixture.nativeElement;
   });
 
   it('should create', () => {

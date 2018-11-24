@@ -3,10 +3,9 @@ import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { TodosComponent } from './todos.component';
-import { TodoService } from '../todos.service';
-import { createSpyObj, storeProviderStub } from '@test/helper-functions';
-import { LoadTodos } from '../todos.actions';
+import { TodoService, LoadTodos } from '@features/todos';
 import { Todo } from '../todos.model';
+import { createSpyObj, storeProviderStub } from '~/tests/helper-functions';
 
 describe('TodosComponent', () => {
   let component: TodosComponent;
@@ -53,7 +52,8 @@ describe('TodosComponent', () => {
       const spy = jest.spyOn(component, 'selectTodo');
 
       const todo: Todo = {
-        id: 1,
+        id: '1',
+        userId: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -72,7 +72,8 @@ describe('TodosComponent', () => {
       expect(component.selectedTodo).not.toBeDefined();
 
       const todo: Todo = {
-        id: 1,
+        id: '1',
+        userId: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -92,7 +93,8 @@ describe('TodosComponent', () => {
       const spy = jest.spyOn(todoService, 'saveTodo');
 
       const todo: Todo = {
-        id: 1,
+        id: '1',
+        userId: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -113,7 +115,8 @@ describe('TodosComponent', () => {
       const spy = jest.spyOn(todoService, 'saveTodo');
 
       const todo: Todo = {
-        id: 1,
+        id: '1',
+        userId: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -137,7 +140,8 @@ describe('TodosComponent', () => {
       const spy = jest.spyOn(component, 'resetTodo');
 
       const todo: Todo = {
-        id: 1,
+        id: '1',
+        userId: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -168,7 +172,8 @@ describe('TodosComponent', () => {
 
     it('should reset the selectedTodo.property', () => {
       const todo: Todo = {
-        id: 1,
+        id: '1',
+        userId: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -176,12 +181,12 @@ describe('TodosComponent', () => {
 
       component.selectedTodo = todo;
 
-      expect(component.selectedTodo.id).toEqual(1);
+      expect(component.selectedTodo.id).toEqual('1');
 
       component.resetTodo();
 
-      expect(component.selectedTodo.id).toEqual(null);
-      expect(component.selectedTodo.title).toEqual('');
+      expect(component.selectedTodo.id).toEqual(undefined);
+      expect(component.selectedTodo.title).toEqual(undefined);
     });
   });
 });
