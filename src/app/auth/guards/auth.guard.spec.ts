@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { AuthGuard } from './auth.guard';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '@auth/services/auth.service';
 import { Store } from '@ngrx/store';
-import { Logout } from './auth.actions';
+import { Logout } from '@auth/actions/auth.actions';
 
 describe('AuthGuard', () => {
   let authGuard: AuthGuard;

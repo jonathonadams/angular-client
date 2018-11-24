@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '@store/reducers';
 import { LoginCredentials } from '@app/auth/auth.model';
-import { Login, LoginRedirect } from '@auth/auth.actions';
-import { AuthService } from '@auth/auth.service';
+import { Login, LoginRedirect } from '@auth/actions/auth.actions';
+import { AuthService } from '@auth/services/auth.service';
 import { ThemeService } from '~/app/core/theme/theme.service';
 import { Observable } from 'rxjs';
 

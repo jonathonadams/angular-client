@@ -10,10 +10,10 @@ import {
   LoginSuccess,
   Logout,
   LoginRedirect
-} from './auth.actions';
-import { AuthService } from './auth.service';
-import { LoginCredentials } from './auth.model';
-import { LoadUserSuccess } from '../features/users';
+} from '@auth/actions/auth.actions';
+import { AuthService } from '@auth/services/auth.service';
+import { LoginCredentials } from '@auth/auth.model';
+import { LoadUserSuccess } from '@features/users';
 
 @Injectable()
 export class AuthEffects {

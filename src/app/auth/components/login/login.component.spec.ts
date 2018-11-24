@@ -7,7 +7,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AuthService } from '@auth/auth.service';
+import { AuthService } from '@auth/services/auth.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

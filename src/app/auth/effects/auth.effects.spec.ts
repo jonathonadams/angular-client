@@ -4,11 +4,17 @@ import { Observable } from 'rxjs';
 import { Actions } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { cold, hot } from 'jest-marbles';
-import { Login, LoginFailure, LoginRedirect, LoginSuccess, Logout } from './auth.actions';
-import { AuthService } from './auth.service';
-import { AuthEffects } from './auth.effects';
 import { createSpyObj } from '@test/helper-functions';
-import { LoginCredentials } from './auth.model';
+import {
+  Login,
+  LoginFailure,
+  LoginRedirect,
+  LoginSuccess,
+  Logout
+} from '@auth/actions/auth.actions';
+import { AuthService } from '@auth/services/auth.service';
+import { AuthEffects } from '@auth/effects/auth.effects';
+import { LoginCredentials } from '../auth.model';
 import { User } from '@features/users';
 
 describe('AuthEffects', () => {
@@ -45,7 +51,7 @@ describe('AuthEffects', () => {
   describe('login$', () => {
     it('should return an LoginSuccess action, with user information if login succeeds', () => {
       const credentials: LoginCredentials = { username: 'test', password: '' };
-      const user = { name: 'User' } as User;
+      const user = { username: 'User' } as User;
       const token = 'JWT.TOKEN';
       const action = new Login(credentials);
       const completion = new LoginSuccess({ user, token });
@@ -75,7 +81,7 @@ describe('AuthEffects', () => {
 
   describe('loginSuccess$', () => {
     it('should dispatch a RouterNavigation action', () => {
-      const user = { name: 'User' } as User;
+      const user = { username: 'User' } as User;
       const token = 'JWT.TOKEN';
       const action = new LoginSuccess({ user, token });
 

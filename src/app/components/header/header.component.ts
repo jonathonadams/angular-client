@@ -6,7 +6,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Logout } from '@app/auth/auth.actions';
+import { Logout } from '@app/auth';
 import { ThemeService } from '@app/core/theme/theme.service';
 import { OverlayService } from '@app/shared';
 import { UserDropDownComponent } from './user-drop-down/user-drop-down.component';

@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { User } from '@features/users/user.model';
 import { ActionWithPayload } from '@store/reducers';
-import { LoginCredentials, LoginResponse } from './auth.model';
+import { LoginCredentials, LoginResponse } from '../auth.model';
 
 export enum AuthActionTypes {
   Login = '[Auth] Login',
