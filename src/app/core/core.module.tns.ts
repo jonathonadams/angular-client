@@ -1,15 +1,15 @@
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { createApollo } from './graphql/createApollo';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
+import { NativeScriptCommonModule } from 'nativescript-angular/common';
 
 const COMPONENTS = [];
 
 @NgModule({
-  imports: [NativeScriptHttpClientModule, CommonModule, ApolloModule, HttpLinkModule],
+  imports: [NativeScriptHttpClientModule, NativeScriptCommonModule, ApolloModule, HttpLinkModule],
   declarations: COMPONENTS
 })
 export class CoreModule {

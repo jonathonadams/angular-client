@@ -14,9 +14,9 @@ export function createApollo(httpLink: HttpLink) {
         console.log(
           '[GraphQL error]: Message: ',
           message,
-          ',Location: ',
+          ', Location: ',
           locations,
-          ',Path: ',
+          ', Path: ',
           path
         )
       );

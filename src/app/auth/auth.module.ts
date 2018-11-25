@@ -13,7 +13,7 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
 export const COMPONENTS = [LoginComponent];
 
 @NgModule({
-  imports: [AppMaterialModule, SharedModule],
+  imports: [SharedModule],
   declarations: COMPONENTS,
   exports: COMPONENTS
 })

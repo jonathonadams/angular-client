@@ -179,11 +179,6 @@ describe('AuthService', () => {
       };
 
       const expectedResponse: LoginResponse = {
-        user: {
-          id: '1',
-          username: 'admin',
-          email: 'email@test.com'
-        },
         token: JWT
       };
 

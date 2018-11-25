@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, exhaustMap, map, tap } from 'rxjs/operators';
@@ -44,9 +43,5 @@ export class AuthEffects {
     map(() => new LogoutRedirect())
   );
 
-  constructor(
-    private actions$: Actions,
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private actions$: Actions, private authService: AuthService) {}
 }
