@@ -33,7 +33,7 @@ export class AuthEffects {
   loginSuccess$ = this.actions$.pipe(
     ofType<LoginSuccess>(AuthActionTypes.LoginSuccess),
     tap(action => this.authService.setAuthorizationToken(action.payload.token)),
-    map(() => new LoadAuthenticatedUser())
+    map(action => new LoadAuthenticatedUser())
   );
 
   @Effect()
