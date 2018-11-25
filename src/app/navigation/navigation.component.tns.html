@@ -1,7 +1,7 @@
 <ActionBar title="Navigation"></ActionBar>
 <StackLayout>
-  <button text="GO TO HOME" [nsRouterLink]="['/home']" class="link"></button>
-  <button text="GO TO TODO" [nsRouterLink]="['/todos']" class="link"></button>
-  <button text="logout" (tap)="logout()"></button>
+  <Button text="GO TO HOME" [nsRouterLink]="['/home']" class="link"></Button>
+  <Button text="GO TO TODO" [nsRouterLink]="['/todos']" class="link"></Button>
+  <Button text="logout" (tap)="logout()"></Button>
   <router-outlet #routerOutlet="outlet"></router-outlet>
 </StackLayout>
