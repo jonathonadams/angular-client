@@ -1,27 +1,24 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { OverlayModule } from '@angular/cdk/overlay';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
+import { NativeScriptCommonModule } from 'nativescript-angular/common';
+import { NativeScriptRouterModule } from 'nativescript-angular/router';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FlexLayoutModule,
+    NativeScriptCommonModule,
     FormsModule,
     ReactiveFormsModule,
     NativeScriptFormsModule,
-    OverlayModule
+    NativeScriptRouterModule
   ],
   declarations: [],
   exports: [
-    CommonModule,
-    FlexLayoutModule,
+    NativeScriptCommonModule,
     FormsModule,
     ReactiveFormsModule,
     NativeScriptFormsModule,
-    OverlayModule
+    NativeScriptRouterModule
   ]
 })
 export class SharedModule {}

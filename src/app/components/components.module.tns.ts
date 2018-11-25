@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { TodoModule } from '../features/todos';
 
 const COMPONENTS = [DashboardComponent];
 
 @NgModule({
   declarations: COMPONENTS,
   imports: [],
-  exports: []
+  exports: COMPONENTS
 })
 export class ComponentsModule {}
