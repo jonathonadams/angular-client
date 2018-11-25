@@ -30,19 +30,19 @@ export class AuthEffects {
     )
   );
 
-  @Effect({ dispatch: false })
-  logout$ = this.actions$.pipe(
-    ofType<Logout>(AuthActionTypes.Logout),
-    tap(action => this.authService.removeAuthorizationToken()),
-    tap(() => this.router.navigate(['/login']))
-  );
-
   @Effect()
   loginSuccess$ = this.actions$.pipe(
     ofType<LoginSuccess>(AuthActionTypes.LoginSuccess),
     tap(action => this.authService.setAuthorizationToken(action.payload.token)),
     tap(() => this.router.navigate(['/home'])),
     map(action => new LoadUserSuccess(action.payload.user))
+  );
+
+  @Effect({ dispatch: false })
+  logout$ = this.actions$.pipe(
+    ofType<Logout>(AuthActionTypes.Logout),
+    tap(action => this.authService.removeAuthorizationToken()),
+    tap(() => this.router.navigate(['/login']))
   );
 
   @Effect({ dispatch: false })

@@ -2,9 +2,9 @@ import { Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AuthGuard } from '@auth/guards/auth.guard';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
-import { NavigationComponent } from '@nav/navigation.component';
-import { TodosComponent } from '@features/todos/components/todos.component';
+
 import { DashboardComponent } from '@components/dashboard/dashboard.component';
+import { NavigationComponent } from './navigation.component';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
       },
       {
         path: 'todos',
-        component: TodosComponent
+        loadChildren: '../features/todos/todos.module#TodoModule'
       },
       {
         path: '',

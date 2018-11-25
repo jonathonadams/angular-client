@@ -21,13 +21,13 @@ import { NavigationModule } from './navigation/navigation.module';
   declarations: [AppComponent],
   imports: [
     NativeScriptModule,
-    ComponentsModule,
-    AppRoutingModule,
-    NavigationModule,
-    CoreModule.forRoot(),
     AuthModule.forRoot(),
+    CoreModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    NavigationModule,
+    ComponentsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],

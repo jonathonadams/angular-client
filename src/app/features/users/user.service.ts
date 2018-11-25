@@ -4,13 +4,19 @@ import { AppState } from '~/app/store';
 import { Observable } from 'rxjs';
 import { User } from './user.model';
 import { selectUser } from './user.reducer';
+import { ApiService } from '~/app/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  private resourceUrl = 'users';
   public user$: Observable<User>;
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private api: ApiService) {
     this.user$ = this.store.pipe(select(selectUser));
+  }
+
+  loadUser(id: string) {
+    return this.api.getOne(this.resourceUrl, id);
   }
 }

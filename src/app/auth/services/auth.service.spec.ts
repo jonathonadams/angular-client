@@ -7,9 +7,9 @@ import { AuthService } from './auth.service';
 import { LoginCredentials, LoginResponse } from '../auth.model';
 // import { GraphQLStub } from 'test';
 import { GraphQLService } from '@app-core/graphql';
-import { GraphQLStub } from '@tests/graphql.stubs';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { environment } from '@env/environment';
+import { GraphQLStub } from '~/tests/graphql.stubs';
 
 describe('AuthService', () => {
   let authService: AuthService;

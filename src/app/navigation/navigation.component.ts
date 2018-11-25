@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Logout } from '@app/auth';
+import { Logout } from '@app/auth/actions/auth.actions';
 
 @Component({
   selector: 'client-navigation',
