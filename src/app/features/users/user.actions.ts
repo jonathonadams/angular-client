@@ -4,6 +4,7 @@ import { Action } from '@ngrx/store';
 
 export enum UserActionTypes {
   Load = '[User] Load',
+  LoadAuthenticated = '[User] Load Authenticated',
   LoadSuccess = '[User] Load Success',
   LoadFail = '[User] Load Fail',
   Create = '[User] Create',
@@ -21,9 +22,12 @@ export enum UserActionTypes {
  * Load user actions
  */
 
-export class LoadUser implements Action {
+export class LoadUsers implements Action {
   readonly type = UserActionTypes.Load;
-  constructor() {}
+}
+
+export class LoadAuthenticatedUser implements Action {
+  readonly type = UserActionTypes.LoadAuthenticated;
 }
 
 export class LoadUserSuccess implements ActionWithPayload<User> {
@@ -92,7 +96,8 @@ export class DeleteUserFail implements ActionWithPayload<User> {
 }
 
 export type UserActionUnion =
-  | LoadUser
+  | LoadUsers
+  | LoadAuthenticatedUser
   | LoadUserSuccess
   | LoadUserFail
   | CreateUser

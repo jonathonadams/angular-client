@@ -16,7 +16,7 @@ export class UserService {
     this.user$ = this.store.pipe(select(selectUser));
   }
 
-  loadUser(id: string) {
-    return this.api.getOne(this.resourceUrl, id);
+  loadUser(id: string): Observable<User> {
+    return this.api.getOne<User>(this.resourceUrl, id);
   }
 }

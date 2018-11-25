@@ -14,6 +14,7 @@ import { AuthModule } from './auth';
 import { CoreModule } from '@app-core/core.module';
 import { NavigationModule } from './navigation/navigation.module';
 import { environment } from '~/environments/environment';
+import { appEffects } from './store';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +28,7 @@ import { environment } from '~/environments/environment';
           logOnly: environment.production // Restrict extension to log-only mode
         })
       : [],
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot(appEffects),
     CoreModule.forRoot(),
     AuthModule.forRoot(),
     NavigationModule,

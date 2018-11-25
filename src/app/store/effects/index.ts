@@ -1,2 +1,3 @@
 import { ErrorEffects } from './error-effects';
-export const appEffects = [ErrorEffects];
+import { UserEffects } from '~/app/features/users/user.effects';
+export const appEffects = [UserEffects, ErrorEffects];

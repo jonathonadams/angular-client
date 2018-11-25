@@ -13,7 +13,7 @@ import {
 } from '@auth/actions/auth.actions';
 import { AuthService } from '@auth/services/auth.service';
 import { LoginCredentials } from '@auth/auth.model';
-import { LoadUserSuccess } from '@features/users';
+import { LoadAuthenticatedUser } from '@features/users';
 
 @Injectable()
 export class AuthEffects {
@@ -35,20 +35,20 @@ export class AuthEffects {
     ofType<LoginSuccess>(AuthActionTypes.LoginSuccess),
     tap(action => this.authService.setAuthorizationToken(action.payload.token)),
     tap(() => this.router.navigate(['/home'])),
-    map(action => new LoadUserSuccess(action.payload.user))
+    map(() => new LoadAuthenticatedUser())
   );
 
   @Effect({ dispatch: false })
   logout$ = this.actions$.pipe(
     ofType<Logout>(AuthActionTypes.Logout),
-    tap(action => this.authService.removeAuthorizationToken()),
+    tap(() => this.authService.removeAuthorizationToken()),
     tap(() => this.router.navigate(['/login']))
   );
 
   @Effect({ dispatch: false })
   loginRedirect$ = this.actions$.pipe(
     ofType<LoginRedirect>(AuthActionTypes.LoginRedirect),
-    tap(authed => this.router.navigate(['/home']))
+    tap(() => this.router.navigate(['/home']))
   );
 
   constructor(

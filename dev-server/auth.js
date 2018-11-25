@@ -33,12 +33,8 @@ module.exports = (req, res, next) => {
                 expiresIn: 86400
               }
             );
-
-            const clonedUser = Object.assign({}, user);
-            delete clonedUser.hashedPassword;
             // send the user and JWT back
             res.json({
-              user: clonedUser,
               token: token
             });
           } else {
