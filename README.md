@@ -70,3 +70,8 @@ TODO -> Document
 TODO -> Document
 
 -> dark theme view encapulation does not apply for material components
+
+# Configuring your own fork
+
+TODO -> Document
+-- App_Resources -> Android -> app.gradle -> application ID must allign with package.json

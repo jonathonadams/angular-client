@@ -1,7 +1,5 @@
 const serverUrl = 'http://10.0.2.2';
 
-console.log('inside android dev');
-
 export const environment = {
   production: false,
   serverUrl: `${serverUrl}:3000`,
