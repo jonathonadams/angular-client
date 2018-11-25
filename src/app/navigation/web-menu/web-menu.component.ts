@@ -1,13 +1,11 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ROUTER_ANIMATIONS } from './router-animation';
 
 @Component({
   selector: 'client-web-menu',
   templateUrl: './web-menu.component.html',
   styleUrls: ['./web-menu.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [ROUTER_ANIMATIONS]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WebMenuComponent {
   @Input()

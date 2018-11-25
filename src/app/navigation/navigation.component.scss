@@ -2,26 +2,18 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  // overflow: hidden;
+  overflow: hidden;
 }
 
 .mat-sidenav {
   width: 180px;
 }
 
-// mat-sidenav-container {
-//   flex: 1;
-// }
-
-// .app-content {
-//   display: flex;
-//   flex-flow: column;
-//   // height: 100%;
-// }
-
 .page-content {
-  // display: flex;
-  // flex-flow: column;
-  // flex: 1 1 0;
   overflow-y: auto;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
 }

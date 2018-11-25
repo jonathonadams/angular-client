@@ -1,6 +1,36 @@
 import { NgModule } from '@angular/core';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
-import { ROUTES } from './common-navigation.routes';
+import { Routes } from '@angular/router';
+import { NavigationComponent } from '@nav/navigation.component';
+import { AuthGuard } from '@auth/guards/auth.guard';
+import { DashboardComponent } from '@components/dashboard/dashboard.component';
+
+export const ROUTES: Routes = [
+  {
+    path: '',
+    component: NavigationComponent,
+    canActivate: [AuthGuard],
+    // Currently the NativeScriptRouterModule does not support the resolve functionality?
+    // resolve: {
+    //   user: UserResolver
+    // },
+    children: [
+      {
+        path: 'home',
+        component: DashboardComponent
+      },
+      {
+        path: 'todos',
+        loadChildren: '../features/todos/todos.module#TodoModule'
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'home'
+      }
+    ]
+  }
+];
 
 @NgModule({
   imports: [NativeScriptRouterModule.forChild(ROUTES)],

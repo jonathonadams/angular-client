@@ -9,7 +9,7 @@ import {
   LoginFailure,
   LoginSuccess,
   Logout,
-  LoginRedirect
+  LogoutRedirect
 } from '@auth/actions/auth.actions';
 import { AuthService } from '@auth/services/auth.service';
 import { LoginCredentials } from '@auth/auth.model';
@@ -34,21 +34,14 @@ export class AuthEffects {
   loginSuccess$ = this.actions$.pipe(
     ofType<LoginSuccess>(AuthActionTypes.LoginSuccess),
     tap(action => this.authService.setAuthorizationToken(action.payload.token)),
-    tap(() => this.router.navigate(['/home'])),
     map(() => new LoadAuthenticatedUser())
   );
 
-  @Effect({ dispatch: false })
+  @Effect()
   logout$ = this.actions$.pipe(
     ofType<Logout>(AuthActionTypes.Logout),
     tap(() => this.authService.removeAuthorizationToken()),
-    tap(() => this.router.navigate(['/login']))
-  );
-
-  @Effect({ dispatch: false })
-  loginRedirect$ = this.actions$.pipe(
-    ofType<LoginRedirect>(AuthActionTypes.LoginRedirect),
-    tap(() => this.router.navigate(['/home']))
+    map(() => new LogoutRedirect())
   );
 
   constructor(

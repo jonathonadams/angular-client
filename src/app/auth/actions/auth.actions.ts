@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { User } from '@features/users/user.model';
 import { ActionWithPayload } from '@store/reducers';
 import { LoginCredentials, LoginResponse } from '../auth.model';
 
@@ -8,7 +7,8 @@ export enum AuthActionTypes {
   Logout = '[Auth] Logout',
   LoginSuccess = '[Auth] Login Success',
   LoginFailure = '[Auth] Login Failure',
-  LoginRedirect = '[Auth] Login Redirect'
+  LoginRedirect = '[Auth] Login Redirect',
+  LogoutRedirect = '[Auth] Logout Redirect'
 }
 
 export class Login implements ActionWithPayload<LoginCredentials> {
@@ -26,12 +26,22 @@ export class LoginFailure implements ActionWithPayload<any> {
   constructor(readonly payload: any) {}
 }
 
-export class LoginRedirect implements Action {
-  readonly type = AuthActionTypes.LoginRedirect;
-}
-
 export class Logout implements Action {
   readonly type = AuthActionTypes.Logout;
 }
 
-export type AuthActionsUnion = Login | LoginSuccess | LoginFailure | LoginRedirect | Logout;
+export class LoginRedirect implements Action {
+  readonly type = AuthActionTypes.LoginRedirect;
+}
+
+export class LogoutRedirect implements Action {
+  readonly type = AuthActionTypes.LoginRedirect;
+}
+
+export type AuthActionsUnion =
+  | Login
+  | LoginSuccess
+  | LoginFailure
+  | LoginRedirect
+  | Logout
+  | LogoutRedirect;

@@ -1,12 +1,15 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Logout } from '@app/auth/actions/auth.actions';
+import { ROUTER_ANIMATIONS } from './router-animation';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'client-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [ROUTER_ANIMATIONS]
 })
 export class NavigationComponent {
   constructor(private store: Store<any>) {}
@@ -17,5 +20,9 @@ export class NavigationComponent {
 
   logout() {
     this.store.dispatch(new Logout());
+  }
+
+  routerAnimations(router: RouterOutlet) {
+    return router.activatedRouteData['animation'] || 'initial';
   }
 }

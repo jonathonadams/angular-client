@@ -1,1 +1,28 @@
-<client-web-menu [navLinks]="navLinks"></client-web-menu>
+<client-header (toggleNavigation)="mainNav.toggle()" class="header"></client-header>
+
+<mat-sidenav-container fxFlex="1 0 0" hasBackdrop="true">
+  <mat-sidenav fxShow fxHide.lt-sm="true" #mainNav mode="over" class="mat-elevation-z6">
+    <mat-nav-list>
+      <mat-list-item
+        *ngFor="let link of navLinks"
+        mat-button
+        [routerLink]="link.path"
+        routerLinkActive="active"
+      >
+        <mat-icon>{{ link.icon }}</mat-icon
+        >&nbsp;&nbsp;<a class="nav-link">{{ link.label }}</a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content fxLayout="column" class="app-content">
+    <div
+      fxLayout="column"
+      fxFlex="1 1 0"
+      class="page-content"
+      [@routerAnimations]="routerAnimations(routerOutlet)"
+    >
+      <router-outlet #routerOutlet="outlet"></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
