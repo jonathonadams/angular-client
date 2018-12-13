@@ -1,7 +1,7 @@
 <client-header (toggleNavigation)="mainNav.toggle()" class="header"></client-header>
 
 <mat-sidenav-container fxFlex="1 0 0" hasBackdrop="true">
-  <mat-sidenav fxShow fxHide.lt-sm="true" #mainNav mode="over" class="mat-elevation-z6">
+  <mat-sidenav #mainNav mode="over" class="mat-elevation-z6">
     <mat-nav-list>
       <mat-list-item
         *ngFor="let link of navLinks"

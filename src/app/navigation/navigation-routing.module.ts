@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { NavigationComponent } from '@nav/navigation.component';
+import { NavigationComponent } from '@nav/components/navigation.component';
 import { AuthGuard } from '@auth/guards/auth.guard';
 import { UserResolver } from '@features/users/user-resolver.service';
 import { DashboardComponent } from '@components/dashboard/dashboard.component';

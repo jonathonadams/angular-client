@@ -18,7 +18,7 @@ describe('UsersReducer', () => {
 
   describe('LoadSucces action', () => {
     it('should add the user to the user state', () => {
-      const user: User = { id: '2', username: 'someUser', email: 'some@email.com' };
+      const user = { id: '2', username: 'someUser', emailAddress: 'some@emailAddress.com' } as User;
       const action = new LoadUserSuccess(user);
 
       const result = usersReducer(undefined, action);
@@ -29,7 +29,11 @@ describe('UsersReducer', () => {
 
   describe('UpdateSucces action', () => {
     it('should update the existing user state', () => {
-      const inititalState: User = { id: '1', username: 'initialUser', email: 'some@email.com' };
+      const inititalState = {
+        id: '1',
+        username: 'initialUser',
+        emailAddress: 'some@emailAddress.com'
+      } as User;
       const user = { id: '1', username: 'updatedName' } as User;
       const action = new UpdateUserSuccess(user);
 
@@ -41,7 +45,11 @@ describe('UsersReducer', () => {
 
   describe('DeleteSucces action', () => {
     it('should delete the existing user state', () => {
-      const inititalState: User = { id: '1', username: 'initialUser', email: 'some@email.com' };
+      const inititalState = {
+        id: '1',
+        username: 'initialUser',
+        emailAddress: 'some@emailAddress.com'
+      } as User;
       const action = new DeleteUserSuccess();
 
       const result = usersReducer(inititalState, action);

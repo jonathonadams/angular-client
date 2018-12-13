@@ -3,13 +3,19 @@
     {
       "id": "1",
       "username": "Some User",
-      "email": "email@domiain.com",
+      "firstName": "Some",
+      "lastName": "User",
+      "emailAddress": "email@domiain.com",
+      "dateOfBirth": "2018-01-01",
       "hashedPassword": "$2a$10$yTVUkddFs4sT2CBAiWkbGOp3Y5R4MMUrQ/IQo0nSbDHQfJuYNwMJu"
     },
     {
       "id": "2",
       "username": "admin",
-      "email": "admin@domiain.com",
+      "firstName": "Admin",
+      "lastName": "Admin",
+      "emailAddress": "email@domiain.com",
+      "dateOfBirth": "2018-01-01",
       "hashedPassword": "$2a$10$yTVUkddFs4sT2CBAiWkbGOp3Y5R4MMUrQ/IQo0nSbDHQfJuYNwMJu"
     }
   ],
