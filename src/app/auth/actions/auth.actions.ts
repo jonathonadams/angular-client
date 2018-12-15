@@ -21,9 +21,9 @@ export class LoginSuccess implements ActionWithPayload<LoginResponse> {
   constructor(readonly payload: { token: string }) {}
 }
 
-export class LoginFailure implements ActionWithPayload<any> {
+export class LoginFailure implements ActionWithPayload<Error> {
   readonly type = AuthActionTypes.LoginFailure;
-  constructor(readonly payload: any) {}
+  constructor(readonly payload: Error) {}
 }
 
 export class Logout implements Action {

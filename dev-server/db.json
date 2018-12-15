@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "1",
-      "username": "Some User",
+      "username": "someuser",
       "firstName": "Some",
       "lastName": "User",
       "emailAddress": "email@domiain.com",
