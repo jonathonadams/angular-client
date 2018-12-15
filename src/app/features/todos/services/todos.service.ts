@@ -32,7 +32,7 @@ export class TodoService {
   }
 
   public createTodo(todo: Todo): Observable<Todo> {
-    // Set the user is of the current JWT id
+    // Set the user id of the current JWT id
     todo.userId = this.auth.getDecodedToken().sub;
     return this.api.post<Todo>('todos', todo);
   }

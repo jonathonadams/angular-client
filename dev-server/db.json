@@ -39,12 +39,6 @@
       "userId": "1"
     },
     {
-      "title": "Orange Todo",
-      "description": "This is an Orange Todo!",
-      "userId": "2",
-      "id": "585"
-    },
-    {
       "title": "Green Todo",
       "description": "This is a Green Todo!",
       "userId": "2",
@@ -55,6 +49,13 @@
       "description": "This is a Pink Todo!",
       "userId": "2",
       "id": "503"
+    },
+    {
+      "title": "Blue Todo",
+      "description": "This is a Blue Todo!",
+      "completed": false,
+      "userId": "2",
+      "id": "876"
     }
   ]
 }

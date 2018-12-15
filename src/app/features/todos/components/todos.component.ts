@@ -24,24 +24,27 @@ export class TodosComponent implements OnInit {
     this.store.dispatch(new LoadTodos());
   }
 
-  public selectTodo(event: Todo) {
-    this.selectedTodo = event;
+  public selectTodo(todo: Todo) {
+    this.selectedTodo = { ...todo };
   }
 
   public saveTodo(todo: Todo) {
-    this.todoService.saveTodo(todo);
+    if (this.selectedTodo) {
+      // Editing a current one
+      this.todoService.saveTodo({ ...this.selectedTodo, ...todo });
+    } else {
+      // It is a new todo, set completed to false
+      this.todoService.saveTodo({ ...todo, completed: false });
+    }
     this.resetTodo();
   }
 
   public resetTodo() {
-    this.selectedTodo = {} as Todo;
+    this.selectedTodo = undefined;
   }
 
   public deleteTodo(todo: Todo) {
-    // Reset the todo if it is the current selected todo
-    if (this.selectedTodo && todo.id === this.selectedTodo.id) {
-      this.resetTodo();
-    }
     this.store.dispatch(new DeleteTodo(todo));
+    this.resetTodo();
   }
 }

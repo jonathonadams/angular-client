@@ -10,7 +10,6 @@ import { AppMaterialModule } from './app-material.module';
   imports: [
     AppMaterialModule,
     CommonModule,
-    FormsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     RouterModule,
@@ -20,7 +19,6 @@ import { AppMaterialModule } from './app-material.module';
   exports: [
     AppMaterialModule,
     CommonModule,
-    FormsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     RouterModule,
