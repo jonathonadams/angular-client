@@ -6,14 +6,12 @@ import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, metaReducers, AppState } from '@store/reducers';
 import { ComponentsModule } from '@components/components.module';
 import { AuthModule } from './auth';
 import { CoreModule } from '@app-core/core.module';
 import { NavigationModule } from './navigation/navigation.module';
-import { environment } from '~/environments/environment';
 import { appEffects } from './store';
 
 @NgModule({
@@ -22,12 +20,6 @@ import { appEffects } from './store';
     BrowserModule,
     BrowserAnimationsModule,
     StoreModule.forRoot<AppState>(reducers, { metaReducers }),
-    !environment.production
-      ? StoreDevtoolsModule.instrument({
-          maxAge: 25, // Retains last 25 states
-          logOnly: environment.production // Restrict extension to log-only mode
-        })
-      : [],
     EffectsModule.forRoot(appEffects),
     CoreModule.forRoot(),
     AuthModule.forRoot(),

@@ -11,30 +11,19 @@
       [formGroup]="loginForm"
       (ngSubmit)="onSubmit(loginForm)"
     >
-      <mat-form-field color="primary">
-        <input
-          matInput
-          type="text"
-          name="username"
-          placeholder="Username"
-          formControlName="username"
-        />
+      <mat-form-field color="primary" appearance="standard">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" formControlName="username" />
       </mat-form-field>
-      <mat-form-field color="primary">
-        <input
-          matInput
-          type="password"
-          name="password"
-          placeholder="Password"
-          formControlName="password"
-        />
+      <mat-form-field color="primary" appearance="standard">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" />
       </mat-form-field>
       <button
         mat-raised-button
         color="accent"
         class="login-btn"
         type="submit"
-        name="submit"
         [disabled]="!loginForm.valid"
       >
         Login
