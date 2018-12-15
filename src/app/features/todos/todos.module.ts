@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { SharedModule, AppMaterialModule } from '@app/shared';
-import { todosReducers, TodoState } from './reducers/todos.reducer';
+import { TodosEntityState, todosReducer } from './reducers/todos.reducer';
 import { TodoEffects } from './effects/todos.effects';
-import { TodoService } from './services/todos.service';
+import { TodosService } from './services/todos.service';
 import { TodosComponent } from './components/todos.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoDetailComponent } from './components/todo-detail/todo-detail.component';
 import { TodoRoutingModule } from './todos-routing.module';
+import { TodosFacade } from './services/todos.facade';
 
 const COMPONENTS = [TodosComponent, TodoListComponent, TodoDetailComponent];
 
@@ -17,10 +18,10 @@ const COMPONENTS = [TodosComponent, TodoListComponent, TodoDetailComponent];
     SharedModule,
     AppMaterialModule,
     TodoRoutingModule,
-    StoreModule.forFeature<TodoState>('todos', todosReducers),
+    StoreModule.forFeature<TodosEntityState>('todosState', todosReducer),
     EffectsModule.forFeature([TodoEffects])
   ],
-  providers: [TodoService],
+  providers: [TodosService, TodosFacade],
   declarations: COMPONENTS,
   exports: COMPONENTS
 })

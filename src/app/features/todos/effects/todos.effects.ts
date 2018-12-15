@@ -18,7 +18,7 @@ import {
   DeleteTodoFail,
   UpdateTodoFail
 } from '../actions/todos.actions';
-import { TodoService } from '../services/todos.service';
+import { TodosService } from '../services/todos.service';
 import { AppState } from '@app/store/reducers';
 import { HttpErrorAction } from '@app/store/effects/error-effects';
 
@@ -41,7 +41,7 @@ import { HttpErrorAction } from '@app/store/effects/error-effects';
 export class TodoEffects {
   constructor(
     private actions$: Actions,
-    private todoService: TodoService,
+    private todoService: TodosService,
     private store: Store<AppState>
   ) {}
 
@@ -49,7 +49,7 @@ export class TodoEffects {
   loadTodos$ = this.actions$.pipe(
     ofType<LoadTodos>(TodoActionTypes.Load),
     exhaustMap(action =>
-      this.todoService.loadTodos().pipe(
+      this.todoService.getAllTodos().pipe(
         map(todos => new LoadTodosSuccess(todos)),
         catchError(error => of(new LoadTodosFail(error)))
       )

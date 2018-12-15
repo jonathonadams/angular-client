@@ -1,10 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AppState } from '@app/store/reducers';
 import { Observable } from 'rxjs';
 import { Todo } from '../todos.model';
-import { TodoService } from '../services/todos.service';
-import { LoadTodos, DeleteTodo } from '../actions/todos.actions';
+import { TodosFacade } from '../services/todos.facade';
+import { filter, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'client-todos',
@@ -16,12 +14,12 @@ export class TodosComponent implements OnInit {
   public userTodo$: Observable<Todo[]>;
   public selectedTodo: Todo;
 
-  constructor(private store: Store<AppState>, private todoService: TodoService) {
-    this.userTodo$ = this.todoService.userTodo$;
+  constructor(private facade: TodosFacade) {
+    this.userTodo$ = this.facade.userTodo$;
   }
 
   ngOnInit() {
-    this.store.dispatch(new LoadTodos());
+    this.facade.loadTodos();
   }
 
   public selectTodo(todo: Todo) {
@@ -31,10 +29,10 @@ export class TodosComponent implements OnInit {
   public saveTodo(todo: Todo) {
     if (this.selectedTodo) {
       // Editing a current one
-      this.todoService.saveTodo({ ...this.selectedTodo, ...todo });
+      this.facade.updateTodo({ ...this.selectedTodo, ...todo });
     } else {
       // It is a new todo, set completed to false
-      this.todoService.saveTodo({ ...todo, completed: false });
+      this.facade.createTodo({ ...todo, completed: false });
     }
     this.resetTodo();
   }
@@ -44,7 +42,7 @@ export class TodosComponent implements OnInit {
   }
 
   public deleteTodo(todo: Todo) {
-    this.store.dispatch(new DeleteTodo(todo));
+    this.facade.deleteTodo(todo);
     this.resetTodo();
   }
 }

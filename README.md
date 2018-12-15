@@ -1,6 +1,6 @@
 [Angular](https://angular.io/), [GraphQL](https://graphql.org/), [NativeScript](https://www.nativescript.org/), [NgRx](https://ngrx.io/), [Material Design](https://material.angular.io/), [Husky](https://github.com/typicode/husky), [Prettier](https://prettier.io/), [Jest](https://jestjs.io/) & [TestCafe](https://testcafe.devexpress.com/)
 
-Note: This poject is a work in progress and will regularly be updated.
+Note: This pyoject is a work in progress and will regularly be updated.
 
 # About this project.
 

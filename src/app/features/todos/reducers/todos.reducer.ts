@@ -1,60 +1,69 @@
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { EntityState, EntityAdapter, createEntityAdapter, Dictionary } from '@ngrx/entity';
 import { Todo } from '../todos.model';
-import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
 import { TodoActionTypes, TodoActionUnion } from '../actions/todos.actions';
-import { AppState } from '~/app/store';
 import { selectUser, User } from '../../users';
 
-const COMPARATOR = 'id';
-
-export interface TodoState {
-  todos: Todo[];
+// 1. define teh entity state
+export interface TodosEntityState extends EntityState<Todo> {
+  // Add custom property state
+  selectedTodoId: string | null;
 }
 
-export const initialState: Todo[] = [];
+// 2. Create entity adapter
+const adapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
 
-export function todosReducer(state: Todo[] = initialState, action: TodoActionUnion): Todo[] {
+// 3. Define the initial state
+export const initialState: TodosEntityState = adapter.getInitialState({
+  selectedTodoId: null
+});
+
+// export const initialState: Todo[] = [];
+
+export function todosReducer(
+  state: TodosEntityState = initialState,
+  action: TodoActionUnion
+): TodosEntityState {
   switch (action.type) {
     case TodoActionTypes.LoadSuccess:
-      return <Todo[]>action.payload;
+      return adapter.addAll(action.payload, state);
 
     case TodoActionTypes.CreateSuccess:
-      return <Todo[]>[...state, action.payload];
+      return adapter.addOne(action.payload, state);
 
     case TodoActionTypes.UpdateSuccess:
-      return <Todo[]>state.map(todo => {
-        return todo[COMPARATOR] === action.payload[COMPARATOR]
-          ? Object.assign({}, todo, action.payload)
-          : todo;
-      });
+      return adapter.updateOne({ id: action.payload.id, changes: action.payload }, state);
 
     case TodoActionTypes.Delete:
-      return <Todo[]>state.filter(todo => {
-        return todo[COMPARATOR] !== action.payload[COMPARATOR];
-      });
+      return adapter.removeOne(action.payload.id, state);
 
     default:
       return state;
   }
 }
 
-// a map of the todos reducers
-export const todosReducers: ActionReducerMap<TodoState> = {
-  todos: todosReducer
-};
-
 // Select the top level 'todos' state.
-export const selectTodoState = createFeatureSelector<TodoState>('todos');
+export const selectTodoState = createFeatureSelector<TodosEntityState>('todosState');
 
-// todo sub state selectors
-export const selectTodos = createSelector(
+const { selectIds, selectEntities, selectAll } = adapter.getSelectors();
+
+export const selectTodoIds = createSelector(
   selectTodoState,
-  (state: TodoState) => state.todos
+  selectIds
+);
+export const selectTodoEntities = createSelector(
+  selectTodoState,
+  selectEntities
+);
+export const selectAllTodos = createSelector(
+  selectTodoState,
+  selectAll
 );
 
 export const selectUserTodos = createSelector(
   selectUser,
-  selectTodos,
-  (user: User, todos: Todo[]) => {
+  selectAllTodos,
+  (user: User, todos) => {
     return user && todos ? todos.filter(todo => todo.userId === user.id) : [];
   }
 );
