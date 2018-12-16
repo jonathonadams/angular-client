@@ -1,5 +1,5 @@
 import { ActionWithPayload } from '@store/reducers';
-import { User } from './user.model';
+import { User } from '../models/user.model';
 import { Action } from '@ngrx/store';
 
 export enum UserActionTypes {

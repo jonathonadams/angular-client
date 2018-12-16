@@ -3,9 +3,9 @@ import { Observable, EMPTY } from 'rxjs';
 import { take, filter, tap, map } from 'rxjs/operators';
 import { Resolve } from '@angular/router';
 import { UserService } from './user.service';
-import { User } from './user.model';
+import { User } from '../models/user.model';
 import { Store } from '@ngrx/store';
-import { LoadAuthenticatedUser } from './user.actions';
+import { LoadAuthenticatedUser } from '../actions/user.actions';
 import { AuthService } from '~/app/auth';
 
 @Injectable({ providedIn: 'root' })

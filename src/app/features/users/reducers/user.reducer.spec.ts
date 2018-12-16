@@ -1,10 +1,10 @@
-import { usersReducer } from '@features/users/user.reducer';
-import { User } from '@features/users/user.model';
+import { usersReducer } from '~/app/features/users/reducers/user.reducer';
+import { User } from '~/app/features/users/models/user.model';
 import {
   LoadUserSuccess,
   UpdateUserSuccess,
   DeleteUserSuccess
-} from '@features/users/user.actions';
+} from '~/app/features/users/actions/user.actions';
 
 describe('UsersReducer', () => {
   describe('undefined action', () => {

@@ -7,8 +7,8 @@ import {
   LoadUserSuccess,
   LoadUserFail,
   LoadAuthenticatedUser
-} from './user.actions';
-import { UserService } from './user.service';
+} from '../actions/user.actions';
+import { UserService } from '../services/user.service';
 import { AuthService } from '~/app/auth';
 
 @Injectable()

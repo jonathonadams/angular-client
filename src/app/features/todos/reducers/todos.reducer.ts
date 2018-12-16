@@ -25,6 +25,12 @@ export function todosReducer(
   action: TodoActionUnion
 ): TodosEntityState {
   switch (action.type) {
+    case TodoActionTypes.Select:
+      return { ...state, selectedTodoId: action.payload };
+
+    case TodoActionTypes.ClearSelected:
+      return { ...state, selectedTodoId: null };
+
     case TodoActionTypes.LoadSuccess:
       return adapter.addAll(action.payload, state);
 
@@ -45,19 +51,19 @@ export function todosReducer(
 // Select the top level 'todos' state.
 export const selectTodoState = createFeatureSelector<TodosEntityState>('todosState');
 
-const { selectIds, selectEntities, selectAll } = adapter.getSelectors();
+const { selectIds, selectEntities, selectAll } = adapter.getSelectors(selectTodoState);
 
-export const selectTodoIds = createSelector(
+export const selectTodoIds = selectIds;
+export const selectTodoEntities = selectEntities;
+export const selectAllTodos = selectAll;
+export const selectCurrentTodoId = createSelector(
   selectTodoState,
-  selectIds
+  (state: TodosEntityState) => state.selectedTodoId
 );
-export const selectTodoEntities = createSelector(
-  selectTodoState,
-  selectEntities
-);
-export const selectAllTodos = createSelector(
-  selectTodoState,
-  selectAll
+export const selectCurrentTodo = createSelector(
+  selectTodoEntities,
+  selectCurrentTodoId,
+  (todoEntities, todoId) => todoEntities[todoId]
 );
 
 export const selectUserTodos = createSelector(

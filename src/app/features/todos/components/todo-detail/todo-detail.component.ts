@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { Todo } from '@app/features/todos';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'client-todo-detail',
@@ -10,12 +10,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class TodoDetailComponent {
   public todoForm: FormGroup;
-  public editing = false;
+  public selectedTodo: Todo;
 
   constructor(private fb: FormBuilder) {
     this.todoForm = this.fb.group({
-      title: [''],
-      description: ['']
+      title: ['', Validators.required],
+      description: ['', Validators.required]
     });
   }
 
@@ -25,20 +25,18 @@ export class TodoDetailComponent {
   cancelled = new EventEmitter<void>();
 
   @Input()
-  set todo(value: Todo) {
-    this.editing = value ? true : false;
-    this.todoForm.reset(value);
+  set todo(todo: Todo) {
+    this.selectedTodo = todo ? { ...todo } : undefined;
+    this.todoForm.reset(todo);
   }
 
   onSubmit({ value, valid }) {
     if (valid) {
-      this.saved.emit(value);
-      this.todoForm.reset();
+      this.saved.emit({ ...this.selectedTodo, ...value });
     }
   }
 
   clearTodo() {
-    this.todoForm.reset();
     this.cancelled.emit();
   }
 }

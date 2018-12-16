@@ -1,5 +1,5 @@
-import { User } from './user.model';
-import { UserActionUnion, UserActionTypes } from './user.actions';
+import { User } from '../models/user.model';
+import { UserActionUnion, UserActionTypes } from '../actions/user.actions';
 import { AppState } from '@store/reducers';
 
 export function usersReducer(state: User, action: UserActionUnion): User {

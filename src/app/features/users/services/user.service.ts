@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '~/app/store';
 import { Observable } from 'rxjs';
-import { User } from './user.model';
-import { selectUser } from './user.reducer';
+import { User } from '../models/user.model';
+import { selectUser } from '../reducers/user.reducer';
 import { ApiService } from '~/app/core';
 
 @Injectable({

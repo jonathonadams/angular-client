@@ -12,10 +12,11 @@ import { filter, tap } from 'rxjs/operators';
 })
 export class TodosComponent implements OnInit {
   public userTodo$: Observable<Todo[]>;
-  public selectedTodo: Todo;
+  public selectedTodo$: Observable<Todo>;
 
   constructor(private facade: TodosFacade) {
     this.userTodo$ = this.facade.userTodo$;
+    this.selectedTodo$ = this.facade.selectedTodo$;
   }
 
   ngOnInit() {
@@ -23,26 +24,19 @@ export class TodosComponent implements OnInit {
   }
 
   public selectTodo(todo: Todo) {
-    this.selectedTodo = { ...todo };
+    this.facade.selectTodo(todo);
   }
 
   public saveTodo(todo: Todo) {
-    if (this.selectedTodo) {
-      // Editing a current one
-      this.facade.updateTodo({ ...this.selectedTodo, ...todo });
-    } else {
-      // It is a new todo, set completed to false
-      this.facade.createTodo({ ...todo, completed: false });
-    }
-    this.resetTodo();
-  }
-
-  public resetTodo() {
-    this.selectedTodo = undefined;
+    this.facade.saveTodo(todo);
+    this.clearTodo();
   }
 
   public deleteTodo(todo: Todo) {
     this.facade.deleteTodo(todo);
-    this.resetTodo();
+  }
+
+  public clearTodo() {
+    this.facade.clearSelected();
   }
 }

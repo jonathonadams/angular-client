@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as jwtDecode from 'jwt-decode';
 import { Observable } from 'rxjs';
-import { FetchResult } from 'apollo-link';
 import { GraphQLService } from '@app-core/graphql';
 import { LocalStorageService } from '@app-core/storage';
 import { DecodedJWT, LoginCredentials, LoginResponse } from '@auth/auth.model';

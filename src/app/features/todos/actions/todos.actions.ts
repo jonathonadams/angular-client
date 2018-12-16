@@ -14,9 +14,19 @@ export enum TodoActionTypes {
   UpdateFail = '[Todo] Update Fail',
   Delete = '[Todo] Delete',
   DeleteSuccess = '[Todo] Delete Success',
-  DeleteFail = '[Todo] Delete Fail'
+  DeleteFail = '[Todo] Delete Fail',
+  Select = '[Todo] Select',
+  ClearSelected = '[Todo] Clear Selected'
 }
 
+export class SelectTodo implements ActionWithPayload<string> {
+  readonly type = TodoActionTypes.Select;
+  constructor(public payload: string) {}
+}
+
+export class ClearSelectedTodo implements Action {
+  readonly type = TodoActionTypes.ClearSelected;
+}
 /**
  * Load Todo action
  */
@@ -92,6 +102,8 @@ export class DeleteTodoFail implements ActionWithPayload<Error> {
 }
 
 export type TodoActionUnion =
+  | SelectTodo
+  | ClearSelectedTodo
   | LoadTodos
   | LoadTodosSuccess
   | LoadTodosFail
