@@ -1,5 +1,5 @@
 import { ActionWithPayload } from '@app/store/reducers';
-import { Todo } from '@app/features/todos/todos.model';
+import { Todo } from '~/app/features/todos/models/todos.model';
 import { Action } from '@ngrx/store';
 
 export enum TodoActionTypes {

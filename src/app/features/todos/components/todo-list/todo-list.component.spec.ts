@@ -46,13 +46,15 @@ describe('TodoListComponent ', () => {
     it('should render a list of todos when set', () => {
       const todos: Todo[] = [
         {
-          id: 1,
+          id: '1',
+          userId: '1',
           title: 'some title',
           description: 'some description',
           completed: true
         },
         {
-          id: 2,
+          id: '1',
+          userId: '1',
           title: 'another title',
           description: 'another description',
           completed: false
@@ -70,13 +72,15 @@ describe('TodoListComponent ', () => {
     it('should be raised with the selected todo when the card is clicked', fakeAsync(() => {
       const todos: Todo[] = [
         {
-          id: 1,
+          id: '1',
+          userId: '1',
           title: 'some title',
           description: 'some description',
           completed: true
         },
         {
-          id: 2,
+          id: '2',
+          userId: '1',
           title: 'another title',
           description: 'another description',
           completed: false
@@ -104,13 +108,15 @@ describe('TodoListComponent ', () => {
     it('should be raised with the selected todo when the delete icon is clicked', fakeAsync(() => {
       const todos: Todo[] = [
         {
-          id: 1,
+          id: '1',
+          userId: '1',
           title: 'some title',
           description: 'some description',
           completed: true
         },
         {
-          id: 2,
+          id: '2',
+          userId: '1',
           title: 'another title',
           description: 'another description',
           completed: false
@@ -121,7 +127,7 @@ describe('TodoListComponent ', () => {
       fixture.detectChanges();
 
       let todo: Todo;
-      component.deleted.subscribe(event => {
+      component.delete.subscribe(event => {
         todo = event;
       });
 

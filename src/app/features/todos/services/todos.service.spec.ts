@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { ApiService } from '@app/core';
 import { Store } from '@ngrx/store';
-import { TodoService } from '../services/todos.service';
+import { TodosService } from './todos.service';
 import { Todo } from '@app/features/todos';
 import { storeProviderStub, authProviderStub } from '@tests/helper-functions';
 import { HttpStub } from '@tests/http.stubs';
 import { AuthService } from '~/app/auth';
 
 describe('TodoService', () => {
-  let service: TodoService;
+  let service: TodosService;
   let store: Store<any>;
   let apiService: ApiService;
   let authService: AuthService;
@@ -16,14 +16,14 @@ describe('TodoService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        TodoService,
+        TodosService,
         storeProviderStub,
         { provide: ApiService, useClass: HttpStub },
         authProviderStub
       ]
     });
 
-    service = TestBed.get(TodoService);
+    service = TestBed.get(TodosService);
     store = TestBed.get(Store);
     apiService = TestBed.get(ApiService);
     authService = TestBed.get(AuthService);
@@ -37,7 +37,7 @@ describe('TodoService', () => {
     it('should call the api service with /todos', () => {
       const spy = jest.spyOn(apiService, 'get');
 
-      service.loadTodos();
+      service.getAllTodos();
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledWith('todos');
@@ -50,7 +50,7 @@ describe('TodoService', () => {
     it('should make a GET request to the api server with the resource id', () => {
       const spy = jest.spyOn(apiService, 'get');
 
-      service.getTodo('1');
+      service.getOneTodo('1');
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledWith('todos/1');

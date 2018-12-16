@@ -3,6 +3,7 @@ import { NO_ERRORS_SCHEMA, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { Todo } from '@app/features/todos';
 import { TodoDetailComponent } from './todo-detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('TodoDetailComponent', () => {
   let component: TodoDetailComponent;
@@ -12,6 +13,7 @@ describe('TodoDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule],
       declarations: [TodoDetailComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
@@ -33,7 +35,8 @@ describe('TodoDetailComponent', () => {
       expect(component.selectedTodo).not.toBeDefined();
 
       const todo: Todo = {
-        id: 1,
+        id: '1',
+        userId: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -47,7 +50,8 @@ describe('TodoDetailComponent', () => {
       expect(component.selectedTodo).not.toBeDefined();
 
       const todo: Todo = {
-        id: 1,
+        id: '1',
+        userId: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -66,7 +70,8 @@ describe('TodoDetailComponent', () => {
   describe('saved', () => {
     it('should be raised when the saved button is clicked', fakeAsync(() => {
       const todo: Todo = {
-        id: 1,
+        id: '1',
+        userId: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -79,8 +84,7 @@ describe('TodoDetailComponent', () => {
         emittedTodo = event;
       });
 
-      const buttonList = debugEl.queryAll(By.css('button'));
-      buttonList[0].triggerEventHandler('click', null);
+      const form = debugEl.query(By.css('form')).triggerEventHandler('submit', null);
 
       tick();
 
@@ -89,27 +93,20 @@ describe('TodoDetailComponent', () => {
   });
 
   describe('cancelled', () => {
-    it('should be raised when the cancel button is clicked', fakeAsync(() => {
-      const todo: Todo = {
-        id: 1,
-        title: 'some title',
-        description: 'some description',
-        completed: true
-      };
-      component.todo = todo;
-      fixture.detectChanges();
-
-      let emittedTodo: Todo;
+    it('should be raised when the canceled button is clicked', fakeAsync(() => {
+      let canceledEvent = true;
       component.cancelled.subscribe(event => {
-        emittedTodo = event;
+        canceledEvent = event;
       });
 
-      const deleteButtons = debugEl.queryAll(By.css('button'));
-      deleteButtons[1].triggerEventHandler('click', null);
+      expect(canceledEvent).toBeDefined();
+
+      const deleteButton = debugEl.query(By.css('button[type="button"]'));
+      deleteButton.triggerEventHandler('click', null);
 
       tick();
 
-      expect(emittedTodo).toEqual(todo);
+      expect(canceledEvent).toBeUndefined();
     }));
   });
 });

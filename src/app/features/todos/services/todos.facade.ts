@@ -15,7 +15,7 @@ import {
   SelectTodo,
   ClearSelectedTodo
 } from '../actions/todos.actions';
-import { Todo } from '../todos.model';
+import { Todo } from '../models/todos.model';
 
 @Injectable()
 export class TodosFacade {

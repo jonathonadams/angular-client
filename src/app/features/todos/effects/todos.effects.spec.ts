@@ -4,7 +4,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 import { Actions } from '@ngrx/effects';
 import { hot, cold } from 'jest-marbles';
-import { Todo } from '../todos.model';
+import { Todo } from '../models/todos.model';
 import {
   LoadTodosSuccess,
   LoadTodos,
@@ -19,14 +19,14 @@ import {
   DeleteTodoSuccess,
   DeleteTodoFail
 } from '../actions/todos.actions';
-import { TodoService } from '../services/todos.service';
+import { TodosService } from '../services/todos.service';
 import { createSpyObj, storeProviderStub } from '@tests/helper-functions';
 import { HttpErrorAction } from '@app/store/effects/error-effects';
 
 describe('TodoEffects', () => {
   let effects: TodoEffects;
   let action$: Observable<any>;
-  let todoService: TodoService;
+  let todoService: TodosService;
   let mockTodo: Todo;
   const todoServiceSpy = createSpyObj('TodoService', [
     'loadTodos',
@@ -41,13 +41,13 @@ describe('TodoEffects', () => {
       providers: [
         TodoEffects,
         storeProviderStub,
-        { provide: TodoService, useValue: todoServiceSpy },
+        { provide: TodosService, useValue: todoServiceSpy },
         provideMockActions(() => action$)
       ]
     });
     effects = TestBed.get(TodoEffects);
     action$ = TestBed.get(Actions);
-    todoService = TestBed.get(TodoService);
+    todoService = TestBed.get(TodosService);
     mockTodo = {
       id: '1',
       userId: '1',
@@ -87,7 +87,7 @@ describe('TodoEffects', () => {
       const response = cold('-a|', { a: todos });
       const expected = cold('--b', { b: completion });
 
-      todoService.loadTodos = jest.fn(() => response);
+      todoService.getAllTodos = jest.fn(() => response);
 
       expect(effects.loadTodos$).toBeObservable(expected);
     });
@@ -101,7 +101,7 @@ describe('TodoEffects', () => {
       const response = cold('-#', {}, error);
       const expected = cold('--b', { b: completion });
 
-      todoService.loadTodos = jest.fn(() => response);
+      todoService.getAllTodos = jest.fn(() => response);
 
       expect(effects.loadTodos$).toBeObservable(expected);
     });

@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Todo } from '../todos.model';
+import { Todo } from '../models/todos.model';
 import { TodosFacade } from '../services/todos.facade';
 import { filter, tap } from 'rxjs/operators';
 

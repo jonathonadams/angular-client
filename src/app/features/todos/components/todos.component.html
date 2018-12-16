@@ -10,7 +10,7 @@
     <client-todo-list
       [todos]="userTodo$ | async"
       (selected)="selectTodo($event)"
-      (deleted)="deleteTodo($event)"
+      (delete)="deleteTodo($event)"
     ></client-todo-list>
   </div>
 </div>

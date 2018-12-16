@@ -2,6 +2,6 @@
   <mat-card-subtitle>{{ todo.title }}</mat-card-subtitle>
   <mat-card-content>{{ todo.description }}</mat-card-content>
   <mat-card-actions>
-    <mat-icon class="button" (click)="deleted.emit(todo)">delete</mat-icon>
+    <mat-icon class="button" (click)="delete.emit(todo)">delete</mat-icon>
   </mat-card-actions>
 </mat-card>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from '@app/core';
-import { Todo } from '../todos.model';
+import { Todo } from '../models/todos.model';
 import { AuthService } from '~/app/auth';
 
 @Injectable()

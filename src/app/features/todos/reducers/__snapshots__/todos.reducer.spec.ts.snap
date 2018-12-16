@@ -1,71 +1,105 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TodoReducer CreateSuccess should add a todo to the todo state 1`] = `
-Array [
-  Object {
-    "completed": true,
-    "description": "some description",
-    "id": 1,
-    "title": "some title",
+Object {
+  "entities": Object {
+    "1": Object {
+      "completed": true,
+      "description": "some description",
+      "id": "1",
+      "title": "some title",
+      "userId": "1",
+    },
+    "2": Object {
+      "completed": false,
+      "description": "another description",
+      "id": "2",
+      "title": "another title",
+      "userId": "1",
+    },
   },
-  Object {
-    "completed": false,
-    "description": "another description",
-    "id": 2,
-    "title": "another title",
-  },
-]
+  "ids": Array [
+    "1",
+    "2",
+  ],
+  "selectedTodoId": null,
+}
 `;
 
 exports[`TodoReducer DeleteSuccess should delete the todo from the sate 1`] = `
-Array [
-  Object {
-    "completed": true,
-    "description": "some description",
-    "id": 1,
-    "title": "some title",
+Object {
+  "entities": Object {
+    "1": Object {
+      "completed": true,
+      "description": "some description",
+      "id": "1",
+      "title": "some title",
+      "userId": "1",
+    },
   },
-  Object {
-    "completed": false,
-    "description": "another description",
-    "id": 2,
-    "title": "another title",
-  },
-]
+  "ids": Array [
+    "1",
+  ],
+  "selectedTodoId": null,
+}
 `;
 
 exports[`TodoReducer LoadSuccess should add the todos to the todo state 1`] = `
-Array [
-  Object {
-    "completed": true,
-    "description": "some description",
-    "id": 1,
-    "title": "some title",
+Object {
+  "entities": Object {
+    "1": Object {
+      "completed": true,
+      "description": "some description",
+      "id": "1",
+      "title": "some title",
+      "userId": "1",
+    },
+    "2": Object {
+      "completed": false,
+      "description": "another description",
+      "id": "2",
+      "title": "another title",
+      "userId": "1",
+    },
   },
-  Object {
-    "completed": false,
-    "description": "another description",
-    "id": 2,
-    "title": "another title",
-  },
-]
+  "ids": Array [
+    "1",
+    "2",
+  ],
+  "selectedTodoId": null,
+}
 `;
 
 exports[`TodoReducer UpdateSuccess should update the todo state 1`] = `
-Array [
-  Object {
-    "completed": true,
-    "description": "some description",
-    "id": 1,
-    "title": "some title",
+Object {
+  "entities": Object {
+    "1": Object {
+      "completed": false,
+      "description": "some description",
+      "id": "1",
+      "title": "some title",
+      "userId": "1",
+    },
+    "2": Object {
+      "completed": true,
+      "description": "some description",
+      "id": "2",
+      "title": "anotherTodo",
+      "userId": "1",
+    },
   },
-  Object {
-    "completed": true,
-    "description": "another description",
-    "id": 2,
-    "title": "another title",
-  },
-]
+  "ids": Array [
+    "1",
+    "2",
+  ],
+  "selectedTodoId": null,
+}
 `;
 
-exports[`TodoReducer undefined action should return the default state 1`] = `Array []`;
+exports[`TodoReducer undefined action should return the default state 1`] = `
+Object {
+  "entities": Object {},
+  "ids": Array [],
+  "selectedTodoId": null,
+}
+`;

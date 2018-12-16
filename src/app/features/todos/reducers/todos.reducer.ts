@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter, Dictionary } from '@ngrx/entity';
-import { Todo } from '../todos.model';
+import { Todo } from '../models/todos.model';
 import { TodoActionTypes, TodoActionUnion } from '../actions/todos.actions';
 import { selectUser, User } from '../../users';
 
@@ -40,7 +40,7 @@ export function todosReducer(
     case TodoActionTypes.UpdateSuccess:
       return adapter.updateOne({ id: action.payload.id, changes: action.payload }, state);
 
-    case TodoActionTypes.Delete:
+    case TodoActionTypes.DeleteSuccess:
       return adapter.removeOne(action.payload.id, state);
 
     default:

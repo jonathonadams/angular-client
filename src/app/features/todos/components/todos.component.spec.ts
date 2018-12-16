@@ -1,30 +1,35 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { TodosComponent } from './todos.component';
-import { TodoService, LoadTodos } from '@features/todos';
-import { Todo } from '../todos.model';
-import { createSpyObj, storeProviderStub } from '~/tests/helper-functions';
+import { Todo } from '../models/todos.model';
+import { createSpyObj } from '~/tests/helper-functions';
+import { TodosFacade } from '../services/todos.facade';
 
 describe('TodosComponent', () => {
   let component: TodosComponent;
   let fixture: ComponentFixture<TodosComponent>;
   let debugEl: DebugElement;
   let nativeEl: HTMLElement;
-  let store: Store<any>;
-  let todoService: TodoService;
-  const todoSpy = createSpyObj('TodoService', ['todo$', 'saveTodo']);
+  let todoFacade: TodosFacade;
+  const todoFacadeSpy = createSpyObj('TodosFacade', [
+    'userTodo$',
+    'selectedTodo$',
+    'loadTodos',
+    'selectTodo',
+    'saveTodo',
+    'deleteTodo',
+    'clearSelected'
+  ]);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TodosComponent],
-      providers: [storeProviderStub, { provide: TodoService, useValue: todoSpy }],
+      providers: [{ provide: TodosFacade, useValue: todoFacadeSpy }],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
-    store = TestBed.get(Store);
-    todoService = TestBed.get(TodoService);
+    todoFacade = TestBed.get(TodosFacade);
   }));
 
   beforeEach(() => {
@@ -40,15 +45,13 @@ describe('TodosComponent', () => {
 
   describe('onInit', () => {
     it('should send a request to load todos', () => {
-      const action = new LoadTodos();
       component.ngOnInit();
-      expect(store.dispatch).toHaveBeenCalled();
-      expect(store.dispatch).toHaveBeenCalledWith(action);
+      expect(todoFacade.loadTodos).toHaveBeenCalled();
     });
   });
 
   describe('selectTodo', () => {
-    it('should be called when the TodoList component slected event is raised', () => {
+    it('should be called when the TodoList component selected event is raised', () => {
       const spy = jest.spyOn(component, 'selectTodo');
 
       const todo: Todo = {
@@ -68,8 +71,8 @@ describe('TodosComponent', () => {
       spy.mockReset();
     });
 
-    it('should set the slectedTodo property with the called argument', () => {
-      expect(component.selectedTodo).not.toBeDefined();
+    it('should call the facade selecTodo method with the raised event', () => {
+      const spy = jest.spyOn(todoFacade, 'selectTodo');
 
       const todo: Todo = {
         id: '1',
@@ -83,14 +86,15 @@ describe('TodosComponent', () => {
 
       todoList.triggerEventHandler('selected', todo);
 
-      expect(component.selectedTodo).toBeDefined();
-      expect(component.selectedTodo).toEqual(todo);
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledWith(todo);
+      spy.mockReset();
     });
   });
 
   describe('saveTodo', () => {
     it('should be raised when clientTodoDetailComponent.save() is raised', () => {
-      const spy = jest.spyOn(todoService, 'saveTodo');
+      const spy = jest.spyOn(component, 'saveTodo');
 
       const todo: Todo = {
         id: '1',
@@ -111,8 +115,9 @@ describe('TodosComponent', () => {
       spy.mockReset();
     });
 
-    it('should call todoService.saveTodo()', () => {
-      const spy = jest.spyOn(todoService, 'saveTodo');
+    it('should call facade saveTodo method with the raised event', () => {
+      const spy = jest.spyOn(todoFacade, 'saveTodo');
+      spy.mockReset();
 
       const todo: Todo = {
         id: '1',
@@ -129,15 +134,15 @@ describe('TodosComponent', () => {
 
       // Both of the below assetions can be used as an sertion
       // on the calls.
-      // The second version is aseting again the first argument the first call
+      // The second version is aseting against the first argument the first call
       expect(spy).toHaveBeenCalledWith(todo);
       expect(spy.mock.calls[0][0]).toBe(todo);
 
       spy.mockReset();
     });
 
-    it('should call the resteTodo method', () => {
-      const spy = jest.spyOn(component, 'resetTodo');
+    it('should call the clearTodo method', () => {
+      const spy = jest.spyOn(component, 'clearTodo');
 
       const todo: Todo = {
         id: '1',
@@ -156,9 +161,9 @@ describe('TodosComponent', () => {
     });
   });
 
-  describe('resetTodo', () => {
+  describe('clearTodo', () => {
     it('should be called when the TodoDetailComponent cancelled event is raised', () => {
-      const spy = jest.spyOn(component, 'resetTodo');
+      const spy = jest.spyOn(component, 'clearTodo');
 
       expect(spy).not.toHaveBeenCalled();
 
@@ -170,7 +175,21 @@ describe('TodosComponent', () => {
       spy.mockReset();
     });
 
-    it('should reset the selectedTodo.property', () => {
+    it('should call the facade clearSelected method', () => {
+      const spy = jest.spyOn(todoFacade, 'clearSelected');
+      spy.mockReset();
+      expect(spy).not.toHaveBeenCalled();
+      component.clearTodo();
+      expect(spy).toHaveBeenCalled();
+      spy.mockReset();
+    });
+  });
+
+  describe('deletTodo', () => {
+    it('should be called with when the TodoListComponent cancelled event is raised with the given event', () => {
+      const spy = jest.spyOn(component, 'deleteTodo');
+      spy.mockReset();
+
       const todo: Todo = {
         id: '1',
         userId: '1',
@@ -179,14 +198,34 @@ describe('TodosComponent', () => {
         completed: true
       };
 
-      component.selectedTodo = todo;
+      expect(spy).not.toHaveBeenCalled();
 
-      expect(component.selectedTodo.id).toEqual('1');
+      const todoList = debugEl.query(By.css('client-todo-list'));
 
-      component.resetTodo();
+      todoList.triggerEventHandler('delete', todo);
 
-      expect(component.selectedTodo.id).toEqual(undefined);
-      expect(component.selectedTodo.title).toEqual(undefined);
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledWith(todo);
+      spy.mockReset();
+    });
+
+    it('should call the facade deleteTodo method with the raised event', () => {
+      const spy = jest.spyOn(todoFacade, 'deleteTodo');
+      spy.mockReset();
+      expect(spy).not.toHaveBeenCalled();
+
+      const todo: Todo = {
+        id: '1',
+        userId: '1',
+        title: 'some title',
+        description: 'some description',
+        completed: true
+      };
+
+      component.deleteTodo(todo);
+      expect(spy).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalledWith(todo);
+      spy.mockReset();
     });
   });
 });
