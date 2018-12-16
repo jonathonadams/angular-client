@@ -5,11 +5,13 @@ import { ComponentsModule } from '../components/components.module';
 import { NavigationRoutingModule } from './navigation-routing.module';
 import { EffectsModule } from '@ngrx/effects';
 import { NavigationEffects } from './effects/navigation.effects';
+import { NavigationFacade } from './services/navigation.facade.service';
 
 const COMPONENTS = [NavigationComponent];
 
 @NgModule({
   declarations: COMPONENTS,
+  providers: [NavigationFacade],
   imports: [
     NavigationRoutingModule,
     SharedModule,

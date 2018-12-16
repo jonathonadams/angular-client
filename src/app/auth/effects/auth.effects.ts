@@ -7,12 +7,11 @@ import {
   Login,
   LoginFailure,
   LoginSuccess,
-  Logout,
-  LogoutRedirect
+  Logout
 } from '@auth/actions/auth.actions';
 import { AuthService } from '@auth/services/auth.service';
 import { LoginCredentials } from '~/app/auth/models/auth.model';
-import { LoadAuthenticatedUser } from '@features/users';
+import { LogoutRedirect, LoginRedirect } from '~/app/navigation/actions/navigation.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -33,7 +32,7 @@ export class AuthEffects {
   loginSuccess$ = this.actions$.pipe(
     ofType<LoginSuccess>(AuthActionTypes.LoginSuccess),
     tap(action => this.authService.setAuthorizationToken(action.payload.token)),
-    map(action => new LoadAuthenticatedUser())
+    map(action => new LoginRedirect())
   );
 
   @Effect()

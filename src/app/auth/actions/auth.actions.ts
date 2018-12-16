@@ -30,18 +30,4 @@ export class Logout implements Action {
   readonly type = AuthActionTypes.Logout;
 }
 
-export class LoginRedirect implements Action {
-  readonly type = AuthActionTypes.LoginRedirect;
-}
-
-export class LogoutRedirect implements Action {
-  readonly type = AuthActionTypes.LoginRedirect;
-}
-
-export type AuthActionsUnion =
-  | Login
-  | LoginSuccess
-  | LoginFailure
-  | LoginRedirect
-  | Logout
-  | LogoutRedirect;
+export type AuthActionsUnion = Login | LoginSuccess | LoginFailure | Logout;

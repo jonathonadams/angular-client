@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { LoginCredentials } from '../models/auth.model';
-import { Login, LoginRedirect } from '../actions/auth.actions';
+import { Login, Logout } from '../actions/auth.actions';
 import { LoadAuthenticatedUser, User } from '~/app/features/users';
 import { Observable } from 'rxjs';
 import { selectAuthenticatedUser } from '~/app/features/users/reducers/user.reducer';
@@ -17,8 +17,8 @@ export class AuthFacade {
     this.store.dispatch(new Login(credentials));
   }
 
-  loginRedirect() {
-    this.store.dispatch(new LoginRedirect());
+  logout() {
+    this.store.dispatch(new Logout());
   }
 
   loadAuthenticatedUser() {
