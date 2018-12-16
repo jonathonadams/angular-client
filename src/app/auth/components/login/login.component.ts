@@ -1,12 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { AppState } from '@store/reducers';
-import { LoginCredentials } from '@app/auth/auth.model';
-import { Login, LoginRedirect } from '@auth/actions/auth.actions';
+import { LoginCredentials } from '~/app/auth/models/auth.model';
 import { AuthService } from '@auth/services/auth.service';
 import { ThemeService } from '@app-core/theme/theme.service';
 import { Observable } from 'rxjs';
+import { AuthFacade } from '../../services/auth.facade.service';
 
 @Component({
   selector: 'client-login',
@@ -22,7 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private auth: AuthService,
-    private store: Store<AppState>,
+    private facade: AuthFacade,
     private theme: ThemeService
   ) {
     this.darkTheme$ = this.theme.darkTheme$;
@@ -46,17 +44,13 @@ export class LoginComponent implements OnInit {
 
   checkUserIsLoggedIn(): void {
     if (this.auth.checkUserIsLoggedIn()) {
-      this.store.dispatch(new LoginRedirect());
+      this.facade.loginRedirect();
     }
-  }
-
-  reset(): void {
-    this.loginForm.reset();
   }
 
   public onSubmit({ value, valid }: { value: LoginCredentials; valid: boolean }): void {
     if (valid) {
-      this.store.dispatch(new Login(value));
+      this.facade.login(value);
     }
   }
 }

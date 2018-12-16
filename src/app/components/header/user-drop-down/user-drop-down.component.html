@@ -1,7 +1,9 @@
 <div class="user-dropdown-overlay-container mat-elevation-z6">
   <mat-list role="list">
     <mat-list-item role="listitem">
-      <h3>{{ (user$ | async).firstName }} {{ (user$ | async).lastName }}</h3></mat-list-item
+      <h3>
+        {{ (authenticatedUser$ | async).firstName }} {{ (authenticatedUser$ | async).lastName }}
+      </h3></mat-list-item
     >
     <mat-list-item role="listitem"
       ><mat-slide-toggle

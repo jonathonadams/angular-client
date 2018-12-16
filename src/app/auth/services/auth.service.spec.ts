@@ -4,7 +4,7 @@ import { GraphQLError } from 'graphql';
 import { sign } from 'jsonwebtoken';
 import { AuthService } from './auth.service';
 
-import { LoginCredentials, LoginResponse } from '../auth.model';
+import { LoginCredentials, LoginResponse } from '../models/auth.model';
 // import { GraphQLStub } from 'test';
 import { GraphQLService } from '@app-core/graphql';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';

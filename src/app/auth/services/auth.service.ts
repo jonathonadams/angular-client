@@ -3,7 +3,7 @@ import * as jwtDecode from 'jwt-decode';
 import { Observable } from 'rxjs';
 import { GraphQLService } from '@app-core/graphql';
 import { LocalStorageService } from '@app-core/storage';
-import { DecodedJWT, LoginCredentials, LoginResponse } from '@auth/auth.model';
+import { DecodedJWT, LoginCredentials, LoginResponse } from '~/app/auth/models/auth.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@env/environment';
 

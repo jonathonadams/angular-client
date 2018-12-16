@@ -11,7 +11,7 @@ import {
   LogoutRedirect
 } from '@auth/actions/auth.actions';
 import { AuthService } from '@auth/services/auth.service';
-import { LoginCredentials } from '@auth/auth.model';
+import { LoginCredentials } from '~/app/auth/models/auth.model';
 import { LoadAuthenticatedUser } from '@features/users';
 
 @Injectable()

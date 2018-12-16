@@ -9,6 +9,7 @@ import {
 import { Observable } from 'rxjs';
 import { ThemeService } from '@app-core/theme/theme.service';
 import { User, UserService } from '@features/users';
+import { AuthFacade } from '~/app/auth/services/auth.facade.service';
 
 // For the purpose of theming, view encapulation has been set to none.
 // This element is only inserted into the overlay container,
@@ -23,15 +24,14 @@ import { User, UserService } from '@features/users';
   encapsulation: ViewEncapsulation.None
 })
 export class UserDropDownComponent {
-  @Input() user: User;
   @Output() toggleDarkTheme = new EventEmitter<boolean>();
   @Output() logout = new EventEmitter<void>();
 
   public darkTheme$: Observable<boolean>;
-  public user$: Observable<User>;
+  public authenticatedUser$: Observable<User>;
 
-  constructor(private theme: ThemeService, private userService: UserService) {
+  constructor(private theme: ThemeService, private facade: AuthFacade) {
     this.darkTheme$ = this.theme.darkTheme$;
-    this.user$ = this.userService.user$;
+    this.authenticatedUser$ = this.facade.authenticatedUser$;
   }
 }

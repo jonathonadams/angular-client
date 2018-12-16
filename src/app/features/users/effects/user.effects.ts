@@ -4,12 +4,14 @@ import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import {
   UserActionTypes,
-  LoadUserSuccess,
-  LoadUserFail,
-  LoadAuthenticatedUser
+  LoadAuthenticatedUser,
+  LoadAuthenticatedUserSuccess,
+  LoadAuthenticatedUserFail,
+  SelectAuthenticatedUser,
+  ClearAuthenticatedUser
 } from '../actions/user.actions';
 import { UserService } from '../services/user.service';
-import { AuthService } from '~/app/auth';
+import { AuthService, Logout, AuthActionTypes } from '~/app/auth';
 
 @Injectable()
 export class UserEffects {
@@ -18,11 +20,24 @@ export class UserEffects {
     ofType<LoadAuthenticatedUser>(UserActionTypes.LoadAuthenticated),
     map(action => this.authService.getDecodedToken().sub),
     switchMap(id =>
-      this.userService.loadUser(id).pipe(
-        map(user => new LoadUserSuccess(user)),
-        catchError(error => of(new LoadUserFail(error)))
+      this.userService.getOneUser(id).pipe(
+        map(user => new LoadAuthenticatedUserSuccess(user)),
+        catchError(error => of(new LoadAuthenticatedUserFail(error)))
       )
     )
+  );
+
+  @Effect()
+  selectAuthenticatedUser$ = this.actions$.pipe(
+    ofType<LoadAuthenticatedUserSuccess>(UserActionTypes.LoadAuthenticatedSuccess),
+    map(action => action.payload.id),
+    map(id => new SelectAuthenticatedUser(id))
+  );
+
+  @Effect()
+  clearAuthenticatedUser$ = this.actions$.pipe(
+    ofType<Logout>(AuthActionTypes.Logout),
+    map(id => new ClearAuthenticatedUser())
   );
 
   constructor(

@@ -1,19 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Observable, EMPTY } from 'rxjs';
-import { take, filter, tap, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { take, filter, tap } from 'rxjs/operators';
 import { Resolve } from '@angular/router';
-import { UserService } from './user.service';
 import { User } from '../models/user.model';
-import { Store } from '@ngrx/store';
-import { LoadAuthenticatedUser } from '../actions/user.actions';
-import { AuthService } from '~/app/auth';
+import { AuthFacade } from '~/app/auth/services/auth.facade.service';
 
 @Injectable({ providedIn: 'root' })
 export class UserResolver implements Resolve<User> {
   constructor(
-    private userService: UserService,
-    private store: Store<any>,
-    private auth: AuthService
+    private facade: AuthFacade // private auth: AuthService
   ) {}
 
   resolve(): Observable<any> {
@@ -24,10 +19,9 @@ export class UserResolver implements Resolve<User> {
     // and the user does not have to authenticate again.
     // It also filters out the scenario where the current user is
     // not the current authenticated user, i.e. logout and then log back in
-    return this.userService.user$.pipe(
-      tap(user => (!user ? this.store.dispatch(new LoadAuthenticatedUser()) : undefined)),
+    return this.facade.authenticatedUser$.pipe(
+      tap(user => (!user ? this.facade.loadAuthenticatedUser() : undefined)),
       filter(user => user !== undefined),
-      filter(user => user.id === this.auth.getDecodedToken().sub),
       take(1)
     );
   }

@@ -2,7 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter, Dictionary } from '@ngrx/entity';
 import { Todo } from '../models/todos.model';
 import { TodoActionTypes, TodoActionUnion } from '../actions/todos.actions';
-import { selectUser, User } from '../../users';
+import { User, selectAuthenticatedUser } from '../../users';
 
 // 1. define teh entity state
 export interface TodosEntityState extends EntityState<Todo> {
@@ -51,11 +51,15 @@ export function todosReducer(
 // Select the top level 'todos' state.
 export const selectTodoState = createFeatureSelector<TodosEntityState>('todosState');
 
-const { selectIds, selectEntities, selectAll } = adapter.getSelectors(selectTodoState);
+export const {
+  selectIds: selectTodoIds,
+  selectEntities: selectTodoEntities,
+  selectAll: selectAllTodos
+} = adapter.getSelectors(selectTodoState);
 
-export const selectTodoIds = selectIds;
-export const selectTodoEntities = selectEntities;
-export const selectAllTodos = selectAll;
+// export const selectTodoIds = selectIds;
+// export const selectTodoEntities = selectEntities;
+// export const selectAllTodos = selectAll;
 export const selectCurrentTodoId = createSelector(
   selectTodoState,
   (state: TodosEntityState) => state.selectedTodoId
@@ -67,7 +71,7 @@ export const selectCurrentTodo = createSelector(
 );
 
 export const selectUserTodos = createSelector(
-  selectUser,
+  selectAuthenticatedUser,
   selectAllTodos,
   (user: User, todos) => {
     return user && todos ? todos.filter(todo => todo.userId === user.id) : [];

@@ -4,7 +4,6 @@ import { Action } from '@ngrx/store';
 
 export enum UserActionTypes {
   Load = '[User] Load',
-  LoadAuthenticated = '[User] Load Authenticated',
   LoadSuccess = '[User] Load Success',
   LoadFail = '[User] Load Fail',
   Create = '[User] Create',
@@ -15,7 +14,47 @@ export enum UserActionTypes {
   UpdateFail = '[User] Update Fail',
   Delete = '[User] Delete',
   DeleteSuccess = '[User] Delete Success',
-  DeleteFail = '[User] Delete Fail'
+  DeleteFail = '[User] Delete Fail',
+  Select = '[User] Select',
+  ClearSelected = '[User] Clear Selected',
+  LoadAuthenticated = '[Authenticated User] Load',
+  LoadAuthenticatedSuccess = '[Authenticated User] Load Success',
+  LoadAuthenticatedFail = '[Authenticated User] Load Fail',
+  SelectAuthenticated = '[Authenticated User] Select',
+  ClearAuthenticated = '[Authenticated User] Clear Selected'
+}
+
+export class SelectUser implements ActionWithPayload<string> {
+  readonly type = UserActionTypes.Select;
+  constructor(public payload: string) {}
+}
+
+export class ClearSelectedUser implements Action {
+  readonly type = UserActionTypes.ClearSelected;
+}
+
+export class SelectAuthenticatedUser implements ActionWithPayload<string> {
+  readonly type = UserActionTypes.SelectAuthenticated;
+  constructor(public payload: string) {}
+}
+
+export class ClearAuthenticatedUser implements Action {
+  readonly type = UserActionTypes.ClearAuthenticated;
+}
+
+// Load AuthenticatedUser
+export class LoadAuthenticatedUser implements Action {
+  readonly type = UserActionTypes.LoadAuthenticated;
+}
+
+export class LoadAuthenticatedUserSuccess implements ActionWithPayload<User> {
+  readonly type = UserActionTypes.LoadAuthenticatedSuccess;
+  constructor(public payload: User) {}
+}
+
+export class LoadAuthenticatedUserFail implements ActionWithPayload<User> {
+  readonly type = UserActionTypes.LoadAuthenticatedFail;
+  constructor(public payload: User) {}
 }
 
 /**
@@ -26,13 +65,9 @@ export class LoadUsers implements Action {
   readonly type = UserActionTypes.Load;
 }
 
-export class LoadAuthenticatedUser implements Action {
-  readonly type = UserActionTypes.LoadAuthenticated;
-}
-
-export class LoadUserSuccess implements ActionWithPayload<User> {
+export class LoadUsersSuccess implements ActionWithPayload<User[]> {
   readonly type = UserActionTypes.LoadSuccess;
-  constructor(readonly payload: User) {}
+  constructor(readonly payload: User[]) {}
 }
 
 export class LoadUserFail implements ActionWithPayload<Error> {
@@ -86,8 +121,9 @@ export class DeleteUser implements Action {
   readonly type = UserActionTypes.Delete;
 }
 
-export class DeleteUserSuccess implements Action {
+export class DeleteUserSuccess implements ActionWithPayload<User> {
   readonly type = UserActionTypes.DeleteSuccess;
+  constructor(public payload: User) {}
 }
 
 export class DeleteUserFail implements ActionWithPayload<User> {
@@ -97,8 +133,7 @@ export class DeleteUserFail implements ActionWithPayload<User> {
 
 export type UserActionUnion =
   | LoadUsers
-  | LoadAuthenticatedUser
-  | LoadUserSuccess
+  | LoadUsersSuccess
   | LoadUserFail
   | CreateUser
   | CreateUserSuccess
@@ -108,4 +143,9 @@ export type UserActionUnion =
   | UpdateUserFail
   | DeleteUser
   | DeleteUserSuccess
-  | DeleteUserFail;
+  | DeleteUserFail
+  | LoadAuthenticatedUser
+  | LoadAuthenticatedUserSuccess
+  | LoadAuthenticatedUserFail
+  | SelectAuthenticatedUser
+  | ClearAuthenticatedUser;

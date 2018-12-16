@@ -5,17 +5,10 @@ import { Actions } from '@ngrx/effects';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { cold, hot } from 'jest-marbles';
 import { createSpyObj } from '@tests/helper-functions';
-import {
-  Login,
-  LoginFailure,
-  LoginRedirect,
-  LoginSuccess,
-  Logout
-} from '@auth/actions/auth.actions';
+import { Login, LoginFailure, LoginSuccess } from '@auth/actions/auth.actions';
 import { AuthService } from '@auth/services/auth.service';
 import { AuthEffects } from '@auth/effects/auth.effects';
-import { LoginCredentials } from '../auth.model';
-import { User, LoadAuthenticatedUser } from '@features/users';
+import { LoginCredentials } from '../models/auth.model';
 
 describe('AuthEffects', () => {
   let effects: AuthEffects;
@@ -68,7 +61,7 @@ describe('AuthEffects', () => {
     it('should return a new LoginFailure if the login service throws', () => {
       const credentials: LoginCredentials = { username: 'someOne', password: '' };
       const action = new Login(credentials);
-      const completion = new LoginFailure('Invalid username or password');
+      const completion = new LoginFailure(new Error('Invalid username or password'));
       const error = 'Invalid username or password';
 
       actions$ = hot('-a---', { a: action });
