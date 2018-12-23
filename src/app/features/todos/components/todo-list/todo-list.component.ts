@@ -11,7 +11,7 @@ export class TodoListComponent {
   @Input()
   todos: Todo[];
   @Output()
-  selected = new EventEmitter<Todo>();
+  selected = new EventEmitter<string>();
   @Output()
-  delete = new EventEmitter<Todo>();
+  delete = new EventEmitter<string>();
 }

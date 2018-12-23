@@ -33,8 +33,8 @@ export class ApiService {
     return this.http.put<T>(`${this.baseUrl}/${url}/${body.id}`, body);
   }
 
-  delete<T>(url: string, body: Object): Observable<T> {
-    return this.http.delete<T>(`${this.baseUrl}/${url}/${body.id}`);
+  delete<T>(url: string, id: string): Observable<T> {
+    return this.http.delete<T>(`${this.baseUrl}/${url}/${id}`);
   }
 
   search<T>(url: string, params: HttpParams): Observable<T> {

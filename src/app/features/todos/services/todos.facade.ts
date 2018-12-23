@@ -16,6 +16,7 @@ import {
   ClearSelectedTodo
 } from '../actions/todos.actions';
 import { Todo } from '../models/todos.model';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TodosFacade {
@@ -23,37 +24,37 @@ export class TodosFacade {
   public userTodo$: Observable<Todo[]>;
   public selectedTodo$: Observable<Todo>;
 
-  constructor(private store: Store<TodosEntityState>) {
+  constructor(private store: Store<TodosEntityState>, private router: Router) {
     this.todo$ = this.store.pipe(select(selectAllTodos));
     this.userTodo$ = this.store.pipe(select(selectUserTodos));
     this.selectedTodo$ = this.store.pipe(select(selectCurrentTodo));
   }
 
-  loadTodos() {
+  public loadTodos(): void {
     this.store.dispatch(new LoadTodos());
   }
 
-  selectTodo(todo: Todo) {
-    this.store.dispatch(new SelectTodo(todo.id));
+  public selectTodo(id: string): void {
+    this.store.dispatch(new SelectTodo(id));
   }
 
-  clearSelected() {
+  public clearSelected(): void {
     this.store.dispatch(new ClearSelectedTodo());
   }
 
-  saveTodo(todo: Todo) {
+  public saveTodo(todo: Todo): void {
     todo.id ? this.updateTodo(todo) : this.createTodo(todo);
   }
 
-  createTodo(todo: Todo) {
+  public createTodo(todo: Todo): void {
     this.store.dispatch(new CreateTodo(todo));
   }
 
-  updateTodo(todo: Todo) {
+  public updateTodo(todo: Todo): void {
     this.store.dispatch(new UpdateTodo(todo));
   }
 
-  deleteTodo(todo: Todo) {
-    this.store.dispatch(new DeleteTodo(todo));
+  public deleteTodo(id: string): void {
+    this.store.dispatch(new DeleteTodo(id));
   }
 }

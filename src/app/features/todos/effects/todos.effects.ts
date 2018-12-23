@@ -84,8 +84,8 @@ export class TodoEffects {
   deleteTodo$ = this.actions$.pipe(
     ofType<DeleteTodo>(TodoActionTypes.Delete),
     map(action => action.payload),
-    mergeMap(deleteTodo =>
-      this.todoService.deleteTodo(deleteTodo).pipe(
+    mergeMap(id =>
+      this.todoService.deleteTodo(id).pipe(
         map(todo => new DeleteTodoSuccess(todo)),
         catchError(error => of(new DeleteTodoFail(error)))
       )

@@ -3,10 +3,11 @@ import { Observable } from 'rxjs';
 import { ApiService } from '@app/core';
 import { Todo } from '../models/todos.model';
 import { AuthService } from '~/app/auth';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TodosService {
-  constructor(private api: ApiService, private auth: AuthService) {}
+  constructor(private api: ApiService, private auth: AuthService, private router: Router) {}
 
   public getAllTodos(): Observable<Todo[]> {
     return this.api.get<Todo[]>('todos');
@@ -26,7 +27,11 @@ export class TodosService {
     return this.api.put<Todo>('todos', todo);
   }
 
-  public deleteTodo(todo: Todo): Observable<Todo> {
-    return this.api.delete<Todo>('todos', todo);
+  public deleteTodo(id: string): Observable<Todo> {
+    return this.api.delete<Todo>('todos', id);
+  }
+
+  public navigateTo(id: string = ''): void {
+    this.router.navigate([`/todos/${id}`]);
   }
 }

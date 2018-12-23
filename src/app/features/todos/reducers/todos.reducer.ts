@@ -57,9 +57,6 @@ export const {
   selectAll: selectAllTodos
 } = adapter.getSelectors(selectTodoState);
 
-// export const selectTodoIds = selectIds;
-// export const selectTodoEntities = selectEntities;
-// export const selectAllTodos = selectAll;
 export const selectCurrentTodoId = createSelector(
   selectTodoState,
   (state: TodosEntityState) => state.selectedTodoId
