@@ -4,13 +4,8 @@ import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-// Uncomment and add to NgModule imports if you need to use two-way binding
-// import { NativeScriptFormsModule } from 'nativescript-angular/forms';
-
-// Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
-// import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './store';
+import { reducers, metaReducers, AppState } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { ComponentsModule } from '@components/components.module';
 import { AuthModule } from './auth';
@@ -21,13 +16,13 @@ import { NavigationModule } from './navigation/navigation.module';
   declarations: [AppComponent],
   imports: [
     NativeScriptModule,
-    AuthModule.forRoot(),
-    CoreModule.forRoot(),
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot<AppState>(reducers, { metaReducers }),
     EffectsModule.forRoot([]),
+    CoreModule.forRoot(),
+    AuthModule.forRoot(),
     NavigationModule,
     ComponentsModule,
-    AppRoutingModule
+    AppRoutingModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

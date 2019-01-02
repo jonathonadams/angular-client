@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   private darkTheme$: Observable<boolean>;
-
   constructor(private theme: ThemeService) {
     this.darkTheme$ = this.theme.darkTheme$;
   }

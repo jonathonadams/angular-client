@@ -10,7 +10,6 @@ import { NavigationFacade } from './services/navigation.facade.service';
 const COMPONENTS = [NavigationComponent];
 
 @NgModule({
-  declarations: COMPONENTS,
   providers: [NavigationFacade],
   imports: [
     NavigationRoutingModule,
@@ -18,7 +17,7 @@ const COMPONENTS = [NavigationComponent];
     ComponentsModule,
     EffectsModule.forFeature([NavigationEffects])
   ],
-  exports: []
-  // schemas: [NO_ERRORS_SCHEMA] --> NativeScipt uses this??
+  declarations: COMPONENTS,
+  exports: COMPONENTS
 })
 export class NavigationModule {}

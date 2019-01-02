@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { Routes, PreloadAllModules } from '@angular/router';
 
@@ -22,4 +22,14 @@ export const routes: Routes = [
   ],
   exports: [NativeScriptRouterModule]
 })
-export class AppRoutingModule {}
+export class RootAppRoutingModule {}
+
+@NgModule()
+export class AppRoutingModule {
+  public static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: RootAppRoutingModule,
+      providers: []
+    };
+  }
+}
