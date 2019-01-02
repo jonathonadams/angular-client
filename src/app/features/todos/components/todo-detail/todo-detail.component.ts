@@ -3,7 +3,7 @@ import { Todo } from '@app/features/todos';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'client-todo-detail',
+  selector: 'demo-todo-detail',
   templateUrl: './todo-detail.component.html',
   styleUrls: ['./todo-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -5,7 +5,7 @@ import { ROUTER_ANIMATIONS } from './router-animation';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'client-navigation',
+  selector: 'demo-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

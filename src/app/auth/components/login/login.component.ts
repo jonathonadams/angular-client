@@ -8,7 +8,7 @@ import { AuthFacade } from '../../services/auth.facade.service';
 import { NavigationFacade } from '~/app/navigation/services/navigation.facade.service';
 
 @Component({
-  selector: 'client-login',
+  selector: 'demo-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

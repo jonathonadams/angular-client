@@ -1,16 +1,16 @@
 <div fxLayout="row" fxLayout.xs="column" class="container">
   <div fxFlex="1 0 0" class="column">
-    <client-todo-detail
+    <demo-todo-detail
       [todo]="selectedTodo$ | async"
       (cancelled)="clearTodo()"
       (saved)="saveTodo($event)"
-    ></client-todo-detail>
+    ></demo-todo-detail>
   </div>
   <div class="column list" fxFlex="2 0 0">
-    <client-todo-list
+    <demo-todo-list
       [todos]="userTodo$ | async"
       (selected)="navigateTo($event)"
       (delete)="deleteTodo($event)"
-    ></client-todo-list>
+    ></demo-todo-list>
   </div>
 </div>

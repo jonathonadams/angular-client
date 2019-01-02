@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from 
 import { Todo } from '@app/features/todos';
 
 @Component({
-  selector: 'client-todo-list',
+  selector: 'demo-todo-list',
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -17,7 +17,7 @@ import { AuthFacade } from '~/app/auth/services/auth.facade.service';
 // To prevent any styling clash, make sure to use unique class selectors for your components
 // eg do not use generc selectors life "container" etc
 @Component({
-  selector: 'client-user-drop-down',
+  selector: 'demo-user-drop-down',
   templateUrl: './user-drop-down.component.html',
   styleUrls: ['./user-drop-down.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -12,7 +12,7 @@ import { OverlayService } from '@app/shared';
 import { UserDropDownComponent } from './user-drop-down/user-drop-down.component';
 
 @Component({
-  selector: 'client-header',
+  selector: 'demo-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

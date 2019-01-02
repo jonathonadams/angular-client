@@ -3,7 +3,7 @@ import { ThemeService } from './core/theme/theme.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'client-root',
+  selector: 'demo-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

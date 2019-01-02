@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TodosService } from '../services/todos.service';
 
 @Component({
-  selector: 'client-todos',
+  selector: 'demo-todos',
   templateUrl: './todos.component.html',
   styleUrls: ['./todos.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
