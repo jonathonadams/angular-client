@@ -73,5 +73,11 @@ TODO -> Document
 
 # Configuring your own fork
 
+App prefixes
+
+- angular.json
+- src/tslint.json
+- All component.ts, .html and .scss
+
 TODO -> Document
 -- App_Resources -> Android -> app.gradle -> application ID must allign with package.json

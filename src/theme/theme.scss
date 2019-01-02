@@ -5,7 +5,72 @@
 @import '~@angular/material/theming';
 
 // Example of definining your own custom pallet
+
 $light-primary-pallet: (
+  50: #ffebe4,
+  100: #ffcdbd,
+  200: #ffab91,
+  300: #ff8964,
+  400: #ff7043,
+  500: #ff5722,
+  600: #ff4f1e,
+  700: #ff4619,
+  800: #ff3c14,
+  900: #ff2c0c,
+  A100: #ffffff,
+  A200: #fff7f6,
+  A400: #ffc9c3,
+  A700: #ffb2a9,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white
+  )
+);
+$light-accent-pallet: (
+  50: #e0f2f1,
+  100: #b3e0db,
+  200: #80cbc4,
+  300: #4db6ac,
+  400: #26a69a,
+  500: #009688,
+  600: #008e80,
+  700: #008375,
+  800: #00796b,
+  900: #006858,
+  A100: #97ffec,
+  A200: #64ffe3,
+  A400: #31ffda,
+  A700: #18ffd5,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white
+  )
+);
+$dark-primary-pallet: (
   50: #ffe6ec,
   100: #ffbfcf,
   200: #ff96b0,
@@ -37,7 +102,7 @@ $light-primary-pallet: (
     A700: white
   )
 );
-$light-accent-pallet: (
+$dark-accent-pallet: (
   50: #dafff4,
   100: #a1ffe3,
   200: #34ffd2,
@@ -52,135 +117,6 @@ $light-accent-pallet: (
   A200: #64ffda,
   A400: #1de9b6,
   A700: #00bfa5,
-  contrast: (
-    50: $black-87-opacity,
-    100: $black-87-opacity,
-    200: $black-87-opacity,
-    300: $black-87-opacity,
-    400: $black-87-opacity,
-    500: white,
-    600: white,
-    700: white,
-    800: $white-87-opacity,
-    900: $white-87-opacity,
-    A100: $black-87-opacity,
-    A200: white,
-    A400: white,
-    A700: white
-  )
-);
-$dark-primary-pallet: (
-  50: #eaffec,
-  100: #cbffd0,
-  200: #a5ffb0,
-  300: #73ff8c,
-  400: #34ff6d,
-  500: #00fc4e,
-  600: #00ea45,
-  700: #00d33b,
-  800: #00be2f,
-  900: #009822,
-  A100: #ffffff,
-  A200: #fff9f3,
-  A400: #ffddc0,
-  A700: #ffcfa7,
-  contrast: (
-    50: $black-87-opacity,
-    100: $black-87-opacity,
-    200: $black-87-opacity,
-    300: $black-87-opacity,
-    400: $black-87-opacity,
-    500: white,
-    600: white,
-    700: white,
-    800: $white-87-opacity,
-    900: $white-87-opacity,
-    A100: $black-87-opacity,
-    A200: white,
-    A400: white,
-    A700: white
-  )
-);
-$dark-accent-pallet: (
-  50: #e0f5ff,
-  100: #afe6ff,
-  200: #78d6ff,
-  300: #34c5ff,
-  400: #00b9ff,
-  500: #00acff,
-  600: #009df0,
-  700: #008adb,
-  800: #0079c7,
-  900: #0059a5,
-  A100: #82b1ff,
-  A200: #448aff,
-  A400: #2979ff,
-  A700: #2962ff,
-  contrast: (
-    50: $black-87-opacity,
-    100: $black-87-opacity,
-    200: $black-87-opacity,
-    300: $black-87-opacity,
-    400: $black-87-opacity,
-    500: white,
-    600: white,
-    700: white,
-    800: $white-87-opacity,
-    900: $white-87-opacity,
-    A100: $black-87-opacity,
-    A200: white,
-    A400: white,
-    A700: white
-  )
-);
-// Example of definining your own custom pallet
-$triadic-main-pallet: (
-  50: #e8e9ff,
-  100: #c3c7fe,
-  200: #98a3fe,
-  300: #667eff,
-  400: #3460ff,
-  500: #0040fb,
-  600: #0037f0,
-  700: #002be3,
-  800: #001cd9,
-  900: #0000bf,
-  A100: #a7ffeb,
-  A200: #64ffda,
-  A400: #1de9b6,
-  A700: #00bfa5,
-  contrast: (
-    50: $black-87-opacity,
-    100: $black-87-opacity,
-    200: $black-87-opacity,
-    300: $black-87-opacity,
-    400: $black-87-opacity,
-    500: white,
-    600: white,
-    700: white,
-    800: $white-87-opacity,
-    900: $white-87-opacity,
-    A100: $black-87-opacity,
-    A200: white,
-    A400: white,
-    A700: white
-  )
-);
-$triadic-accent-pallet: (
-  50: #f9e1ff,
-  100: #edb4fe,
-  200: #e17dfe,
-  300: #d334ff,
-  400: #c700ff,
-  500: #b400f2,
-  600: #a000ee,
-  700: #8300e9,
-  800: #6600e3,
-  900: #0000d9,
-  A100: #ffffff,
-  A200: #ffffff,
-  A400: #ffcdd7,
-  A700: #ffb3c3,
   contrast: (
     50: $black-87-opacity,
     100: $black-87-opacity,
@@ -262,36 +198,14 @@ $dark-background: (
     A700: white
   )
 );
-// $app-primary: mat-palette($light-primary-pallet, 500);
-// $app-accent: mat-palette($light-accent-pallet, 200);
-// // Create the theme object (a Sass map containing all of the palettes).
-// $app-theme: mat-light-theme($app-primary, $app-accent);
-// // Define an alternate dark theme.
-// $dark-primary: mat-palette($dark-primary-pallet, 400);
-// // $dark-accent: mat-palette($light-accent-pallet, A200, A100, A400);
-// $dark-accent: mat-palette($dark-accent-pallet, 300);
-// $dark-warn: mat-palette($mat-deep-orange);
-// // Create the theme object (a Sass map containing all of the palettes).
-// $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 // --------------------------------------------------------------------
-// --------------------------------------------------------------------
-// --------------------------------------------------------------------
-// --------------------------------------------------------------------
-$app-primary: mat-palette($light-primary-pallet, 500);
-$app-accent: mat-palette($light-accent-pallet, 200);
+$app-primary: mat-palette($light-primary-pallet);
+$app-accent: mat-palette($light-accent-pallet);
 // Create the theme object (a Sass map containing all of the palettes).
 $app-theme: mat-light-theme($app-primary, $app-accent);
+// --------------------------------------------------------------------
 // Define an alternate dark theme.
-$dark-accent: mat-palette($dark-primary-pallet, 400);
-// $dark-accent: mat-palette($light-accent-pallet, A200, A100, A400);
-$dark-primary: mat-palette($dark-accent-pallet, 300);
+$dark-primary: mat-palette($dark-primary-pallet, 500);
+$dark-accent: mat-palette($dark-accent-pallet, 200);
 $dark-warn: mat-palette($mat-deep-orange);
-$triad-accent: mat-palette($triadic-accent-pallet);
-// $dark-accent: mat-palette($light-accent-pallet, A200, A100, A400);
-$triad-primary: mat-palette($triadic-main-pallet, A400);
-// Create the theme object (a Sass map containing all of the palettes).
-// --------------------------------------------------
-// $app-theme: mat-light-theme($dark-primary, $dark-accent);
-// $app-theme: mat-light-theme($triad-accent, $triad-primary);
-$app-theme: mat-light-theme($triad-primary, $triad-accent);
-$dark-theme: mat-dark-theme($app-primary, $app-accent, $dark-warn);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
