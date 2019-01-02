@@ -98,7 +98,7 @@ describe('ApiService', () => {
 
   describe('delete', () => {
     it('hould make a DELETE request to the API url /resources/:id', () => {
-      apiService.delete('test', testData).subscribe(data => {
+      apiService.delete('test', testData.id).subscribe(data => {
         expect(data).toEqual(testData);
       });
 

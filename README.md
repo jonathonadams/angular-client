@@ -35,7 +35,7 @@ TODO -> Implement Bazel for building
 
 The application uses [Jest](https://jestjs.io/) for unit testing.
 
-run 'npm test' to run the test suite.
+run 'npm run test' to run the test suite.
 
 TODO -> Document this better
 

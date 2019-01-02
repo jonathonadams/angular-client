@@ -9,6 +9,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, DebugElement } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthService } from '@auth/services/auth.service';
 import { ThemeService } from '@app-core/theme/theme.service';
+import { AuthFacade } from '../../services/auth.facade.service';
+import { NavigationFacade } from '~/app/navigation/services/navigation.facade.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -16,10 +18,8 @@ describe('LoginComponent', () => {
   let debugEl: DebugElement;
   let nativeEl: HTMLElement;
   let authService: AuthService;
-  let store: Store<any>;
   let theme: ThemeService;
-  const authServiceSpy = { userIsLoggedIn: jest.fn() };
-  const storeSpy = { dispatch: jest.fn() };
+  const authServiceSpy = { checkUserIsLoggedIn: jest.fn() };
   const themeSpy = { darkTheme$: jest.fn() };
 
   beforeEach(async(() => {
@@ -28,14 +28,14 @@ describe('LoginComponent', () => {
       declarations: [LoginComponent],
       providers: [
         { provide: AuthService, useValue: authServiceSpy },
-        { provide: Store, useValue: storeSpy },
+        { provide: AuthFacade, useValue: {} },
+        { provide: NavigationFacade, useValue: {} },
         { provide: ThemeService, useValue: themeSpy }
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
 
     authService = TestBed.get(AuthService);
-    store = TestBed.get(Store);
     theme = TestBed.get(ThemeService);
   }));
 

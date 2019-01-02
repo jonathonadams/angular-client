@@ -7,7 +7,7 @@ import { By } from '@angular/platform-browser';
 
 @Component({
   template: `
-    <client-todo-list [todos]="todos"> </client-todo-list>
+    <demo-todo-list [todos]="todos"> </demo-todo-list>
   `
 })
 export class TestParentComponent {
@@ -90,9 +90,9 @@ describe('TodoListComponent ', () => {
       component.todos = todos;
       fixture.detectChanges();
 
-      let todo: Todo;
+      let id: string;
       component.selected.subscribe(event => {
-        todo = event;
+        id = event;
       });
 
       const matCardList = debugEl.queryAll(By.css('mat-card'));
@@ -100,7 +100,7 @@ describe('TodoListComponent ', () => {
 
       tick();
 
-      expect(todo).toEqual(todos[0]);
+      expect(id).toEqual(todos[0].id);
     }));
   });
 
@@ -126,9 +126,9 @@ describe('TodoListComponent ', () => {
       component.todos = todos;
       fixture.detectChanges();
 
-      let todo: Todo;
+      let id: string;
       component.delete.subscribe(event => {
-        todo = event;
+        id = event;
       });
 
       const deleteButtons = debugEl.queryAll(By.css('mat-card .button'));
@@ -136,7 +136,7 @@ describe('TodoListComponent ', () => {
 
       tick();
 
-      expect(todo).toEqual(todos[0]);
+      expect(id).toEqual(todos[0].id);
     }));
   });
 });

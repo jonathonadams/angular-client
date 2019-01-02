@@ -6,25 +6,20 @@ import { Todo } from '@app/features/todos';
 import { storeProviderStub, authProviderStub } from '@tests/helper-functions';
 import { HttpStub } from '@tests/http.stubs';
 import { AuthService } from '~/app/auth';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TodoService', () => {
   let service: TodosService;
-  let store: Store<any>;
   let apiService: ApiService;
   let authService: AuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        TodosService,
-        storeProviderStub,
-        { provide: ApiService, useClass: HttpStub },
-        authProviderStub
-      ]
+      imports: [RouterTestingModule],
+      providers: [TodosService, { provide: ApiService, useClass: HttpStub }, authProviderStub]
     });
 
     service = TestBed.get(TodosService);
-    store = TestBed.get(Store);
     apiService = TestBed.get(ApiService);
     authService = TestBed.get(AuthService);
   });
@@ -119,11 +114,11 @@ describe('TodoService', () => {
         completed: true
       };
 
-      service.deleteTodo(todo);
+      service.deleteTodo(todo.id);
 
       expect(spy).toHaveBeenCalled();
       expect(spy.mock.calls[0][0]).toEqual('todos');
-      expect(spy.mock.calls[0][1]).toEqual(todo);
+      expect(spy.mock.calls[0][1]).toEqual(todo.id);
 
       spy.mockReset();
     });

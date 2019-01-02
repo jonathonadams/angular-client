@@ -1,10 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { TodosComponent } from './todos.component';
 import { Todo } from '../models/todos.model';
 import { createSpyObj } from '~/tests/helper-functions';
 import { TodosFacade } from '../services/todos.facade';
+import { TodosService } from '../services/todos.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute } from '@angular/router';
+import { ActivatedRouteStub } from '~/tests/activated-router.stubs';
 
 describe('TodosComponent', () => {
   let component: TodosComponent;
@@ -12,6 +16,9 @@ describe('TodosComponent', () => {
   let debugEl: DebugElement;
   let nativeEl: HTMLElement;
   let todoFacade: TodosFacade;
+  let todoService: TodosService;
+  let route: ActivatedRouteStub;
+
   const todoFacadeSpy = createSpyObj('TodosFacade', [
     'userTodo$',
     'selectedTodo$',
@@ -22,14 +29,22 @@ describe('TodosComponent', () => {
     'clearSelected'
   ]);
 
+  const todoServiceSpy = createSpyObj('TodosService', ['navigateTo']);
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [TodosComponent],
-      providers: [{ provide: TodosFacade, useValue: todoFacadeSpy }],
+      providers: [
+        { provide: TodosFacade, useValue: todoFacadeSpy },
+        { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
+        { provide: TodosService, useValue: todoServiceSpy }
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
     todoFacade = TestBed.get(TodosFacade);
+    todoService = TestBed.get(TodosService);
+    route = TestBed.get(ActivatedRoute);
   }));
 
   beforeEach(() => {
@@ -51,25 +66,24 @@ describe('TodosComponent', () => {
   });
 
   describe('selectTodo', () => {
-    it('should be called when the TodoList component selected event is raised', () => {
+    it('should be called when the url param id is changed', fakeAsync(() => {
+      // Subscribing to the paramMap observable happens on init
+      component.ngOnInit();
+
       const spy = jest.spyOn(component, 'selectTodo');
+      spy.mockReset();
 
-      const todo: Todo = {
-        id: '1',
-        userId: '1',
-        title: 'some title',
-        description: 'some description',
-        completed: true
-      };
+      expect(spy).not.toHaveBeenCalled();
 
-      const todoList = debugEl.query(By.css('client-todo-list'));
+      route.setParamMap({ id: 5 });
 
-      todoList.triggerEventHandler('selected', todo);
+      tick();
 
       expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledWith(todo);
+      expect(spy).toHaveBeenCalledWith(5);
+
       spy.mockReset();
-    });
+    }));
 
     it('should call the facade selecTodo method with the raised event', () => {
       const spy = jest.spyOn(todoFacade, 'selectTodo');
@@ -82,18 +96,16 @@ describe('TodosComponent', () => {
         completed: true
       };
 
-      const todoList = debugEl.query(By.css('client-todo-list'));
-
-      todoList.triggerEventHandler('selected', todo);
+      component.selectTodo(todo.id);
 
       expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledWith(todo);
+      expect(spy).toHaveBeenCalledWith(todo.id);
       spy.mockReset();
     });
   });
 
   describe('saveTodo', () => {
-    it('should be raised when clientTodoDetailComponent.save() is raised', () => {
+    it('should be raised when TodoDetailComponent.save() is raised', () => {
       const spy = jest.spyOn(component, 'saveTodo');
 
       const todo: Todo = {
@@ -106,7 +118,7 @@ describe('TodosComponent', () => {
 
       expect(spy).not.toHaveBeenCalled();
 
-      const detailComponet: DebugElement = debugEl.query(By.css('client-todo-detail'));
+      const detailComponet: DebugElement = debugEl.query(By.css('demo-todo-detail'));
 
       detailComponet.triggerEventHandler('saved', todo);
 
@@ -167,7 +179,7 @@ describe('TodosComponent', () => {
 
       expect(spy).not.toHaveBeenCalled();
 
-      const todoDetail = debugEl.query(By.css('client-todo-detail'));
+      const todoDetail = debugEl.query(By.css('demo-todo-detail'));
 
       todoDetail.triggerEventHandler('cancelled', null);
 
@@ -200,7 +212,7 @@ describe('TodosComponent', () => {
 
       expect(spy).not.toHaveBeenCalled();
 
-      const todoList = debugEl.query(By.css('client-todo-list'));
+      const todoList = debugEl.query(By.css('demo-todo-list'));
 
       todoList.triggerEventHandler('delete', todo);
 
@@ -222,9 +234,9 @@ describe('TodosComponent', () => {
         completed: true
       };
 
-      component.deleteTodo(todo);
+      component.deleteTodo(todo.id);
       expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledWith(todo);
+      expect(spy).toHaveBeenCalledWith(todo.id);
       spy.mockReset();
     });
   });

@@ -1,12 +1,6 @@
 import { convertToParamMap, ParamMap, Params } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
 
-export class RouterOutletStub {
-  activatedRouteData: {
-    [name: string]: any;
-  };
-}
-
 /**
  * An ActivateRoute test double with a `paramMap` observable.
  * Use the `setParamMap()` method to add the next `paramMap` value.
