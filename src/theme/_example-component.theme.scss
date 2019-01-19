@@ -21,6 +21,8 @@
 
 // https://blog.thoughtram.io/angular/2017/05/23/custom-themes-with-angular-material.html
 // https://github.com/angular/material2/issues/9069
+// https://github.com/angular/material2/blob/master/src/lib/core/theming/_palette.scss#L666-L679
+
 // Below is an example of the opacities you can use in the mat-color mixin
 // divider
 // dialog
@@ -34,7 +36,7 @@
 
 // Then in your component scss file you can do something like this.
 
-// Top level styles are applied by doing the below
+// Top level styles are applied by doing the below @include
 @include my-custom-component-mixin($app-theme);
 
 // Different styles may be applied by nesting the mixing inside of
