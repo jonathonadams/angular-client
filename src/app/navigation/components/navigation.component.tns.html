@@ -1,7 +1,23 @@
-<ActionBar title="Navigation"></ActionBar>
-<StackLayout>
-  <Button text="GO TO HOME" [nsRouterLink]="['/home']" class="link"></Button>
-  <Button text="GO TO TODO" [nsRouterLink]="['/todos']" class="link"></Button>
-  <Button text="logout" (tap)="logout()"></Button>
-  <router-outlet #routerOutlet="outlet"></router-outlet>
-</StackLayout>
+<RadSideDrawer tkExampleTitle tkToggleNavButton>
+  <StackLayout tkDrawerContent class="sideStackLayout">
+      <StackLayout class="sideTitleStackLayout">
+          <Label text="Navigation Menu"></Label>
+      </StackLayout>
+      <ScrollView>
+          <StackLayout class="sideStackLayout">
+              <Label *ngFor="let link of navLinks" 
+                [text]="link.label"
+                (tap)="navigatTo(link.path)" 
+                class="sideLabel sideLightGrayLabel"></Label>
+              <Label text="Close Drawer" color="lightgray" padding="10" style="horizontal-align: center" (tap)="onCloseDrawerTap()"></Label>
+              <Button text="logout" (tap)="logout()"></Button>
+          </StackLayout>
+      </ScrollView>
+  </StackLayout>
+  <StackLayout tkMainContent>
+      <ActionBar title="Navigation">
+        <Button text="OPEN DRAWER" (tap)="openDrawer()" class="drawerContentButton"></Button>
+      </ActionBar>
+      <router-outlet #routerOutlet="outlet"></router-outlet>
+  </StackLayout>
+</RadSideDrawer>
