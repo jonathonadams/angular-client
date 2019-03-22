@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   preset: 'jest-preset-angular',
-  setupTestFrameworkScriptFile: '<rootDir>/src/setupJest.ts',
+  setupFilesAfterEnv: ['<rootDir>/src/setupJest.ts'],
   roots: ['<rootDir>/src'],
   verbose: true,
   coverageThreshold: {

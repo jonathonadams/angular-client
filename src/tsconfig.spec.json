@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "../out-tsc/spec",
     "module": "commonjs",
-    "types": ["node"]
+    "types": ["node", "jest"]
   },
   "angularCompilerOptions": {
     "preserveWhitespaces": false

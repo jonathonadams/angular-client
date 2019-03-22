@@ -1,5 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/testing';
+import { TestBed } from '@angular/core/testing';
 import { Apollo } from 'apollo-angular';
 
 import { GraphQLService } from './graphql.service';
@@ -15,7 +14,7 @@ describe('GraphQLService', () => {
       providers: [GraphQLService, { provide: Apollo, useValue: spyClass }]
     });
 
-    // Inject the Appolo service and test controller for each test
+    // Inject the Apollo service and test controller for each test
     graphQLService = TestBed.get(GraphQLService);
     apolloSpy = TestBed.get(Apollo);
   });
@@ -32,7 +31,9 @@ describe('GraphQLService', () => {
           id
         }
       }`;
-      const spy = (apolloSpy.query = jest.fn(() => of({ data: 'success' })));
+
+      apolloSpy.query = jest.fn(() => of({ data: 'success' }));
+      const spy = jest.spyOn(apolloSpy, 'query');
       graphQLService.query(query).subscribe(result => {
         expect(result.data).toEqual('success');
         expect(apolloSpy.query).toHaveBeenCalled();
@@ -50,7 +51,9 @@ describe('GraphQLService', () => {
 
       const variable = { variable: 'test' };
 
-      const spy = (apolloSpy.query = jest.fn(() => of({ data: 'query success' })));
+      apolloSpy.query = jest.fn(() => of({ data: 'success' }));
+      const spy = jest.spyOn(apolloSpy, 'query');
+
       graphQLService.query(query, variable).subscribe(result => {
         expect(result.data).toEqual('query success');
         expect(apolloSpy.query).toHaveBeenCalled();
@@ -72,8 +75,9 @@ describe('GraphQLService', () => {
       }
       `;
       const variable = { username: 'test', password: 'password' };
+      apolloSpy.mutate = jest.fn(() => of({ data: 'mutate success' }));
+      const spy = jest.spyOn(apolloSpy, 'mutate');
 
-      const spy = (apolloSpy.mutate = jest.fn(() => of({ data: 'mutate success' })));
       graphQLService.mutation<any>(query, variable).subscribe(result => {
         expect(result.data as any).toEqual('mutate success');
         expect(apolloSpy.mutate).toHaveBeenCalled();

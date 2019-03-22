@@ -15,7 +15,7 @@ import { NavigationFacade } from '~/app/navigation/services/navigation.facade.se
 })
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
-  private darkTheme$: Observable<boolean>;
+  public darkTheme$: Observable<boolean>;
 
   constructor(
     private formBuilder: FormBuilder,
