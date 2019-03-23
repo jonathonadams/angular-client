@@ -1,4 +1,4 @@
-const { join, relative, resolve, sep } = require('path');
+const { join, relative, resolve, sep, dirname } = require('path');
 
 const webpack = require('webpack');
 const nsWebpack = require('nativescript-dev-webpack');
@@ -6,12 +6,18 @@ const nativescriptTarget = require('nativescript-dev-webpack/nativescript-target
 const {
   nsReplaceBootstrap
 } = require('nativescript-dev-webpack/transformers/ns-replace-bootstrap');
+const {
+  nsReplaceLazyLoader
+} = require('nativescript-dev-webpack/transformers/ns-replace-lazy-loader');
+const { nsSupportHmrNg } = require('nativescript-dev-webpack/transformers/ns-support-hmr-ng');
+const { getMainModulePath } = require('nativescript-dev-webpack/utils/ast-utils');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { NativeScriptWorkerPlugin } = require('nativescript-worker-loader/NativeScriptWorkerPlugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const { AngularCompilerPlugin } = require('@ngtools/webpack');
+const hashSalt = Date.now().toString();
 
 module.exports = env => {
   // Add your custom Activities, Services and other Android app components here.
@@ -32,8 +38,8 @@ module.exports = env => {
     // The 'appPath' and 'appResourcesPath' values are fetched from
     // the nsconfig.json configuration file
     // when bundling with `tns run android|ios --bundle`.
-    appPath = 'app',
-    appResourcesPath = 'app/App_Resources',
+    appPath = 'src',
+    appResourcesPath = 'App_Resources',
 
     // You can provide the following flags when running 'tns run android|ios'
     aot, // --env.aot
@@ -43,24 +49,50 @@ module.exports = env => {
     sourceMap, // --env.sourceMap
     hmr // --env.hmr,
   } = env;
-  const externals = (env.externals || []).map(e => {
-    // --env.externals
-    return new RegExp(e + '.*');
-  });
 
+  const externals = nsWebpack.getConvertedExternals(env.externals);
   const appFullPath = resolve(projectRoot, appPath);
   const appResourcesFullPath = resolve(projectRoot, appResourcesPath);
-
+  const tsConfigName = 'tsconfig.tns.json';
   const entryModule = `${nsWebpack.getEntryModule(appFullPath)}.ts`;
   const entryPath = `.${sep}${entryModule}`;
+  const ngCompilerTransformers = [];
+  const additionalLazyModuleResources = [];
+  if (aot) {
+    ngCompilerTransformers.push(nsReplaceBootstrap);
+  }
+
+  if (hmr) {
+    ngCompilerTransformers.push(nsSupportHmrNg);
+  }
+
+  // when "@angular/core" is external, it's not included in the bundles. In this way, it will be used
+  // directly from node_modules and the Angular modules loader won't be able to resolve the lazy routes
+  // fixes https://github.com/NativeScript/nativescript-cli/issues/4024
+  if (env.externals && env.externals.indexOf('@angular/core') > -1) {
+    const appModuleRelativePath = getMainModulePath(
+      resolve(appFullPath, entryModule),
+      tsConfigName
+    );
+    if (appModuleRelativePath) {
+      const appModuleFolderPath = dirname(resolve(appFullPath, appModuleRelativePath));
+      // include the lazy loader inside app module
+      ngCompilerTransformers.push(nsReplaceLazyLoader);
+      // include the new lazy loader path in the allowed ones
+      additionalLazyModuleResources.push(appModuleFolderPath);
+    }
+  }
 
   const ngCompilerPlugin = new AngularCompilerPlugin({
     hostReplacementPaths: nsWebpack.getResolver([platform, 'tns']),
-    platformTransformers: aot ? [nsReplaceBootstrap(() => ngCompilerPlugin)] : null,
+    platformTransformers: ngCompilerTransformers.map(t =>
+      t(() => ngCompilerPlugin, resolve(appFullPath, entryModule))
+    ),
     mainPath: resolve(appPath, entryModule),
-    tsConfigPath: join(__dirname, 'tsconfig.tns.json'),
+    tsConfigPath: join(__dirname, tsConfigName),
     skipCodeGeneration: !aot,
-    sourceMap: !!sourceMap
+    sourceMap: !!sourceMap,
+    additionalLazyModuleResources: additionalLazyModuleResources
   });
 
   const config = {
@@ -83,7 +115,8 @@ module.exports = env => {
       path: dist,
       libraryTarget: 'commonjs2',
       filename: '[name].js',
-      globalObject: 'global'
+      globalObject: 'global',
+      hashSalt
     },
     resolve: {
       extensions: ['.ts', '.js', '.scss', '.css'],
@@ -173,14 +206,18 @@ module.exports = env => {
         // tns-core-modules reads the app.css and its imports using css-loader
         {
           test: /[\/|\\]app\.css$/,
-          use: {
-            loader: 'css-loader',
-            options: { minimize: false, url: false }
-          }
+          use: [
+            'nativescript-dev-webpack/style-hot-loader',
+            { loader: 'css-loader', options: { minimize: false, url: false } }
+          ]
         },
         {
           test: /[\/|\\]app\.scss$/,
-          use: [{ loader: 'css-loader', options: { minimize: false, url: false } }, 'sass-loader']
+          use: [
+            'nativescript-dev-webpack/style-hot-loader',
+            { loader: 'css-loader', options: { minimize: false, url: false } },
+            'sass-loader'
+          ]
         },
 
         // Angular components reference css files and their imports using raw-loader
@@ -193,7 +230,11 @@ module.exports = env => {
 
         {
           test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
-          use: ['nativescript-dev-webpack/moduleid-compat-loader', '@ngtools/webpack']
+          use: [
+            'nativescript-dev-webpack/moduleid-compat-loader',
+            'nativescript-dev-webpack/lazy-ngmodule-hot-loader',
+            '@ngtools/webpack'
+          ]
         },
 
         // Mark files inside `@angular/core` as using SystemJS style dynamic imports.
