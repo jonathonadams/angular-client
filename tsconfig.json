@@ -24,7 +24,8 @@
     "target": "es5",
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom", "es6", "es2015.iterable"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowJs": true
   },
   "exclude": []
 }
