@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
-import { LoadUsers } from '../actions/user.actions';
 import {
-  selectAllUsers,
-  selectCurrentUser,
-  selectAuthenticatedUser
-} from '../reducers/user.reducer';
+  LoadUsers,
+  SelectUser,
+  ClearSelectedUser,
+  UpdateUser,
+  DeleteUser
+} from '../actions/user.actions';
+import { selectAllUsers, selectCurrentUser } from '../reducers/user.reducer';
 
 @Injectable()
 export class UserFacade {
@@ -21,5 +23,21 @@ export class UserFacade {
 
   loadUsers() {
     this.store.dispatch(new LoadUsers());
+  }
+
+  selectUser(user: User) {
+    this.store.dispatch(new SelectUser(user.id));
+  }
+
+  clearSelected() {
+    this.store.dispatch(new ClearSelectedUser());
+  }
+
+  updateUser(user: User) {
+    this.store.dispatch(new UpdateUser(user));
+  }
+
+  deleteUser(user: User) {
+    this.store.dispatch(new DeleteUser(user));
   }
 }

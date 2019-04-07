@@ -5,4 +5,13 @@ export interface User {
   lastName: string;
   emailAddress: string;
   dateOfBirth: Date;
+  settings: {
+    darkMode: boolean;
+    colors: {
+      lightPrimary: string;
+      lightAccent: string;
+      darkPrimary: string;
+      darkAccent: string;
+    };
+  };
 }

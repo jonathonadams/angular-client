@@ -1,10 +1,75 @@
-// For more information on angular material thememing, visit the below link
+// For more information on angular material hemming, visit the below link
 // https://material.angular.io/guide/theming
+
+:root {
+  --light-primary-color: #ff5722;
+  --light-accent-color: #009688;
+  --dark-primary-color: #ff3460;
+  --dark-accent-color: #00c782;
+}
 
 // Angular Theme
 @import '~@angular/material/theming';
 
-// Example of definining your own custom pallet
+// https://github.com/angular/material2/blob/master/src/lib/core/theming/_palette.scss
+/* 
+ The below hard-coded colors have been taken from the source code below.
+ https://github.com/angular/material2/blob/master/src/lib/core/theming/_palette.scss
+
+ Normally you do not need to redeclare all these variables, however to change any of them
+ (i.e the disabled form field text then you need to redeclare them
+
+ Un comment below to access / modify the colors
+*/
+
+// $dark-primary-text: rgba(black, 0.87);
+// $dark-secondary-text: rgba(black, 0.54);
+// $dark-disabled-text: rgba(black, 0.38);
+// $dark-dividers: rgba(black, 0.12);
+// $dark-focused: rgba(black, 0.12);
+// $light-primary-text: white;
+// $light-secondary-text: rgba(white, 0.7);
+// $light-disabled-text: rgba(white, 0.5);
+// $light-dividers: rgba(white, 0.12);
+// $light-focused: rgba(white, 0.12);
+
+// // Foreground palette for light themes.
+// $mat-light-theme-foreground: (
+//   base: black,
+//   divider: $dark-dividers,
+//   dividers: $dark-dividers,
+//   disabled: $dark-disabled-text,
+//   disabled-button: rgba(black, 0.26),
+//   disabled-text: $dark-disabled-text,
+//   elevation: black,
+//   hint-text: $dark-disabled-text,
+//   secondary-text: $dark-secondary-text,
+//   icon: rgba(black, 0.54),
+//   icons: rgba(black, 0.54),
+//   text: rgba(black, 0.87),
+//   slider-min: rgba(black, 0.87),
+//   slider-off: rgba(black, 0.26),
+//   slider-off-active: rgba(black, 0.38)
+// );
+
+// // Foreground palette for dark themes.
+// $mat-dark-theme-foreground: (
+//   base: white,
+//   divider: $light-dividers,
+//   dividers: $light-dividers,
+//   disabled: $light-disabled-text,
+//   disabled-button: rgba(white, 0.3),
+//   disabled-text: $light-disabled-text,
+//   elevation: black,
+//   hint-text: $light-disabled-text,
+//   secondary-text: $light-secondary-text,
+//   icon: white,
+//   icons: white,
+//   text: white,
+//   slider-min: white,
+//   slider-off: rgba(white, 0.3),
+//   slider-off-active: rgba(white, 0.3)
+// );
 
 $light-primary-pallet: (
   50: #ffebe4,
@@ -12,7 +77,7 @@ $light-primary-pallet: (
   200: #ffab91,
   300: #ff8964,
   400: #ff7043,
-  500: #ff5722,
+  500: var(--light-primary-color),
   600: #ff4f1e,
   700: #ff4619,
   800: #ff3c14,
@@ -22,20 +87,20 @@ $light-primary-pallet: (
   A400: #ffc9c3,
   A700: #ffb2a9,
   contrast: (
-    50: $black-87-opacity,
-    100: $black-87-opacity,
-    200: $black-87-opacity,
-    300: $black-87-opacity,
-    400: $black-87-opacity,
-    500: white,
-    600: white,
-    700: white,
-    800: $white-87-opacity,
-    900: $white-87-opacity,
-    A100: $black-87-opacity,
-    A200: white,
-    A400: white,
-    A700: white
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text
   )
 );
 $light-accent-pallet: (
@@ -44,7 +109,7 @@ $light-accent-pallet: (
   200: #80cbc4,
   300: #4db6ac,
   400: #26a69a,
-  500: #009688,
+  500: var(--light-accent-color),
   600: #008e80,
   700: #008375,
   800: #00796b,
@@ -54,20 +119,20 @@ $light-accent-pallet: (
   A400: #31ffda,
   A700: #18ffd5,
   contrast: (
-    50: $black-87-opacity,
-    100: $black-87-opacity,
-    200: $black-87-opacity,
-    300: $black-87-opacity,
-    400: $black-87-opacity,
-    500: white,
-    600: white,
-    700: white,
-    800: $white-87-opacity,
-    900: $white-87-opacity,
-    A100: $black-87-opacity,
-    A200: white,
-    A400: white,
-    A700: white
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text
   )
 );
 $dark-primary-pallet: (
@@ -76,7 +141,7 @@ $dark-primary-pallet: (
   200: #ff96b0,
   300: #ff6b90,
   400: #ff4c77,
-  500: #ff3460,
+  500: var(--dark-primary-color),
   600: #ee2e5d,
   700: #d8285a,
   800: #c32257,
@@ -86,20 +151,20 @@ $dark-primary-pallet: (
   A400: #ffcdd7,
   A700: #ffb3c3,
   contrast: (
-    50: $black-87-opacity,
-    100: $black-87-opacity,
-    200: $black-87-opacity,
-    300: $black-87-opacity,
-    400: $black-87-opacity,
-    500: white,
-    600: white,
-    700: white,
-    800: $white-87-opacity,
-    900: $white-87-opacity,
-    A100: $black-87-opacity,
-    A200: white,
-    A400: white,
-    A700: white
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text
   )
 );
 $dark-accent-pallet: (
@@ -108,7 +173,7 @@ $dark-accent-pallet: (
   200: #34ffd2,
   300: #00fcbf,
   400: #00f4b0,
-  500: #00eea1,
+  500: var(--dark-accent-color),
   600: #00dc93,
   700: #00c782,
   800: #00b574,
@@ -118,20 +183,20 @@ $dark-accent-pallet: (
   A400: #1de9b6,
   A700: #00bfa5,
   contrast: (
-    50: $black-87-opacity,
-    100: $black-87-opacity,
-    200: $black-87-opacity,
-    300: $black-87-opacity,
-    400: $black-87-opacity,
-    500: white,
-    600: white,
-    700: white,
-    800: $white-87-opacity,
-    900: $white-87-opacity,
-    A100: $black-87-opacity,
-    A200: white,
-    A400: white,
-    A700: white
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text
   )
 );
 $light-background: (
@@ -150,20 +215,20 @@ $light-background: (
   A400: #2979ff,
   A700: #2962ff,
   contrast: (
-    50: $black-87-opacity,
-    100: $black-87-opacity,
-    200: $black-87-opacity,
-    300: $black-87-opacity,
-    400: $black-87-opacity,
-    500: white,
-    600: white,
-    700: white,
-    800: $white-87-opacity,
-    900: $white-87-opacity,
-    A100: $black-87-opacity,
-    A200: white,
-    A400: white,
-    A700: white
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text
   )
 );
 $dark-background: (
@@ -182,30 +247,28 @@ $dark-background: (
   A400: #2979ff,
   A700: #2962ff,
   contrast: (
-    50: $black-87-opacity,
-    100: $black-87-opacity,
-    200: $black-87-opacity,
-    300: $black-87-opacity,
-    400: $black-87-opacity,
-    500: white,
-    600: white,
-    700: white,
-    800: $white-87-opacity,
-    900: $white-87-opacity,
-    A100: $black-87-opacity,
-    A200: white,
-    A400: white,
-    A700: white
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text
   )
 );
 // --------------------------------------------------------------------
 $app-primary: mat-palette($light-primary-pallet);
 $app-accent: mat-palette($light-accent-pallet);
-// Create the theme object (a Sass map containing all of the palettes).
 $app-theme: mat-light-theme($app-primary, $app-accent);
 // --------------------------------------------------------------------
-// Define an alternate dark theme.
-$dark-primary: mat-palette($dark-primary-pallet, 500);
-$dark-accent: mat-palette($dark-accent-pallet, 200);
+$dark-primary: mat-palette($dark-primary-pallet);
+$dark-accent: mat-palette($dark-accent-pallet);
 $dark-warn: mat-palette($mat-deep-orange);
 $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);

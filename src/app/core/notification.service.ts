@@ -14,7 +14,9 @@ export class NotificationService {
     this.config.horizontalPosition = 'center';
   }
 
-  emit(notification: string) {
-    this.snackBar.open(notification, 'Dismiss', this.config);
+  emit(notification: string, duration?: number) {
+    const temp: MatSnackBarConfig = Object.assign({}, this.config);
+    if (duration) temp.duration = duration;
+    this.snackBar.open(notification, 'Dismiss', temp);
   }
 }

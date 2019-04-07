@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, mergeMap, tap } from 'rxjs/operators';
 import {
   UserActionTypes,
   LoadAuthenticatedUser,
   LoadAuthenticatedUserSuccess,
   LoadAuthenticatedUserFail,
   SelectAuthenticatedUser,
-  ClearAuthenticatedUser
+  ClearAuthenticatedUser,
+  UpdateUser,
+  UpdateUserSuccess,
+  UpdateUserFail
 } from '../actions/user.actions';
 import { UserService } from '../services/user.service';
 import { AuthService, Logout, AuthActionTypes } from '~/app/auth';
@@ -21,6 +24,7 @@ export class UserEffects {
     map(action => this.authService.getDecodedToken().sub),
     switchMap(id =>
       this.userService.getOneUser(id).pipe(
+        tap(user => this.userService.setUserThemeColors(user)),
         map(user => new LoadAuthenticatedUserSuccess(user)),
         catchError(error => of(new LoadAuthenticatedUserFail(error)))
       )
@@ -38,6 +42,17 @@ export class UserEffects {
   clearAuthenticatedUser$ = this.actions$.pipe(
     ofType<Logout>(AuthActionTypes.Logout),
     map(id => new ClearAuthenticatedUser())
+  );
+
+  @Effect()
+  updateUser$ = this.actions$.pipe(
+    ofType<UpdateUser>(UserActionTypes.Update),
+    mergeMap(action =>
+      this.userService.updateUser(action.payload).pipe(
+        map(updatedUser => new UpdateUserSuccess(updatedUser)),
+        catchError(error => of(new UpdateUserFail(error)))
+      )
+    )
   );
 
   constructor(

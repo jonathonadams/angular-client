@@ -32,8 +32,6 @@
     "format:fix": "pretty-quick --staged",
     "lint": "ng lint client",
     "lint:fix": "ng lint client --fix",
-    "dev": "concurrently \"ng serve -o\" \"npm run server\"",
-    "server": "node dev-server/index.js",
     "lint-staged": "lint-staged"
   },
   "husky": {

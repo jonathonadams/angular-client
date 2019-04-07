@@ -5,7 +5,7 @@ import { Resolve } from '@angular/router';
 import { User } from '../models/user.model';
 import { AuthFacade } from '~/app/auth/services/auth.facade.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class UserResolver implements Resolve<User> {
   constructor(
     private facade: AuthFacade // private auth: AuthService

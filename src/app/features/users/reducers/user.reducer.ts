@@ -1,6 +1,5 @@
 import { User } from '../models/user.model';
 import { UserActionUnion, UserActionTypes } from '../actions/user.actions';
-import { AppState } from '@store/reducers';
 import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
@@ -47,7 +46,7 @@ export function usersReducer(
   }
 }
 
-export const selectUserState = (state: AppState) => state.users;
+export const selectUserState = createFeatureSelector<UsersEntityState>('userState');
 
 export const {
   selectIds: selectUserIds,
@@ -65,12 +64,12 @@ export const selectCurrentUser = createSelector(
   (userEntities, userId) => userEntities[userId]
 );
 
-export const selectAuthenticatedtUserId = createSelector(
+export const selectAuthenticatedUserId = createSelector(
   selectUserState,
   (state: UsersEntityState) => state.authenticatedUserId
 );
 export const selectAuthenticatedUser = createSelector(
   selectUserEntities,
-  selectAuthenticatedtUserId,
+  selectAuthenticatedUserId,
   (userEntities, authenticatedUserId) => userEntities[authenticatedUserId]
 );

@@ -10,6 +10,8 @@ import { Logout } from '@app/auth';
 import { ThemeService } from '@app/core/theme/theme.service';
 import { OverlayService } from '@app/shared';
 import { UserDropDownComponent } from './user-drop-down/user-drop-down.component';
+import { User } from '~/app/features/users';
+import { UserFacade } from '~/app/features/users/services/user.facade.service';
 
 @Component({
   selector: 'demo-header',
@@ -22,6 +24,7 @@ export class HeaderComponent {
     private el: ElementRef,
     private store: Store<any>,
     private themeService: ThemeService,
+    private userFacade: UserFacade,
     private overlay: OverlayService
   ) {}
   @Output() toggleNavigation = new EventEmitter<void>();
@@ -36,8 +39,8 @@ export class HeaderComponent {
       UserDropDownComponent
     );
 
-    componentRef.instance.toggleDarkTheme.subscribe(active => {
-      this.themeService.setActiveStatus(active);
+    componentRef.instance.saveUserSettings.subscribe((user: User) => {
+      this.userFacade.updateUser(user);
     });
 
     componentRef.instance.logout.subscribe(() => {

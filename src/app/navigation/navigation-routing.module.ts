@@ -4,6 +4,9 @@ import { NavigationComponent } from '@nav/components/navigation.component';
 import { AuthGuard } from '@auth/guards/auth.guard';
 import { UserResolver } from '~/app/features/users/services/user-resolver.service';
 import { DashboardComponent } from '@components/dashboard/dashboard.component';
+import { UserProfileComponent } from '../features/users/components/user-profile/user-profile.component';
+import { UsersNavigationComponent } from '../features/users/components/users-navigation/users-navigation.component';
+import { UsersComponent } from '../features/users/components/users.component';
 
 export const ROUTES: Routes = [
   {
@@ -21,6 +24,12 @@ export const ROUTES: Routes = [
       {
         path: 'todos',
         loadChildren: '../features/todos/todos.module#TodoModule'
+      },
+      // Move this to a UsersRoutingModule when angular supports a 'loadModuleRoutes' or something that is not lazy loaded
+      {
+        path: 'users',
+        component: UsersComponent,
+        children: [{ path: 'profile', component: UserProfileComponent }]
       },
       {
         path: '',

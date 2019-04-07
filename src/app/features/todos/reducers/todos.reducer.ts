@@ -4,7 +4,7 @@ import { Todo } from '../models/todos.model';
 import { TodoActionTypes, TodoActionUnion } from '../actions/todos.actions';
 import { User, selectAuthenticatedUser } from '../../users';
 
-// 1. define teh entity state
+// 1. define the entity state
 export interface TodosEntityState extends EntityState<Todo> {
   // Add custom property state
   selectedTodoId: string | null;

@@ -11,9 +11,12 @@ import { ComponentsModule } from '@components/components.module';
 import { AuthModule } from './auth';
 import { CoreModule } from './core/core.module';
 import { NavigationModule } from './navigation/navigation.module';
+import { FeaturesModule } from './features/features.module';
+import { UsersComponent } from './features/users/components/users.component';
+import { UsersNavigationComponent } from './features/users/components/users-navigation/users-navigation.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UsersComponent, UsersNavigationComponent],
   imports: [
     NativeScriptModule,
     StoreModule.forRoot<AppState>(reducers, { metaReducers }),
@@ -22,6 +25,7 @@ import { NavigationModule } from './navigation/navigation.module';
     AuthModule.forRoot(),
     NavigationModule,
     ComponentsModule,
+    FeaturesModule,
     AppRoutingModule.forRoot()
   ],
   providers: [],

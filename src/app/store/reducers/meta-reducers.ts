@@ -1,7 +1,7 @@
 import { ActionReducer, MetaReducer } from '@ngrx/store';
 import { environment } from '@env/environment';
 
-// Meta reducers are like middleware thar run bevore any other reducder
+// Meta reducers are like middleware thar run before any other reducer
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
   return function(state, action) {

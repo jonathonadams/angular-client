@@ -117,8 +117,9 @@ export class UpdateUserFail implements ActionWithPayload<User> {
  * Delete User actions
  */
 
-export class DeleteUser implements Action {
+export class DeleteUser implements ActionWithPayload<User> {
   readonly type = UserActionTypes.Delete;
+  constructor(public payload: User) {}
 }
 
 export class DeleteUserSuccess implements ActionWithPayload<User> {

@@ -1,0 +1,5 @@
+<mat-nav-list>
+  <ng-container *ngFor="let link of navLinks">
+    <a [routerLink]="link.path" mat-list-item>{{ link.label }}</a>
+  </ng-container>
+</mat-nav-list>

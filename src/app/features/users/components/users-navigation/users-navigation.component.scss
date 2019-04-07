@@ -1,0 +1,16 @@
+.mat-card {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  :last-of-type {
+    margin-bottom: none;
+  }
+}
+
+.button {
+  margin-top: 1em;
+}
+
+.h1 {
+  font-weight: 100;
+  margin: 1em;
+}

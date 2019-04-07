@@ -13,6 +13,7 @@ import { AuthModule } from './auth';
 import { CoreModule } from '@app-core/core.module';
 import { NavigationModule } from './navigation/navigation.module';
 import { appEffects } from './store';
+import { FeaturesModule } from './features/features.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import { appEffects } from './store';
     AuthModule.forRoot(),
     NavigationModule,
     ComponentsModule,
+    FeaturesModule,
     AppRoutingModule.forRoot()
   ],
   providers: [],

@@ -1,14 +1,14 @@
 <div class="user-dropdown-overlay-container mat-elevation-z6">
   <mat-list role="list">
     <mat-list-item role="listitem">
-      <h3>
-        {{ (authenticatedUser$ | async).firstName }} {{ (authenticatedUser$ | async).lastName }}
+      <h3 *ngIf="(user$ | async) as user" (click)="navigateToProfile()" class="user-profile">
+        {{ user.firstName }} {{ user.lastName }}
       </h3></mat-list-item
     >
     <mat-list-item role="listitem"
       ><mat-slide-toggle
-        (change)="toggleDarkTheme.emit($event.checked)"
-        [checked]="darkTheme$ | async"
+        (change)="toggleDarkMode($event.checked)"
+        [checked]="(user$ | async).settings.darkMode"
         >Dark Mode</mat-slide-toggle
       ></mat-list-item
     >
