@@ -42,7 +42,7 @@ jobs:
       - checkout
       - <<: *deps-restore
       - run:
-          name: Build Library
+          name: Build Application
           command: npm run build:prod
 
 workflows:
