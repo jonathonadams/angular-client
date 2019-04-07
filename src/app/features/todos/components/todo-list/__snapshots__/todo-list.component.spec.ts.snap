@@ -3,7 +3,7 @@
 exports[`TodoListComponent  todos should render a list of todos when set 1`] = `
 <div
   id="root3"
-  ng-version="7.2.7"
+  ng-version="7.2.10"
 >
   
   <mat-card>

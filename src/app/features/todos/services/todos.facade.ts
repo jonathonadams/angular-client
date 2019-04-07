@@ -54,7 +54,7 @@ export class TodosFacade {
     this.store.dispatch(new UpdateTodo(todo));
   }
 
-  public deleteTodo(id: string): void {
-    this.store.dispatch(new DeleteTodo(id));
+  public deleteTodo(todo: Todo): void {
+    this.store.dispatch(new DeleteTodo(todo));
   }
 }

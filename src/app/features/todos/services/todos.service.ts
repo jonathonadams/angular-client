@@ -27,8 +27,8 @@ export class TodosService {
     return this.api.put<Todo>('todos', todo);
   }
 
-  public deleteTodo(id: string): Observable<Todo> {
-    return this.api.delete<Todo>('todos', id);
+  public deleteTodo(todo: Todo): Observable<Todo> {
+    return this.api.delete<Todo>('todos', todo.id);
   }
 
   public navigateTo(id: string = ''): void {

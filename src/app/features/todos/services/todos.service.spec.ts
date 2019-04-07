@@ -1,11 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { ApiService } from '@app/core';
-import { Store } from '@ngrx/store';
 import { TodosService } from './todos.service';
 import { Todo } from '@app/features/todos';
-import { storeProviderStub, authProviderStub } from '@tests/helper-functions';
+import { authProviderStub } from '@tests/helper-functions';
 import { HttpStub } from '@tests/http.stubs';
-import { AuthService } from '~/app/auth';
+import { AuthService, DecodedJWT } from '~/app/auth';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TodoService', () => {
@@ -68,7 +67,7 @@ describe('TodoService', () => {
       authService.getDecodedToken = jest.fn(() => {
         return {
           sub: '1'
-        };
+        } as DecodedJWT;
       });
       service.createTodo(todo);
 
@@ -114,7 +113,7 @@ describe('TodoService', () => {
         completed: true
       };
 
-      service.deleteTodo(todo.id);
+      service.deleteTodo(todo);
 
       expect(spy).toHaveBeenCalled();
       expect(spy.mock.calls[0][0]).toEqual('todos');

@@ -45,8 +45,8 @@ export class TodosComponent implements OnInit {
     this.clearTodo();
   }
 
-  public deleteTodo(id: string) {
-    this.facade.deleteTodo(id);
+  public deleteTodo(todo: Todo) {
+    this.facade.deleteTodo(todo);
   }
 
   public clearTodo() {

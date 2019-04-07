@@ -86,9 +86,9 @@ export class UpdateTodoFail implements ActionWithPayload<Error> {
  * Delete Todo actions
  */
 
-export class DeleteTodo implements ActionWithPayload<string> {
+export class DeleteTodo implements ActionWithPayload<Todo> {
   readonly type = TodoActionTypes.Delete;
-  constructor(public payload: string) {}
+  constructor(public payload: Todo) {}
 }
 
 export class DeleteTodoSuccess implements ActionWithPayload<Todo> {

@@ -136,7 +136,7 @@ describe('TodoListComponent ', () => {
 
       tick();
 
-      expect(id).toEqual(todos[0].id);
+      expect(id).toEqual(todos[0]);
     }));
   });
 });

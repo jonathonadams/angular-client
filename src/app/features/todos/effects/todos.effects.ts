@@ -32,10 +32,10 @@ import { HttpErrorAction } from '@app/store/effects/error-effects';
 // This is good for action where the order of completion does not matter as they may complete out of time.. i.e. deleting or adding an item.
 
 // switchMap -> switches to the current observable as it. Note that it sends the unsubscribe (and subsequent cancel) to the current observable.
-// This is generally not desired for API calls as the currrent request will be cancelled. i.e. if you spam the delete button the next click will
+// This is generally not desired for API calls as the current request will be cancelled. i.e. if you spam the delete button the next click will
 // cancel the current delete API call. This is undesired.
 
-// concatMap -> merges the observable in the correct order. No obserbale is ignored and everything runs sequencially. Use this when order matters.
+// concatMap -> merges the observable in the correct order. No observable is ignored and everything runs sequentially. Use this when order matters.
 
 @Injectable()
 export class TodoEffects {
@@ -84,9 +84,9 @@ export class TodoEffects {
   deleteTodo$ = this.actions$.pipe(
     ofType<DeleteTodo>(TodoActionTypes.Delete),
     map(action => action.payload),
-    mergeMap(id =>
-      this.todoService.deleteTodo(id).pipe(
-        map(todo => new DeleteTodoSuccess(todo)),
+    mergeMap(todo =>
+      this.todoService.deleteTodo(todo).pipe(
+        map(deletedTodo => new DeleteTodoSuccess(deletedTodo)),
         catchError(error => of(new DeleteTodoFail(error)))
       )
     )
