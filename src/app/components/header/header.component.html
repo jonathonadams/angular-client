@@ -1,6 +1,11 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" fxLayoutAlign="space-between center">
   <button (click)="toggleNavigation.emit()" mat-mini-fab color="accent">
     <mat-icon>menu</mat-icon>
   </button>
-  <button (click)="showUserDropDown()" mat-icon-button><mat-icon>account_circle</mat-icon></button>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    {{ (user$ | async).username }}
+    <button (click)="showUserDropDown()" mat-icon-button>
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>

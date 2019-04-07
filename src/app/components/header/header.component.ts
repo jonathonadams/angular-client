@@ -12,6 +12,8 @@ import { OverlayService } from '@app/shared';
 import { UserDropDownComponent } from './user-drop-down/user-drop-down.component';
 import { User } from '~/app/features/users';
 import { UserFacade } from '~/app/features/users/services/user.facade.service';
+import { AuthFacade } from '~/app/auth/services/auth.facade.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'demo-header',
@@ -20,14 +22,18 @@ import { UserFacade } from '~/app/features/users/services/user.facade.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
+  public user$: Observable<User>;
+  @Output() toggleNavigation = new EventEmitter<void>();
   constructor(
     private el: ElementRef,
     private store: Store<any>,
     private themeService: ThemeService,
     private userFacade: UserFacade,
+    private authFacade: AuthFacade,
     private overlay: OverlayService
-  ) {}
-  @Output() toggleNavigation = new EventEmitter<void>();
+  ) {
+    this.user$ = this.authFacade.authenticatedUser$;
+  }
 
   public toggleDarkTheme(active: boolean): void {
     this.themeService.setActiveStatus(active);
