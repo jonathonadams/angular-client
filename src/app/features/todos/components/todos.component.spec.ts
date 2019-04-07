@@ -234,9 +234,9 @@ describe('TodosComponent', () => {
         completed: true
       };
 
-      component.deleteTodo(todo.id);
+      component.deleteTodo(todo);
       expect(spy).toHaveBeenCalled();
-      expect(spy).toHaveBeenCalledWith(todo.id);
+      expect(spy).toHaveBeenCalledWith(todo);
       spy.mockReset();
     });
   });

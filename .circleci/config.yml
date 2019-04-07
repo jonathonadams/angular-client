@@ -34,7 +34,7 @@ jobs:
       - <<: *deps-restore
       - run:
           name: Run tests
-          command: npm run test
+          command: npm run test:ci
 
   build:
     <<: *setup
@@ -42,7 +42,7 @@ jobs:
       - checkout
       - <<: *deps-restore
       - run:
-          name: Build Library
+          name: Build Application
           command: npm run build:prod
 
 workflows:
