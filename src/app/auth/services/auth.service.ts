@@ -4,18 +4,13 @@ import { Observable } from 'rxjs';
 import { GraphQLService } from '@app-core/graphql';
 import { LocalStorageService } from '@app-core/storage';
 import { DecodedJWT, LoginCredentials, LoginResponse } from '~/app/auth/models/auth.model';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '@env/environment';
+import { ApolloQueryResult } from 'apollo-client';
 
 @Injectable()
 export class AuthService {
   private storageKey = 'access_token';
 
-  constructor(
-    private graphQL: GraphQLService,
-    private localStorage: LocalStorageService,
-    private http: HttpClient
-  ) {}
+  constructor(private graphQL: GraphQLService, private localStorage: LocalStorageService) {}
 
   setAuthorizationToken(token: string): void {
     this.localStorage.setItem(this.storageKey, token);
@@ -57,24 +52,18 @@ export class AuthService {
   // Login function that returns a user and JWT
   // This is a graphql login function
   // swap out for a REST login function
-  // login(
-  //   credentials: LoginCredentials
-  // ): Observable<FetchResult<{ data: { login: LoginResponse } }>> {
-  //   const query = `
-  //     mutation LoginUser($username: String!, $password: String!){
-  //       login(username: $username, password: $password){
-  //         token
-  //         user {
-  //           id
-  //           username
-  //         }
-  //       }
-  //     }
-  //   `;
-  //   return this.graphQL.mutation<{ data: { login: LoginResponse } }>(query, credentials);
-  // }
-
-  login(credentials: LoginCredentials): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${environment.serverUrl}/authorize`, credentials);
+  login(credentials: LoginCredentials): Observable<ApolloQueryResult<{ login: LoginResponse }>> {
+    const query = `
+      mutation LoginUser($username: String!, $password: String!){
+        login(username: $username, password: $password){
+          token
+        }
+      }
+    `;
+    return this.graphQL.mutation<{ data: { login: LoginResponse } }>(query, credentials);
   }
+
+  // login(credentials: LoginCredentials): Observable<LoginResponse> {
+  //   return this.http.post<LoginResponse>(`${environment.serverUrl}/authorize`, credentials);
+  // }
 }

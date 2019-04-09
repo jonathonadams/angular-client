@@ -1,83 +1,97 @@
-[Angular](https://angular.io/), [GraphQL](https://graphql.org/), [NativeScript](https://www.nativescript.org/), [NgRx](https://ngrx.io/), [Material Design](https://material.angular.io/), [Husky](https://github.com/typicode/husky), [Prettier](https://prettier.io/), [Jest](https://jestjs.io/) & [TestCafe](https://testcafe.devexpress.com/)
+NOTE: This project is a work in progress and will regularly be updated.
 
-Note: This pyoject is a work in progress and will regularly be updated.
+## About this project.
 
-# About this project.
+This project is designed to provide a starting point for the development of your own web application and/or native mobile application. It is a shared project to use the same code base to build a Web Application and a native Mobile Application using NativeScript.
 
-This project is designed to provide a starting point for the development of your own web application and/or native mobile application.
+The application is a simple Todo app, yet demonstrates some of more advanced techniques of Angular and provides the necessary foundation to continue build your own application.
 
-This is the combination of my years developing and learning some of the tricker parts of Angular development. I have created this project to show examples of how to implement some of the less common concepts (or not as well documented... material themeing i'm looking at you).
+### What the project demonstrates
 
-The project is a simple application that once authenticated has a side navigation component to navigate between the two navigation routes.
-Under the hood it use Redux for state management and side effects as well as GraphQL for querying a GraphQL server.
-It also demonstrates how to make a custom Angular Material theme as a well as the ability to toggle between themes (e.g. a dark theme) and theme your own components.
+1. [Redux / NgRx](https://ngrx.io/) for application state management.
+2. Using [GraphQL](https://graphql.org/) as query language for API Communication .
+3. Shared code base for building native mobile and web applications using [NativeScript](https://www.nativescript.org/)
+4. Building a custom theme with user configurable, persistent, colors using [Angular Material](https://material.angular.io/)
+5. Using alternative testing frameworks, [Jest](https://jestjs.io/) for unit testing and [TestCafe](https://testcafe.devexpress.com/) for e2e testing.
+6. Using Git Hooks [Husky](https://github.com/typicode/husky#readme) to automate linting and code formating with [Prettier](https://github.com/prettier/prettier)
+7. Continuous integration with [CircleCI](https://circleci.com/)
 
-TODO -> Insert Screens here
+### Installation & Running
 
-## Mock API Server
+1. Clone the repo: `git clone https://github.com/jadams88/angular-client.git`
+2. Install all dependencies: `npm install`. NOTE: The dependencies include modules for building NativeScript. Some warnings will be logged during installation if your development machine is not configured for local NativeScript development. Please see [Setup](https://docs.nativescript.org/angular/start/quick-setup) to setup NativeScript locally.
 
-A mock server is provided in the dev-server/ directory. This uses the awesome [json-server](json-server) & [json-graphql-server](https://github.com/marmelab/json-graphql-server) to auto create REST endpoints and GraphQL queries form the db.json file.
-Running 'npm run server' will start this server on port :3000.
+To run the application run the following for the desired platform
 
-## Husky Git Hooks
+- Web : `ng serve -o`
+- ios : `npm run ios`
+- Android : `npm run android`
 
-TODO -> Document the Husky hooks
+## API Server
 
-## Code scaffolding
+Developing an API server for the application to communicate to is beyond the scope of this project, however a starter API that supports all the required features of this application is provided [here](https://github.com/jadams88/koa-graphql-rest-api).
 
-TODO -> Document the nativescript/schematics
+## Testing
 
-## Builds
+### Unit Testing
 
-TODO -> Implement Bazel for building
+Unit test are configured to run with the [Jest](https://jestjs.io/) testing framework. This includes `marble testing` and `snapshot testing`.
 
-## Running unit tests
+Note / TODO : There is a fair number of unit tests however additional tests need to be written.
 
-The application uses [Jest](https://jestjs.io/) for unit testing.
+To run the tests, run `npm test`
 
-run 'npm run test' to run the test suite.
+### End to End test.
 
-TODO -> Document this better
+E2E Test are rung using [TestCafe](https://testcafe.devexpress.com/). These are located in the `/e2e` directory.
 
-## Running end-to-end tests
+There is a configuration file located at `/e2e/config.e2e.ts`. This contains configuration variables to run e2e tests correctly.
 
-The application uses [TestCafe](https://testcafe.devexpress.com/) for e2e testing.
+To run the tests, serve the application and then run the test suit against that url.
 
-TODO -> Document this better
+1. `ng serve`
+2. Open a new terminal, and then run `npm run e2e:chrome`. (note there are equivalent scripts for the other major browsers, please look in the `package.json` file)
 
-# Native Application Development
+Note: There is not a full suite of e2e tests that cover the application (yet), however there are a couple of example tests to test the login page and authentication.
 
-## ios develop
+## NativeScript Mobile Development
 
-TODO -> Document this process and the below
+TODO -> Document Mobile development and requirements.
+TODO -> Document the removal of additional configuration that has been enabled to work with an unecrypted API server on localhost.
+Including
+
+_ios develop_
 
 remove the NSAppTransportSecurity from the info.plist in the ios directory
 
-## android local development
-
-TODO -> Document this process and the below
+_android local development_
 
 android:networkSecurityConfig="@xml/network_security_config"
 
-## Starting your own application
+## Configuring your own Application
 
-TODO -> Document
-
-- change the prefix to from client -> whatever
-
-## Cutome theme mixins for angular material
-
-TODO -> Document
-
--> dark theme view encapulation does not apply for material components
-
-# Configuring your own fork
-
-App prefixes
+TODO -> Document all app prefixes that need to be changed from `demo` including:
 
 - angular.json
 - src/tslint.json
 - All component.ts, .html and .scss
 
+TODO -> Document Nativescript development setup eg.
+App_Resources -> Android -> app.gradle -> application ID must align with package.json
+
+## Contributing
+
+TODO -> Document contributing guidelines, Code of conduct etc
+TODO -> Document the Husky Git Hooks
+TODO -> Document the code scaffolding with nativescript/schematics
+
+## Road MAP
+
+- Complete Mobile Components
+- Bazel for building
+
+## Custom theme mixins for angular material
+
 TODO -> Document
--- App_Resources -> Android -> app.gradle -> application ID must allign with package.json
+
+-> dark theme view encapsulation does not apply for material components

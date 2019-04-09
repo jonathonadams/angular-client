@@ -50,6 +50,7 @@ export class TodoEffects {
     ofType<LoadTodos>(TodoActionTypes.Load),
     exhaustMap(action =>
       this.todoService.getAllTodos().pipe(
+        map(queryResult => queryResult.data.allTodos),
         map(todos => new LoadTodosSuccess(todos)),
         catchError(error => of(new LoadTodosFail(error)))
       )
