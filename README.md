@@ -95,3 +95,7 @@ TODO -> Document the code scaffolding with nativescript/schematics
 TODO -> Document
 
 -> dark theme view encapsulation does not apply for material components
+
+## Known Issues
+
+- By default, the Apollo InMemoryCache creates a `__typename` property on each object, this creates some issues with created an abstract service. This option can be set to false in `createApollo.ts` to remove this, however it will not allow you to use fragments on your queries if you do so. A utility function & service is provided in the `GraphQLService` until the issue is removed. Relevant feature request tracking the issues can be found [here](https://github.com/apollographql/apollo-feature-requests/issues/6)

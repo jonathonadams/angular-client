@@ -2,9 +2,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Todo } from '../models/todos.model';
 import { TodosFacade } from '../services/todos.facade';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { TodosService } from '../services/todos.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'demo-todos',
@@ -19,6 +20,7 @@ export class TodosComponent implements OnInit {
   constructor(
     private facade: TodosFacade,
     private route: ActivatedRoute,
+    private location: Location,
     private service: TodosService
   ) {
     this.userTodo$ = this.facade.userTodo$;
@@ -26,14 +28,19 @@ export class TodosComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('constructor');
     this.facade.loadTodos();
     this.route.paramMap
-      .pipe(map(paramMap => paramMap.get('id')))
+      .pipe(
+        map(paramMap => paramMap.get('id')),
+        filter(id => id !== 'null')
+      )
       .subscribe(id => this.selectTodo(id));
   }
 
   public navigateTo(id: string): void {
-    this.service.navigateTo(id);
+    this.facade.selectTodo(id);
+    this.location.go(`/todos/${id}`);
   }
 
   public selectTodo(id: string) {
@@ -42,7 +49,6 @@ export class TodosComponent implements OnInit {
 
   public saveTodo(todo: Todo) {
     this.facade.saveTodo(todo);
-    this.clearTodo();
   }
 
   public deleteTodo(todo: Todo) {
@@ -51,6 +57,7 @@ export class TodosComponent implements OnInit {
 
   public clearTodo() {
     this.facade.clearSelected();
-    this.service.navigateTo();
+    // Also update the url to remove the id without navigating
+    this.location.go('/todos');
   }
 }

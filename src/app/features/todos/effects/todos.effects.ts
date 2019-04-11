@@ -63,6 +63,7 @@ export class TodoEffects {
     map(action => action.payload),
     mergeMap(newTodo =>
       this.todoService.createTodo(newTodo).pipe(
+        map(queryResult => queryResult.data.newTodo),
         map(todo => new CreateTodoSuccess(todo)),
         catchError(error => of(new CreateTodoFail(error)))
       )
@@ -75,6 +76,7 @@ export class TodoEffects {
     map(action => action.payload),
     mergeMap(updateTodo =>
       this.todoService.updateTodo(updateTodo).pipe(
+        map(queryResult => queryResult.data.updateTodo),
         map(todo => new UpdateTodoSuccess(todo)),
         catchError(error => of(new UpdateTodoFail(error)))
       )
@@ -86,7 +88,8 @@ export class TodoEffects {
     ofType<DeleteTodo>(TodoActionTypes.Delete),
     map(action => action.payload),
     mergeMap(todo =>
-      this.todoService.deleteTodo(todo).pipe(
+      this.todoService.deleteTodo(todo.id).pipe(
+        map(queryResult => queryResult.data.removeTodo),
         map(deletedTodo => new DeleteTodoSuccess(deletedTodo)),
         catchError(error => of(new DeleteTodoFail(error)))
       )

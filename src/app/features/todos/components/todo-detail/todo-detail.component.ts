@@ -1,6 +1,10 @@
-import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Todo } from '@app/features/todos';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TodosFacade } from '../../services/todos.facade';
+import { Observable } from 'rxjs';
+import { take, filter } from 'rxjs/operators';
+import { Subscription } from 'apollo-client/util/Observable';
 
 @Component({
   selector: 'demo-todo-detail',
@@ -8,35 +12,45 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./todo-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TodoDetailComponent {
+export class TodoDetailComponent implements OnDestroy {
   public todoForm: FormGroup;
-  public selectedTodo: Todo;
-
-  constructor(private fb: FormBuilder) {
-    this.todoForm = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required]
-    });
-  }
+  public selectedTodo$: Observable<Todo>;
+  public subscription: Subscription;
 
   @Output()
   saved = new EventEmitter<Todo>();
   @Output()
   cancelled = new EventEmitter<void>();
 
-  @Input()
-  set todo(todo: Todo) {
-    this.selectedTodo = todo ? { ...todo } : undefined;
-    this.todoForm.reset(todo);
+  constructor(private fb: FormBuilder, private facade: TodosFacade) {
+    this.todoForm = this.fb.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+    this.selectedTodo$ = this.facade.selectedTodo$;
+
+    this.subscription = this.selectedTodo$
+      .pipe(filter(val => val !== undefined))
+      .subscribe(todo => {
+        this.todoForm.reset(todo);
+      });
   }
 
   onSubmit({ value, valid }) {
     if (valid) {
-      this.saved.emit({ ...this.selectedTodo, ...value });
+      this.selectedTodo$.pipe(take(1)).subscribe(selectedTodo => {
+        this.saved.emit({ ...selectedTodo, ...value });
+        this.todoForm.reset();
+      });
     }
   }
 
   clearTodo() {
+    this.todoForm.reset();
     this.cancelled.emit();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

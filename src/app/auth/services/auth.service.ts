@@ -51,7 +51,6 @@ export class AuthService {
   }
   // Login function that returns a user and JWT
   // This is a graphql login function
-  // swap out for a REST login function
   login(credentials: LoginCredentials): Observable<ApolloQueryResult<{ login: LoginResponse }>> {
     const query = `
       mutation LoginUser($username: String!, $password: String!){
@@ -63,6 +62,7 @@ export class AuthService {
     return this.graphQL.mutation<{ data: { login: LoginResponse } }>(query, credentials);
   }
 
+  // swap out for a REST login function
   // login(credentials: LoginCredentials): Observable<LoginResponse> {
   //   return this.http.post<LoginResponse>(`${environment.serverUrl}/authorize`, credentials);
   // }
