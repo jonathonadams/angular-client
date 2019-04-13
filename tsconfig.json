@@ -26,6 +26,5 @@
     "lib": ["es2018", "dom", "es6", "es2015.iterable"],
     "skipLibCheck": true,
     "allowJs": true
-  },
-  "exclude": []
+  }
 }

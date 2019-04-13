@@ -4,19 +4,37 @@ import { By } from '@angular/platform-browser';
 import { Todo } from '@app/features/todos';
 import { TodoDetailComponent } from './todo-detail.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { createSpyObj } from '~/tests';
+import { TodosFacade } from '../../services/todos.facade';
+import { cold, Scheduler, hot } from 'jest-marbles';
+import { of } from 'rxjs';
 
 describe('TodoDetailComponent', () => {
   let component: TodoDetailComponent;
   let fixture: ComponentFixture<TodoDetailComponent>;
   let debugEl: DebugElement;
   let nativeEl: HTMLElement;
+  let todoFacade: TodosFacade;
+
+  const todoFacadeSpy = createSpyObj('TodosFacade', [
+    'userTodo$',
+    'loadTodos',
+    'selectTodo',
+    'saveTodo',
+    'deleteTodo',
+    'clearSelected'
+  ]);
+  todoFacadeSpy.selectedTodo$ = of(jest.fn());
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
+      providers: [{ provide: TodosFacade, useValue: todoFacadeSpy }],
       declarations: [TodoDetailComponent],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
+
+    todoFacade = TestBed.get(TodosFacade);
   }));
 
   beforeEach(() => {
@@ -30,45 +48,8 @@ describe('TodoDetailComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('todo', () => {
-    it('should set the selectedTodo property when set', () => {
-      expect(component.selectedTodo).not.toBeDefined();
-
-      const todo: Todo = {
-        id: '1',
-        userId: '1',
-        title: 'some title',
-        description: 'some description',
-        completed: true
-      };
-      component.todo = todo;
-
-      expect(component.selectedTodo).toBeDefined();
-    });
-
-    it('should make a copy of the property value', () => {
-      expect(component.selectedTodo).not.toBeDefined();
-
-      const todo: Todo = {
-        id: '1',
-        userId: '1',
-        title: 'some title',
-        description: 'some description',
-        completed: true
-      };
-      component.todo = todo;
-
-      expect(component.selectedTodo).toBeDefined();
-
-      // Note that we want to check the deep equality of the object
-      // So we check that the objects are equal with .toEqual
-      // and deepy equal with .toBe
-      expect(component.selectedTodo).toEqual(todo);
-      expect(component.selectedTodo).not.toBe(todo);
-    });
-  });
   describe('saved', () => {
-    it('should be raised when the saved button is clicked', fakeAsync(() => {
+    it('should be raised when the saved button is clicked', () => {
       const todo: Todo = {
         id: '1',
         userId: '1',
@@ -76,20 +57,33 @@ describe('TodoDetailComponent', () => {
         description: 'some description',
         completed: true
       };
-      component.todo = todo;
+
+      const formValues = {
+        description: 'undated description',
+        title: 'some new title'
+      };
+
+      const updatedTodo = { ...todo, ...formValues };
+
+      const resetFormValues = { description: null, title: null };
+
+      component.selectedTodo$ = of(todo);
+      component.todoForm.reset(formValues);
+
       fixture.detectChanges();
+
+      expect(component.todoForm.value).toEqual(formValues);
 
       let emittedTodo: Todo;
       component.saved.subscribe(event => {
         emittedTodo = event;
       });
 
-      const form = debugEl.query(By.css('form')).triggerEventHandler('submit', null);
+      debugEl.query(By.css('form')).triggerEventHandler('submit', null);
 
-      tick();
-
-      expect(emittedTodo).toEqual(todo);
-    }));
+      expect(emittedTodo).toEqual(updatedTodo);
+      expect(component.todoForm.value).toEqual(resetFormValues);
+    });
   });
 
   describe('cancelled', () => {

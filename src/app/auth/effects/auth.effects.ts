@@ -21,7 +21,7 @@ export class AuthEffects {
     map(action => action.payload),
     exhaustMap((auth: LoginCredentials) =>
       this.authService.login(auth).pipe(
-        // map(result => result.data.login), // use this for graphql
+        map(result => result.data.login), // use this for graphql
         map(loginResponse => new LoginSuccess(loginResponse)),
         catchError(error => of(new LoginFailure(error)))
       )
