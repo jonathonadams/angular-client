@@ -132,7 +132,7 @@ describe('TodoListComponent ', () => {
       });
 
       const deleteButtons = debugEl.queryAll(By.css('mat-card .button'));
-      deleteButtons[0].triggerEventHandler('click', null);
+      deleteButtons[0].triggerEventHandler('click', { stopPropagation() {} });
 
       tick();
 

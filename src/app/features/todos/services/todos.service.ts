@@ -1,52 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiService, GraphQLService } from '@app/core';
+import { GraphQLService } from '@app/core';
 import { Todo } from '../models/todos.model';
 import { AuthService } from '~/app/auth';
 import { Router } from '@angular/router';
 import { ApolloQueryResult } from 'apollo-client';
+import {
+  ALL_TODOS_QUERY,
+  LOAD_TODO_QUERY,
+  CREATE_TODO_QUERY,
+  UPDATE_TODO_QUERY,
+  REMOTE_TODO_QUERY
+} from './todos.queries';
 
 @Injectable()
 export class TodosService {
-  readonly allTodoProperties = `
-    fragment allTodoProperties on Todo {
-      id
-      userId
-      title
-      description
-      completed
-    }
-  `;
-
-  constructor(
-    private graphQl: GraphQLService,
-    private api: ApiService,
-    private auth: AuthService,
-    private router: Router
-  ) {}
+  constructor(private graphQl: GraphQLService, private auth: AuthService, private router: Router) {}
 
   public getAllTodos(): Observable<ApolloQueryResult<{ allTodos: Todo[] }>> {
-    const query = `
-      {
-        allTodos {
-          ...allTodoProperties
-        }
-      }
-      ${this.allTodoProperties}
-    `;
-    return this.graphQl.query<{ allTodos: Todo[] }>(query);
+    return this.graphQl.query<{ allTodos: Todo[] }>(ALL_TODOS_QUERY);
   }
 
   public getOneTodo(id: string): Observable<ApolloQueryResult<{ Todo: Todo }>> {
-    const query = `
-      query LoadTodo($id: ID!) {
-        Todo(id: $id) {
-          ...allTodoProperties
-        }
-      }
-      ${this.allTodoProperties}
-    `;
-    return this.graphQl.query<{ Todo: Todo }>(query, { id });
+    return this.graphQl.query<{ Todo: Todo }>(LOAD_TODO_QUERY, { id });
   }
 
   public createTodo(todo: Todo): Observable<ApolloQueryResult<{ newTodo: Todo }>> {
@@ -55,41 +31,20 @@ export class TodosService {
     // set the completed state to false
     todo.completed = false;
     const variables = { input: todo };
-    const query = `
-      mutation CreateTodo($input: NewTodoInput!) {
-        newTodo(input: $input) {
-          ...allTodoProperties
-        }
-      }
-      ${this.allTodoProperties}
-    `;
 
-    return this.graphQl.mutation<{ newTodo: Todo }>(query, variables);
+    return this.graphQl.mutation<{ newTodo: Todo }>(CREATE_TODO_QUERY, variables);
   }
 
   public updateTodo(todo: Todo): Observable<ApolloQueryResult<{ updateTodo: Todo }>> {
     const variables = { input: todo };
-    const query = `
-      mutation UpdateTodo($input: UpdatedTodoInput!) {
-        updateTodo(input: $input) {
-          ...allTodoProperties
-        }
-      }
-      ${this.allTodoProperties}
-    `;
-    return this.graphQl.mutation<{ updateTodo: Todo }>(query, variables);
+
+    return this.graphQl.mutation<{ updateTodo: Todo }>(UPDATE_TODO_QUERY, variables);
   }
 
   public deleteTodo(id: string): Observable<ApolloQueryResult<{ removeTodo: { id: string } }>> {
     const variables = { id };
-    const query = `
-      mutation DeleteTodo($id: ID!){
-        removeTodo(id: $id) {
-          id
-        }
-      }
-    `;
-    return this.graphQl.mutation<{ removeTodo: { id: string } }>(query, variables);
+
+    return this.graphQl.mutation<{ removeTodo: { id: string } }>(REMOTE_TODO_QUERY, variables);
   }
 
   // ------------------------------------------

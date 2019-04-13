@@ -4,7 +4,6 @@ import { Todo } from '../models/todos.model';
 import { TodosFacade } from '../services/todos.facade';
 import { map, filter } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { TodosService } from '../services/todos.service';
 import { Location } from '@angular/common';
 
 @Component({
@@ -20,15 +19,13 @@ export class TodosComponent implements OnInit {
   constructor(
     private facade: TodosFacade,
     private route: ActivatedRoute,
-    private location: Location,
-    private service: TodosService
+    private location: Location
   ) {
     this.userTodo$ = this.facade.userTodo$;
     this.selectedTodo$ = this.facade.selectedTodo$;
   }
 
   ngOnInit() {
-    console.log('constructor');
     this.facade.loadTodos();
     this.route.paramMap
       .pipe(
