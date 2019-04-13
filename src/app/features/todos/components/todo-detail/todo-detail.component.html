@@ -1,6 +1,6 @@
 <mat-card>
   <form [formGroup]="todoForm" (ngSubmit)="onSubmit(todoForm)">
-    <mat-card-title>{{ selectedTodo ? 'Edit' : 'Create' }} Todo</mat-card-title>
+    <mat-card-title>{{ (selectedTodo$ | async) ? 'Edit' : 'Create' }} Todo</mat-card-title>
     <mat-card-subtitle>
       <mat-form-field appearance="standard">
         <mat-label>Title</mat-label>

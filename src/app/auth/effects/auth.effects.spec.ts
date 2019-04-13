@@ -55,8 +55,7 @@ describe('AuthEffects', () => {
 
       actions$ = hot('-a---', { a: action });
       // Example graphql response below
-      // const response = cold('-a|', { a: { data: { login: { user, token } } } });
-      const response = cold('-a|', { a: { token } });
+      const response = cold('-a|', { a: { data: { login: { token } } } });
       const expected = cold('--b', { b: completion });
       authService.login = jest.fn(() => response);
 

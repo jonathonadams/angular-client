@@ -84,7 +84,7 @@ describe('TodoEffects', () => {
       const completion = new LoadTodosSuccess(todos);
 
       action$ = hot('-a-', { a: action });
-      const response = cold('-a|', { a: todos });
+      const response = cold('-a|', { a: { data: { allTodos: todos } } });
       const expected = cold('--b', { b: completion });
 
       todoService.getAllTodos = jest.fn(() => response);
@@ -108,12 +108,12 @@ describe('TodoEffects', () => {
   });
 
   describe('createTodo$', () => {
-    it('should retun a CreateTodoSuccess action with a payload of the created Todo', () => {
+    it('should return a CreateTodoSuccess action with a payload of the created Todo', () => {
       const action = new CreateTodo(mockTodo);
       const completion = new CreateTodoSuccess(mockTodo);
 
       action$ = hot('-a-', { a: action });
-      const response = cold('-a|', { a: mockTodo });
+      const response = cold('-a|', { a: { data: { newTodo: mockTodo } } });
       const expected = cold('--b', { b: completion });
 
       todoService.createTodo = jest.fn(() => response);
@@ -137,12 +137,12 @@ describe('TodoEffects', () => {
   });
 
   describe('updateTodo$', () => {
-    it('should retun a UpdateTodoSuccess action with a payload of the updated Todo', () => {
+    it('should return a UpdateTodoSuccess action with a payload of the updated Todo', () => {
       const action = new UpdateTodo(mockTodo);
       const completion = new UpdateTodoSuccess(mockTodo);
 
       action$ = hot('-a-', { a: action });
-      const response = cold('-a|', { a: mockTodo });
+      const response = cold('-a|', { a: { data: { updateTodo: mockTodo } } });
       const expected = cold('--b', { b: completion });
 
       todoService.updateTodo = jest.fn(() => response);
@@ -151,7 +151,7 @@ describe('TodoEffects', () => {
     });
 
     it('should return a UpdateTodoFail action if the service throws', () => {
-      const error = new Error('An error occured');
+      const error = new Error('An error occurred');
       const action = new UpdateTodo(mockTodo);
       const completion = new UpdateTodoFail(error);
 
@@ -171,7 +171,7 @@ describe('TodoEffects', () => {
       const completion = new DeleteTodoSuccess(mockTodo);
 
       action$ = hot('-a-', { a: action });
-      const response = cold('-a|', { a: mockTodo });
+      const response = cold('-a|', { a: { data: { removeTodo: mockTodo } } });
       const expected = cold('--b', { b: completion });
 
       todoService.deleteTodo = jest.fn(() => response);
@@ -180,7 +180,7 @@ describe('TodoEffects', () => {
     });
 
     it('should return a DeleteTodoFail action if the service throws', () => {
-      const error = new Error('An error occured');
+      const error = new Error('An error occurred');
       const action = new DeleteTodo(mockTodo);
       const completion = new DeleteTodoFail(error);
 

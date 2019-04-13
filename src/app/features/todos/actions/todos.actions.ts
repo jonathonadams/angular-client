@@ -91,9 +91,9 @@ export class DeleteTodo implements ActionWithPayload<Todo> {
   constructor(public payload: Todo) {}
 }
 
-export class DeleteTodoSuccess implements ActionWithPayload<Todo> {
+export class DeleteTodoSuccess implements ActionWithPayload<{ id: string }> {
   readonly type = TodoActionTypes.DeleteSuccess;
-  constructor(public payload: Todo) {}
+  constructor(public payload: { id: string }) {}
 }
 
 export class DeleteTodoFail implements ActionWithPayload<Error> {

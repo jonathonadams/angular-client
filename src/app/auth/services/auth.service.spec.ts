@@ -5,16 +5,14 @@ import { sign } from 'jsonwebtoken';
 import { AuthService } from './auth.service';
 
 import { LoginCredentials, LoginResponse } from '../models/auth.model';
-// import { GraphQLStub } from 'test';
 import { GraphQLService } from '@app-core/graphql';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { environment } from '@env/environment';
+// import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { GraphQLStub } from '~/tests/graphql.stubs';
 
 describe('AuthService', () => {
   let authService: AuthService;
   let graphQLStub: GraphQLStub;
-  let httpTestingController: HttpTestingController;
+  // let httpTestingController: HttpTestingController;
   let JWT: string;
   const storageKey = 'access_token';
   const tokenSecret = 'this-is-a-test-secret';
@@ -22,11 +20,11 @@ describe('AuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AuthService, { provide: GraphQLService, useClass: GraphQLStub }],
-      imports: [HttpClientTestingModule, RouterTestingModule.withRoutes([])]
+      imports: [RouterTestingModule.withRoutes([])]
     });
     authService = TestBed.get(AuthService);
     graphQLStub = TestBed.get(GraphQLService);
-    httpTestingController = TestBed.get(HttpTestingController);
+    // httpTestingController = TestBed.get(HttpTestingController);
 
     // Create a JWT for each test that is valid and has not expired
     JWT = sign(
@@ -172,85 +170,75 @@ describe('AuthService', () => {
   });
 
   describe('login', () => {
-    it('should make a POST request with LoginCredentials to the /authorize route', () => {
+    // GraphQL login response check
+    it('should return a LoginResponse if called with valid credentials', () => {
+      const spy = jest.spyOn(graphQLStub, 'mutation');
       const loginCredentials: LoginCredentials = {
         username: 'admin',
         password: 'secret'
       };
-
       const expectedResponse: LoginResponse = {
         token: JWT
       };
-
-      // Make an HTTP GET request
-      authService.login(loginCredentials).subscribe(data => {
-        // When observable resolves, result should match test data
-        expect(data).toEqual(expectedResponse);
-      });
-
-      // The following `expectOne()` will match the request's URL.
-      // If no requests or multiple requests matched that URL
-      // `expectOne()` would throw.
-      const req = httpTestingController.expectOne(`${environment.serverUrl}/authorize`);
-
-      // Assert that the request is a POST.
-      expect(req.request.method).toEqual('POST');
-
-      // Respond with mock data, causing Observable to resolve.
-      // Subscribe callback asserts that correct data was returned.
-      req.flush(expectedResponse);
-
-      // Finally, assert that there are no outstanding requests.
-      httpTestingController.verify();
+      // Set the response from the the stub
+      graphQLStub.setExpectedResponse<{ login: LoginResponse }>({ login: expectedResponse });
+      authService.login(loginCredentials).subscribe(
+        response => {
+          expect(response.errors).toBeUndefined();
+          expect(response.data.login).toBeDefined();
+          expect(response.data.login).toEqual(expectedResponse);
+          expect(graphQLStub.mutation).toHaveBeenCalled();
+          expect(spy.mock.calls[0][1]).toEqual(loginCredentials);
+        },
+        error => console.log(error)
+      );
+    });
+    it('should return an error if credentials are incorrect', () => {
+      const spy = jest.spyOn(graphQLStub, 'mutation');
+      const loginCredentials: LoginCredentials = {
+        username: 'unauthorized',
+        password: 'noi dea'
+      };
+      const graphErrors: GraphQLError[] = [{ name: 'Unauthorized Error', message: 'Unauthorized' }];
+      // Set the response from the the stub
+      graphQLStub.setErrorResponse(graphErrors);
+      authService.login(loginCredentials).subscribe(
+        response => {
+          expect(response.data).toEqual(null);
+          expect(response.errors).toBeDefined();
+          expect(response.errors[0].message).toEqual('Unauthorized');
+          expect(graphQLStub.mutation).toHaveBeenCalled();
+          expect(spy.mock.calls[0][1]).toEqual(loginCredentials);
+        },
+        error => console.log(error)
+      );
     });
 
-    /// GraphQL login response check
-    // it('should return a LoginResponse if called with valid credentials', () => {
-    //   const spy = jest.spyOn(graphQLStub, 'mutation');
+    // REST spec
+    // it('should make a POST request with LoginCredentials to the /authorize route', () => {
     //   const loginCredentials: LoginCredentials = {
     //     username: 'admin',
     //     password: 'secret'
     //   };
     //   const expectedResponse: LoginResponse = {
-    //     user: {
-    //       id: '1',
-    //       name: 'admin',
-    //       email: 'email@test.com'
-    //     },
     //     token: JWT
     //   };
-    //   // Set the response from the the stub
-    //   graphQLStub.setExpectedResponse<{ login: LoginResponse }>({ login: expectedResponse });
-    //   authService.login(loginCredentials).subscribe(
-    //     response => {
-    //       expect(response.errors).toBeUndefined();
-    //       expect(response.data.login).toBeDefined();
-    //       expect(response.data.login).toEqual(expectedResponse);
-    //       expect(graphQLStub.mutation).toHaveBeenCalled();
-    //       expect(spy.mock.calls[0][1]).toEqual(loginCredentials);
-    //     },
-    //     error => console.log(error)
-    //   );
-    // });
-    //   it('should reuturn an error if credentials are incorrect', () => {
-    //     const spy = jest.spyOn(graphQLStub, 'mutation');
-    //     const loginCredentials: LoginCredentials = {
-    //       username: 'unauthorized',
-    //       password: 'noidea'
-    //     };
-    //     const graphErrors: GraphQLError[] = [{ name: 'Unauthorized Error', message: 'Unauthorized' }];
-    //     // Set the response from the the stub
-    //     graphQLStub.setErrorResponse(graphErrors);
-    //     authService.login(loginCredentials).subscribe(
-    //       response => {
-    //         expect(response.data).toEqual(null);
-    //         expect(response.errors).toBeDefined();
-    //         expect(response.errors[0].message).toEqual('Unauthorized');
-    //         expect(graphQLStub.mutation).toHaveBeenCalled();
-    //         expect(spy.mock.calls[0][1]).toEqual(loginCredentials);
-    //       },
-    //       error => console.log(error)
-    //     );
+    //   // Make an HTTP GET request
+    //   authService.login(loginCredentials).subscribe(data => {
+    //     // When observable resolves, result should match test data
+    //     expect(data).toEqual(expectedResponse);
     //   });
+    //   // The following `expectOne()` will match the request's URL.
+    //   // If no requests or multiple requests matched that URL
+    //   // `expectOne()` would throw.
+    //   const req = httpTestingController.expectOne(`${environment.serverUrl}/authorize`);
+    //   // Assert that the request is a POST.
+    //   expect(req.request.method).toEqual('POST');
+    //   // Respond with mock data, causing Observable to resolve.
+    //   // Subscribe callback asserts that correct data was returned.
+    //   req.flush(expectedResponse);
+    //   // Finally, assert that there are no outstanding requests.
+    //   httpTestingController.verify();
+    // });
   });
 });

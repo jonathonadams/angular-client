@@ -5,10 +5,9 @@ import { TodosComponent } from './todos.component';
 import { Todo } from '../models/todos.model';
 import { createSpyObj } from '~/tests/helper-functions';
 import { TodosFacade } from '../services/todos.facade';
-import { TodosService } from '../services/todos.service';
-import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
 import { ActivatedRouteStub } from '~/tests/activated-router.stubs';
+import { Location } from '@angular/common';
 
 describe('TodosComponent', () => {
   let component: TodosComponent;
@@ -16,7 +15,6 @@ describe('TodosComponent', () => {
   let debugEl: DebugElement;
   let nativeEl: HTMLElement;
   let todoFacade: TodosFacade;
-  let todoService: TodosService;
   let route: ActivatedRouteStub;
 
   const todoFacadeSpy = createSpyObj('TodosFacade', [
@@ -37,13 +35,12 @@ describe('TodosComponent', () => {
       providers: [
         { provide: TodosFacade, useValue: todoFacadeSpy },
         { provide: ActivatedRoute, useValue: new ActivatedRouteStub() },
-        { provide: TodosService, useValue: todoServiceSpy }
+        { provide: Location, useValue: { go: jest.fn() } }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
 
     todoFacade = TestBed.get(TodosFacade);
-    todoService = TestBed.get(TodosService);
     route = TestBed.get(ActivatedRoute);
   }));
 
@@ -118,9 +115,9 @@ describe('TodosComponent', () => {
 
       expect(spy).not.toHaveBeenCalled();
 
-      const detailComponet: DebugElement = debugEl.query(By.css('demo-todo-detail'));
+      const detailComponent: DebugElement = debugEl.query(By.css('demo-todo-detail'));
 
-      detailComponet.triggerEventHandler('saved', todo);
+      detailComponent.triggerEventHandler('saved', todo);
 
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledWith(todo);
@@ -144,17 +141,17 @@ describe('TodosComponent', () => {
 
       expect(spy).toHaveBeenCalled();
 
-      // Both of the below assetions can be used as an sertion
+      // Both of the below assertions can be used as an assertion
       // on the calls.
-      // The second version is aseting against the first argument the first call
+      // The second version is asserting against the first argument the first call
       expect(spy).toHaveBeenCalledWith(todo);
       expect(spy.mock.calls[0][0]).toBe(todo);
 
       spy.mockReset();
     });
 
-    it('should call the clearTodo method', () => {
-      const spy = jest.spyOn(component, 'clearTodo');
+    it('should call the facade.saveTodo method', () => {
+      const spy = jest.spyOn(todoFacade, 'saveTodo');
 
       const todo: Todo = {
         id: '1',
@@ -197,7 +194,7 @@ describe('TodosComponent', () => {
     });
   });
 
-  describe('deletTodo', () => {
+  describe('deleteTodo', () => {
     it('should be called with when the TodoListComponent cancelled event is raised with the given event', () => {
       const spy = jest.spyOn(component, 'deleteTodo');
       spy.mockReset();
