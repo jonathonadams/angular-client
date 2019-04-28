@@ -17,7 +17,8 @@ export enum TodoActionTypes {
   DeleteFail = '[Todo] Delete Fail',
   Select = '[Todo] Select',
   ClearSelected = '[Todo] Clear Selected',
-  UpdateFilter = '[Todo] Filter Todo '
+  SelectFilter = '[Todo] Select Filter',
+  SearchFilter = '[Todo] Search Filter'
 }
 
 export class SelectTodo implements ActionWithPayload<string> {
@@ -29,9 +30,14 @@ export class ClearSelectedTodo implements Action {
   readonly type = TodoActionTypes.ClearSelected;
 }
 
-export class FilterAllTodos implements ActionWithPayload<TodoFilterStatus> {
-  readonly type = TodoActionTypes.UpdateFilter;
+export class TodoSelectFilter implements ActionWithPayload<TodoFilterStatus> {
+  readonly type = TodoActionTypes.SelectFilter;
   constructor(public payload: TodoFilterStatus) {}
+}
+
+export class TodoSearchFilter implements ActionWithPayload<string> {
+  readonly type = TodoActionTypes.SearchFilter;
+  constructor(public payload: string) {}
 }
 
 /**
@@ -111,7 +117,8 @@ export class DeleteTodoFail implements ActionWithPayload<Error> {
 export type TodoActionUnion =
   | SelectTodo
   | ClearSelectedTodo
-  | FilterAllTodos
+  | TodoSelectFilter
+  | TodoSearchFilter
   | LoadTodos
   | LoadTodosSuccess
   | LoadTodosFail

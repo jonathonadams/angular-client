@@ -6,10 +6,11 @@ import {
   EventEmitter,
   ViewChild,
   ElementRef,
-  OnInit
+  OnInit,
+  OnDestroy
 } from '@angular/core';
 import { Todo, TodoFilterStatus } from '../../models/todos.model';
-import { fromEvent, Observable } from 'rxjs';
+import { fromEvent, Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { MatSelectChange } from '@angular/material';
 
@@ -19,7 +20,8 @@ import { MatSelectChange } from '@angular/material';
   styleUrls: ['./all-todos.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AllTodosComponent implements OnInit {
+export class AllTodosComponent implements OnInit, OnDestroy {
+  private subscription: Subscription;
   @ViewChild('todoSearch') searchInput: ElementRef<HTMLInputElement>;
 
   @Input()
@@ -33,27 +35,33 @@ export class AllTodosComponent implements OnInit {
   @Output()
   public updated = new EventEmitter<Todo>();
   @Output()
-  public filterChanged = new EventEmitter<TodoFilterStatus>();
+  public selectFilterChanged = new EventEmitter<TodoFilterStatus>();
+  @Output()
+  public searchFilterChanged = new EventEmitter<string>();
 
   public filterOptions = [
     { display: 'All', value: TodoFilterStatus.All },
     { display: 'Completed', value: TodoFilterStatus.Completed },
-    { display: 'In Completed', value: TodoFilterStatus.InCompleted }
+    { display: 'Incomplete', value: TodoFilterStatus.InCompleted }
   ];
 
   ngOnInit() {
-    const searchValues = fromEvent(this.searchInput.nativeElement, 'keyup')
+    this.subscription = fromEvent(this.searchInput.nativeElement, 'keyup')
       .pipe(
-        debounceTime(200),
+        debounceTime(100),
         map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value),
         distinctUntilChanged()
       )
       .subscribe(value => {
-        console.log(value);
+        this.searchFilterChanged.emit(value.trim().toLowerCase());
       });
   }
 
   filterOptionsChanged(event: MatSelectChange) {
-    this.filterChanged.emit(event.value);
+    this.selectFilterChanged.emit(event.value);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

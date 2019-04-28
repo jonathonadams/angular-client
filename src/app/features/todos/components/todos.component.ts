@@ -48,6 +48,7 @@ export class TodosComponent implements OnInit {
 
   public saveTodo(todo: Todo) {
     this.facade.saveTodo(todo);
+    this.clearTodo();
   }
 
   public deleteTodo(todo: Todo) {
@@ -60,7 +61,11 @@ export class TodosComponent implements OnInit {
     this.location.go('/todos');
   }
 
-  public filterChanged(value: TodoFilterStatus) {
-    this.facade.filterAllTodos(value);
+  public selectFilterChanged(value: TodoFilterStatus) {
+    this.facade.selectFilterChanged(value);
+  }
+
+  public searchFilterChanged(searchString: string): void {
+    this.facade.searchFilterChanged(searchString);
   }
 }

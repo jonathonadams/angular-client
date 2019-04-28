@@ -14,7 +14,8 @@ import {
   DeleteTodo,
   SelectTodo,
   ClearSelectedTodo,
-  FilterAllTodos
+  TodoSelectFilter,
+  TodoSearchFilter
 } from '../actions/todos.actions';
 import { Todo, TodoFilterStatus } from '../models/todos.model';
 import { Router } from '@angular/router';
@@ -45,8 +46,12 @@ export class TodosFacade {
     this.store.dispatch(new ClearSelectedTodo());
   }
 
-  public filterAllTodos(filter: TodoFilterStatus) {
-    this.store.dispatch(new FilterAllTodos(filter));
+  public selectFilterChanged(selectionChange: TodoFilterStatus) {
+    this.store.dispatch(new TodoSelectFilter(selectionChange));
+  }
+
+  public searchFilterChanged(searchString: string) {
+    this.store.dispatch(new TodoSearchFilter(searchString));
   }
 
   public saveTodo(todo: Todo): void {
