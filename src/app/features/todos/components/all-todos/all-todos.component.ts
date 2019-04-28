@@ -14,4 +14,6 @@ export class AllTodosComponent {
   public selected = new EventEmitter<Todo>();
   @Output()
   public delete = new EventEmitter<Todo>();
+  @Output()
+  public updated = new EventEmitter<Todo>();
 }

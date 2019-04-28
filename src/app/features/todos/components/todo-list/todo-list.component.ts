@@ -15,5 +15,10 @@ export class TodoListComponent {
   @Output()
   delete = new EventEmitter<Todo>();
   @Output()
-  updated = new EventEmitter<{ id: string; completed: boolean }>();
+  updated = new EventEmitter<Todo>();
+
+  public updateTodoCompletedStatus(todo: Todo, completed: boolean) {
+    const updatedTodo: Todo = { ...todo, completed };
+    this.updated.emit(updatedTodo);
+  }
 }

@@ -7,12 +7,8 @@
       [todos]="userTodo$ | async"
       (selected)="navigateTo($event)"
       (delete)="deleteTodo($event)"
+      (updated)="saveTodo($event)"
     >
     </demo-all-todos>
-    <!-- <demo-todo-list
-      [todos]="userTodo$ | async"
-      (selected)="navigateTo($event)"
-      (delete)="deleteTodo($event)"
-    ></demo-todo-list> -->
   </div>
 </div>
