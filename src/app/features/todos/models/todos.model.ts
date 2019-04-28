@@ -5,3 +5,9 @@ export interface Todo {
   description: string;
   completed: boolean;
 }
+
+export enum TodoFilterStatus {
+  All,
+  Completed,
+  InCompleted
+}

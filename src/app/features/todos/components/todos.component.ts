@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Todo } from '../models/todos.model';
+import { Todo, TodoFilterStatus } from '../models/todos.model';
 import { TodosFacade } from '../services/todos.facade';
 import { map, filter } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -15,6 +15,7 @@ import { Location } from '@angular/common';
 export class TodosComponent implements OnInit {
   public userTodo$: Observable<Todo[]>;
   public selectedTodo$: Observable<Todo>;
+  public todoFilter$: Observable<TodoFilterStatus>;
 
   constructor(
     private facade: TodosFacade,
@@ -23,6 +24,7 @@ export class TodosComponent implements OnInit {
   ) {
     this.userTodo$ = this.facade.userTodo$;
     this.selectedTodo$ = this.facade.selectedTodo$;
+    this.todoFilter$ = this.facade.allTodoFilter$;
   }
 
   ngOnInit() {
@@ -56,5 +58,9 @@ export class TodosComponent implements OnInit {
     this.facade.clearSelected();
     // Also update the url to remove the id without navigating
     this.location.go('/todos');
+  }
+
+  public filterChanged(value: TodoFilterStatus) {
+    this.facade.filterAllTodos(value);
   }
 }

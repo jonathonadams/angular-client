@@ -6,7 +6,7 @@ import { TodosEntityState, todosReducer } from './reducers/todos.reducer';
 import { TodoEffects } from './effects/todos.effects';
 import { TodosService } from './services/todos.service';
 import { TodosComponent } from './components/todos.component';
-import { TodoListComponent } from './components/todo-list/todo-list.component';
+import { TodoListComponent } from './components/all-todos/todo-list/todo-list.component';
 import { TodoDetailComponent } from './components/todo-detail/todo-detail.component';
 import { TodoRoutingModule } from './todos-routing.module';
 import { TodosFacade } from './services/todos.facade';

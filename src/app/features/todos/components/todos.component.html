@@ -4,10 +4,12 @@
   </div>
   <div class="column list" fxFlex="2 0 0">
     <demo-all-todos
-      [todos]="userTodo$ | async"
+      [todo$]="userTodo$"
+      [todoFilter$]="todoFilter$"
       (selected)="navigateTo($event)"
       (delete)="deleteTodo($event)"
       (updated)="saveTodo($event)"
+      (filterChanged)="filterChanged($event)"
     >
     </demo-all-todos>
   </div>

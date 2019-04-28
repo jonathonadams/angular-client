@@ -1,5 +1,5 @@
 import { ActionWithPayload } from '@app/store/reducers';
-import { Todo } from '~/app/features/todos/models/todos.model';
+import { Todo, TodoFilterStatus } from '~/app/features/todos/models/todos.model';
 import { Action } from '@ngrx/store';
 
 export enum TodoActionTypes {
@@ -16,7 +16,8 @@ export enum TodoActionTypes {
   DeleteSuccess = '[Todo] Delete Success',
   DeleteFail = '[Todo] Delete Fail',
   Select = '[Todo] Select',
-  ClearSelected = '[Todo] Clear Selected'
+  ClearSelected = '[Todo] Clear Selected',
+  UpdateFilter = '[Todo] Filter Todo '
 }
 
 export class SelectTodo implements ActionWithPayload<string> {
@@ -27,6 +28,12 @@ export class SelectTodo implements ActionWithPayload<string> {
 export class ClearSelectedTodo implements Action {
   readonly type = TodoActionTypes.ClearSelected;
 }
+
+export class FilterAllTodos implements ActionWithPayload<TodoFilterStatus> {
+  readonly type = TodoActionTypes.UpdateFilter;
+  constructor(public payload: TodoFilterStatus) {}
+}
+
 /**
  * Load Todo action
  */
@@ -104,6 +111,7 @@ export class DeleteTodoFail implements ActionWithPayload<Error> {
 export type TodoActionUnion =
   | SelectTodo
   | ClearSelectedTodo
+  | FilterAllTodos
   | LoadTodos
   | LoadTodosSuccess
   | LoadTodosFail
