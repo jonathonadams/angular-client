@@ -35,9 +35,9 @@ export class TodosComponent implements OnInit {
       .subscribe(id => this.selectTodo(id));
   }
 
-  public navigateTo(id: string): void {
-    this.facade.selectTodo(id);
-    this.location.go(`/todos/${id}`);
+  public navigateTo(todo: Todo): void {
+    this.facade.selectTodo(todo.id);
+    this.location.go(`/todos/${todo.id}`);
   }
 
   public selectTodo(id: string) {

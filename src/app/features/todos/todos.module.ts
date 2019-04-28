@@ -10,8 +10,9 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { TodoDetailComponent } from './components/todo-detail/todo-detail.component';
 import { TodoRoutingModule } from './todos-routing.module';
 import { TodosFacade } from './services/todos.facade';
+import { AllTodosComponent } from './components/all-todos/all-todos.component';
 
-const COMPONENTS = [TodosComponent, TodoListComponent, TodoDetailComponent];
+const COMPONENTS = [TodosComponent, AllTodosComponent, TodoListComponent, TodoDetailComponent];
 
 @NgModule({
   imports: [

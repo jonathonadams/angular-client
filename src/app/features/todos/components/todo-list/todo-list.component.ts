@@ -9,9 +9,11 @@ import { Todo } from '@app/features/todos';
 })
 export class TodoListComponent {
   @Input()
-  todos: Todo[];
+  todo: Todo;
   @Output()
-  selected = new EventEmitter<string>();
+  selected = new EventEmitter<Todo>();
   @Output()
   delete = new EventEmitter<Todo>();
+  @Output()
+  updated = new EventEmitter<{ id: string; completed: boolean }>();
 }

@@ -1,0 +1,7 @@
+<demo-todo-list
+  *ngFor="let todo of todos"
+  [todo]="todo"
+  (selected)="selected.emit($event)"
+  (delete)="delete.emit($event)"
+>
+</demo-todo-list>
