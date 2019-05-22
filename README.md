@@ -58,8 +58,8 @@ Note: There is not a full suite of e2e tests that cover the application (yet), h
 
 ## NativeScript Mobile Development
 
-TODO -> Document Mobile development and requirements.
-TODO -> Document the removal of additional configuration that has been enabled to work with an unecrypted API server on localhost.
+TODO: Document Mobile development and requirements.
+TODO: Document the removal of additional configuration that has been enabled to work with an unecrypted API server on localhost.
 Including
 
 _ios develop_
@@ -72,7 +72,7 @@ android:networkSecurityConfig="@xml/network_security_config"
 
 ## Configuring your own Application
 
-TODO -> Document all app prefixes that need to be changed from `demo` including:
+TODO: Document all app prefixes that need to be changed from `demo` including:
 
 - angular.json
 - src/tslint.json
@@ -83,21 +83,15 @@ App_Resources -> Android -> app.gradle -> application ID must align with package
 
 ## Contributing
 
-TODO -> Document contributing guidelines, Code of conduct etc
-TODO -> Document the Husky Git Hooks
-TODO -> Document the code scaffolding with nativescript/schematics
+TODO: Document contributing guidelines, Code of conduct etc
+TODO: Document the Husky Git Hooks
+TODO: Document the code scaffolding with nativescript/schematics
 
 ## Road MAP
 
 - Complete Mobile Components
 - Bazel for building
 
-## Custom theme mixins for angular material
-
-TODO -> Document
-
--> dark theme view encapsulation does not apply for material components
-
 ## Known Issues
 
-- By default, the Apollo InMemoryCache creates a `__typename` property on each object, this creates some issues with created an abstract service. This option can be set to false in `createApollo.ts` to remove this, however it will not allow you to use fragments on your queries if you do so. A utility function & service is provided in the `GraphQLService` until the issue is removed. Relevant feature request tracking the issues can be found [here](https://github.com/apollographql/apollo-feature-requests/issues/6)
+- By default, the Apollo InMemoryCache creates a `__typename` property on each object, this creates some issues with using a generic GraphQL service if not handled appropriately. This option can be set to false in `createApollo.ts` to remove this, however it will not allow you to use fragments on your queries if you do so. A utility function & service is provided in the `GraphQLService` until the issue is removed. Relevant feature request tracking the issues can be found [here](https://github.com/apollographql/apollo-feature-requests/issues/6)
