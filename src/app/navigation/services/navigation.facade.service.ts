@@ -6,7 +6,7 @@ import { LoginRedirect, LogoutRedirect } from '../actions/navigation.actions';
 export class NavigationFacade {
   constructor(private store: Store<any>) {}
 
-  logingRedirect() {
+  loginRedirect() {
     this.store.dispatch(new LoginRedirect());
   }
 

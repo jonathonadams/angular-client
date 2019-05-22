@@ -50,7 +50,7 @@ describe('TodoEffects', () => {
     todoService = TestBed.get(TodosService);
     mockTodo = {
       id: '1',
-      userId: '1',
+      user: '1',
       title: 'some title',
       description: 'some description',
       completed: true
@@ -66,14 +66,14 @@ describe('TodoEffects', () => {
       const todos: Todo[] = [
         {
           id: '1',
-          userId: '1',
+          user: '1',
           title: 'some title',
           description: 'some description',
           completed: true
         },
         {
           id: '2',
-          userId: '1',
+          user: '1',
           title: 'another title',
           description: 'another description',
           completed: false

@@ -87,7 +87,7 @@ describe('TodosComponent', () => {
 
       const todo: Todo = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -107,7 +107,7 @@ describe('TodosComponent', () => {
 
       const todo: Todo = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -130,7 +130,7 @@ describe('TodosComponent', () => {
 
       const todo: Todo = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -155,7 +155,7 @@ describe('TodosComponent', () => {
 
       const todo: Todo = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -201,7 +201,7 @@ describe('TodosComponent', () => {
 
       const todo: Todo = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -209,7 +209,7 @@ describe('TodosComponent', () => {
 
       expect(spy).not.toHaveBeenCalled();
 
-      const todoList = debugEl.query(By.css('demo-todo-list'));
+      const todoList = debugEl.query(By.css('demo-all-todos'));
 
       todoList.triggerEventHandler('delete', todo);
 
@@ -225,7 +225,7 @@ describe('TodosComponent', () => {
 
       const todo: Todo = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: true

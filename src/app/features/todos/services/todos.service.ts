@@ -27,7 +27,7 @@ export class TodosService {
 
   public createTodo(todo: Todo): Observable<ApolloQueryResult<{ newTodo: Todo }>> {
     // Set the user id of the current JWT id
-    todo.userId = this.auth.getDecodedToken().sub;
+    todo.user = this.auth.getDecodedToken().sub;
     // set the completed state to false
     todo.completed = false;
     const variables = { input: todo };
@@ -62,7 +62,7 @@ export class TodosService {
 
   // public createTodo(todo: Todo): Observable<Todo> {
   //   // Set the user id of the current JWT id
-  //   todo.userId = this.auth.getDecodedToken().sub;
+  //   todo.user = this.auth.getDecodedToken().sub;
   //   return this.api.post<Todo>('todos', todo);
   // }
 

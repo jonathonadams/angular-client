@@ -12,13 +12,14 @@ import {
   DeleteTodoSuccess
 } from '../actions/todos.actions';
 import { EntityAdapter, createEntityAdapter, EntityState, Dictionary } from '@ngrx/entity';
+import { TodoFilterStatus } from '../models/todos.model';
 
 describe('TodoReducer', () => {
   let adapter: EntityAdapter<Todo>;
 
   const todo: Todo = {
     id: '1',
-    userId: '1',
+    user: '1',
     title: 'some title',
     description: 'some description',
     completed: true
@@ -28,7 +29,9 @@ describe('TodoReducer', () => {
     entities: {
       [todo.id]: todo
     },
-    selectedTodoId: null
+    selectedTodoId: null,
+    allTodoFilter: TodoFilterStatus.InCompleted,
+    allTodoFilterString: null
   };
 
   beforeEach(() => {
@@ -48,14 +51,14 @@ describe('TodoReducer', () => {
       const todos: Todo[] = [
         {
           id: '1',
-          userId: '1',
+          user: '1',
           title: 'some title',
           description: 'some description',
           completed: true
         },
         {
           id: '2',
-          userId: '1',
+          user: '1',
           title: 'another title',
           description: 'another description',
           completed: false
@@ -72,7 +75,7 @@ describe('TodoReducer', () => {
     it('should add a todo to the todo state', () => {
       const newTodo = {
         id: '2',
-        userId: '1',
+        user: '1',
         title: 'another title',
         description: 'another description',
         completed: false
@@ -88,7 +91,7 @@ describe('TodoReducer', () => {
     it('should update the todo state', () => {
       const todo1 = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: false
@@ -101,7 +104,9 @@ describe('TodoReducer', () => {
           [todo1.id]: todo1,
           [todo2.id]: todo2
         },
-        selectedTodoId: null
+        selectedTodoId: null,
+        allTodoFilter: TodoFilterStatus.InCompleted,
+        allTodoFilterString: null
       };
 
       const updateTodo = {
@@ -119,7 +124,7 @@ describe('TodoReducer', () => {
     it('should delete the todo from the sate', () => {
       const todo1 = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -132,7 +137,9 @@ describe('TodoReducer', () => {
           [todo1.id]: todo1,
           [todo2.id]: todo2
         },
-        selectedTodoId: null
+        selectedTodoId: null,
+        allTodoFilter: TodoFilterStatus.InCompleted,
+        allTodoFilterString: null
       };
 
       const todoToDelete = {

@@ -5,6 +5,7 @@ import { GraphQLService } from '@app-core/graphql';
 import { LocalStorageService } from '@app-core/storage';
 import { DecodedJWT, LoginCredentials, LoginResponse } from '~/app/auth/models/auth.model';
 import { ApolloQueryResult } from 'apollo-client';
+import { FormControl, AbstractControl } from '@angular/forms';
 
 @Injectable()
 export class AuthService {
@@ -66,4 +67,16 @@ export class AuthService {
   // login(credentials: LoginCredentials): Observable<LoginResponse> {
   //   return this.http.post<LoginResponse>(`${environment.serverUrl}/authorize`, credentials);
   // }
+
+  isPasswordAllowed(password: string): boolean {
+    return !!password && password.length > 6 && /\d/.test(password) && /\D/.test(password);
+  }
+
+  passwordValidator() {
+    return (control: AbstractControl) => {
+      const allowed = this.isPasswordAllowed(control.value);
+      // const forbidden = nameRe.test(control.value);
+      return allowed ? null : { forbiddenName: { value: control.value } };
+    };
+  }
 }

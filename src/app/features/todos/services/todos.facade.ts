@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import {
-  selectAllTodos,
   TodosEntityState,
-  selectUserTodos,
-  selectCurrentTodo
+  selectCurrentTodo,
+  selectFilteredTodos,
+  selectTodoFilterSelection
 } from '../reducers/todos.reducer';
 import {
   LoadTodos,
@@ -13,9 +13,11 @@ import {
   UpdateTodo,
   DeleteTodo,
   SelectTodo,
-  ClearSelectedTodo
+  ClearSelectedTodo,
+  TodoSelectFilter,
+  TodoSearchFilter
 } from '../actions/todos.actions';
-import { Todo } from '../models/todos.model';
+import { Todo, TodoFilterStatus } from '../models/todos.model';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -23,11 +25,13 @@ export class TodosFacade {
   public todo$: Observable<Todo[]>;
   public userTodo$: Observable<Todo[]>;
   public selectedTodo$: Observable<Todo>;
+  public allTodoFilter$: Observable<TodoFilterStatus>;
 
   constructor(private store: Store<TodosEntityState>, private router: Router) {
-    this.todo$ = this.store.pipe(select(selectAllTodos));
-    this.userTodo$ = this.store.pipe(select(selectUserTodos));
+    // this.todo$ = this.store.pipe(select(selectAllTodos));
+    this.userTodo$ = this.store.pipe(select(selectFilteredTodos));
     this.selectedTodo$ = this.store.pipe(select(selectCurrentTodo));
+    this.allTodoFilter$ = this.store.pipe(select(selectTodoFilterSelection));
   }
 
   public loadTodos(): void {
@@ -40,6 +44,14 @@ export class TodosFacade {
 
   public clearSelected(): void {
     this.store.dispatch(new ClearSelectedTodo());
+  }
+
+  public selectFilterChanged(selectionChange: TodoFilterStatus) {
+    this.store.dispatch(new TodoSelectFilter(selectionChange));
+  }
+
+  public searchFilterChanged(searchString: string) {
+    this.store.dispatch(new TodoSearchFilter(searchString));
   }
 
   public saveTodo(todo: Todo): void {

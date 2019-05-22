@@ -1,7 +1,6 @@
 export const ALL_TODO_PROPERTIES = `
   fragment allTodoProperties on Todo {
     id
-    userId
     title
     description
     completed

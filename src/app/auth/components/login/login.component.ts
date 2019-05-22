@@ -36,16 +36,13 @@ export class LoginComponent implements OnInit {
         '',
         Validators.compose([Validators.required, Validators.pattern('[\\w\\-\\s\\/]+')])
       ],
-      password: [
-        '',
-        Validators.compose([Validators.required, Validators.pattern('[\\w\\-\\s\\/]+')])
-      ]
+      password: ['', Validators.compose([Validators.required, this.auth.passwordValidator()])]
     });
   }
 
   checkUserIsLoggedIn(): void {
     if (this.auth.checkUserIsLoggedIn()) {
-      this.navFacade.logingRedirect();
+      this.navFacade.loginRedirect();
     }
   }
 
