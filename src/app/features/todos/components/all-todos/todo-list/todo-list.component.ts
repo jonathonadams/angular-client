@@ -15,10 +15,10 @@ export class TodoListComponent {
   @Output()
   delete = new EventEmitter<Todo>();
   @Output()
-  updated = new EventEmitter<Todo>();
+  update = new EventEmitter<Todo>();
 
   public updateTodoCompletedStatus(todo: Todo, completed: boolean) {
     const updatedTodo: Todo = { ...todo, completed };
-    this.updated.emit(updatedTodo);
+    this.update.emit(updatedTodo);
   }
 }

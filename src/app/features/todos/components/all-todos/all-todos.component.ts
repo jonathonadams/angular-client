@@ -33,7 +33,7 @@ export class AllTodosComponent implements OnInit, OnDestroy {
   @Output()
   public delete = new EventEmitter<Todo>();
   @Output()
-  public updated = new EventEmitter<Todo>();
+  public update = new EventEmitter<Todo>();
   @Output()
   public selectFilterChanged = new EventEmitter<TodoFilterStatus>();
   @Output()

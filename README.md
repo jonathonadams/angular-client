@@ -37,9 +37,11 @@ Developing an API server for the application to communicate to is beyond the sco
 
 Unit test are configured to run with the [Jest](https://jestjs.io/) testing framework. This includes `marble testing` and `snapshot testing`.
 
-Note / TODO : There is a fair number of unit tests however additional tests need to be written.
-
 To run the tests, run `npm test`
+
+TODO:
+
+- Add additional tests to the todo reducer
 
 ### End to End test.
 

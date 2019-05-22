@@ -24,7 +24,7 @@
     "test:push": "jest --ci=true --coverage --bail",
     "test:staged": "jest --ci=true --passWithNoTests --coverage --bail --findRelatedTests",
     "snapshot:update": "jest --updateSnapshot --testPathPattern",
-    "test:ci": "jest --maxWorkers=2",
+    "test:ci": "jest --coverage --maxWorkers=2",
     "e2e:chrome": "testcafe -c 3 chrome e2e/src/ --r json:e2e/report.json",
     "e2e:firefox": "testcafe -c 3 firefox e2e/src/",
     "e2e:safari": "testcafe -c 3 safari e2e/src/",

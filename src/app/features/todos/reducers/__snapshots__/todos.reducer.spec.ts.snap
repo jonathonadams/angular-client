@@ -2,6 +2,8 @@
 
 exports[`TodoReducer CreateSuccess should add a todo to the todo state 1`] = `
 Object {
+  "allTodoFilter": 2,
+  "allTodoFilterString": null,
   "entities": Object {
     "1": Object {
       "completed": true,
@@ -28,6 +30,8 @@ Object {
 
 exports[`TodoReducer DeleteSuccess should delete the todo from the sate 1`] = `
 Object {
+  "allTodoFilter": 2,
+  "allTodoFilterString": null,
   "entities": Object {
     "1": Object {
       "completed": true,
@@ -46,6 +50,8 @@ Object {
 
 exports[`TodoReducer LoadSuccess should add the todos to the todo state 1`] = `
 Object {
+  "allTodoFilter": 2,
+  "allTodoFilterString": null,
   "entities": Object {
     "1": Object {
       "completed": true,
@@ -72,6 +78,8 @@ Object {
 
 exports[`TodoReducer UpdateSuccess should update the todo state 1`] = `
 Object {
+  "allTodoFilter": 2,
+  "allTodoFilterString": null,
   "entities": Object {
     "1": Object {
       "completed": false,
@@ -98,6 +106,8 @@ Object {
 
 exports[`TodoReducer undefined action should return the default state 1`] = `
 Object {
+  "allTodoFilter": 2,
+  "allTodoFilterString": null,
   "entities": Object {},
   "ids": Array [],
   "selectedTodoId": null,

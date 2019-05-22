@@ -12,6 +12,7 @@ import {
   DeleteTodoSuccess
 } from '../actions/todos.actions';
 import { EntityAdapter, createEntityAdapter, EntityState, Dictionary } from '@ngrx/entity';
+import { TodoFilterStatus } from '../models/todos.model';
 
 describe('TodoReducer', () => {
   let adapter: EntityAdapter<Todo>;
@@ -28,7 +29,9 @@ describe('TodoReducer', () => {
     entities: {
       [todo.id]: todo
     },
-    selectedTodoId: null
+    selectedTodoId: null,
+    allTodoFilter: TodoFilterStatus.InCompleted,
+    allTodoFilterString: null
   };
 
   beforeEach(() => {
@@ -101,7 +104,9 @@ describe('TodoReducer', () => {
           [todo1.id]: todo1,
           [todo2.id]: todo2
         },
-        selectedTodoId: null
+        selectedTodoId: null,
+        allTodoFilter: TodoFilterStatus.InCompleted,
+        allTodoFilterString: null
       };
 
       const updateTodo = {
@@ -132,7 +137,9 @@ describe('TodoReducer', () => {
           [todo1.id]: todo1,
           [todo2.id]: todo2
         },
-        selectedTodoId: null
+        selectedTodoId: null,
+        allTodoFilter: TodoFilterStatus.InCompleted,
+        allTodoFilterString: null
       };
 
       const todoToDelete = {

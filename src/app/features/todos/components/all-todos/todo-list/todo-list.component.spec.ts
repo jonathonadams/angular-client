@@ -7,11 +7,11 @@ import { By } from '@angular/platform-browser';
 
 @Component({
   template: `
-    <demo-todo-list [todos]="todos"> </demo-todo-list>
+    <demo-todo-list [todo]="todo"> </demo-todo-list>
   `
 })
 export class TestParentComponent {
-  todos: Todo[];
+  todo: Todo;
 }
 
 describe('TodoListComponent ', () => {
@@ -42,26 +42,17 @@ describe('TodoListComponent ', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('todos', () => {
-    it('should render a list of todos when set', () => {
-      const todos: Todo[] = [
-        {
-          id: '1',
-          userId: '1',
-          title: 'some title',
-          description: 'some description',
-          completed: true
-        },
-        {
-          id: '1',
-          userId: '1',
-          title: 'another title',
-          description: 'another description',
-          completed: false
-        }
-      ];
+  describe('todo', () => {
+    it('should displays the todo details when set', () => {
+      const todo: Todo = {
+        id: '1',
+        userId: '1',
+        title: 'some title',
+        description: 'some description',
+        completed: true
+      };
 
-      component.todos = todos;
+      component.todo = todo;
       fixture.detectChanges();
 
       expect(nativeEl).toMatchSnapshot();
@@ -69,30 +60,21 @@ describe('TodoListComponent ', () => {
   });
 
   describe('selected', () => {
-    it('should be raised with the selected todo when the card is clicked', fakeAsync(() => {
-      const todos: Todo[] = [
-        {
-          id: '1',
-          userId: '1',
-          title: 'some title',
-          description: 'some description',
-          completed: true
-        },
-        {
-          id: '2',
-          userId: '1',
-          title: 'another title',
-          description: 'another description',
-          completed: false
-        }
-      ];
+    it('should be raised with current todo when the card is clicked', fakeAsync(() => {
+      const todo: Todo = {
+        id: '1',
+        userId: '1',
+        title: 'some title',
+        description: 'some description',
+        completed: true
+      };
 
-      component.todos = todos;
+      component.todo = todo;
       fixture.detectChanges();
 
-      let id: string;
+      let selectedTodo: Todo;
       component.selected.subscribe(event => {
-        id = event;
+        selectedTodo = event;
       });
 
       const matCardList = debugEl.queryAll(By.css('mat-card'));
@@ -100,35 +82,26 @@ describe('TodoListComponent ', () => {
 
       tick();
 
-      expect(id).toEqual(todos[0].id);
+      expect(selectedTodo).toEqual(todo);
     }));
   });
 
-  describe('deleted', () => {
-    it('should be raised with the selected todo when the delete icon is clicked', fakeAsync(() => {
-      const todos: Todo[] = [
-        {
-          id: '1',
-          userId: '1',
-          title: 'some title',
-          description: 'some description',
-          completed: true
-        },
-        {
-          id: '2',
-          userId: '1',
-          title: 'another title',
-          description: 'another description',
-          completed: false
-        }
-      ];
+  describe('delete', () => {
+    it('should be raised with the current todo when the delete icon is clicked', fakeAsync(() => {
+      const todo: Todo = {
+        id: '1',
+        userId: '1',
+        title: 'some title',
+        description: 'some description',
+        completed: true
+      };
 
-      component.todos = todos;
+      component.todo = todo;
       fixture.detectChanges();
 
-      let id: string;
+      let deletedTodo: Todo;
       component.delete.subscribe(event => {
-        id = event;
+        deletedTodo = event;
       });
 
       const deleteButtons = debugEl.queryAll(By.css('mat-card .button'));
@@ -136,7 +109,55 @@ describe('TodoListComponent ', () => {
 
       tick();
 
-      expect(id).toEqual(todos[0]);
+      expect(deletedTodo).toEqual(todo);
+    }));
+  });
+  describe('update', () => {
+    it('should be raised when updateTodoCompletedStatus is called', fakeAsync(() => {
+      const todo: Todo = {
+        id: '1',
+        userId: '1',
+        title: 'some title',
+        description: 'some description',
+        completed: true
+      };
+
+      component.todo = todo;
+      fixture.detectChanges();
+
+      let updatedTodo: Todo;
+      component.update.subscribe(event => {
+        updatedTodo = event;
+      });
+
+      component.updateTodoCompletedStatus(todo, true);
+
+      tick();
+
+      expect(updatedTodo).toEqual(todo);
+    }));
+    it('should be raised with the updated completed status', fakeAsync(() => {
+      const todo: Todo = {
+        id: '1',
+        userId: '1',
+        title: 'some title',
+        description: 'some description',
+        completed: true
+      };
+
+      component.todo = todo;
+      fixture.detectChanges();
+
+      let updatedTodo: Todo;
+      component.update.subscribe(event => {
+        updatedTodo = event;
+      });
+
+      component.updateTodoCompletedStatus(todo, false);
+
+      tick();
+
+      expect(updatedTodo.completed).not.toEqual(todo.completed);
     }));
   });
 });
