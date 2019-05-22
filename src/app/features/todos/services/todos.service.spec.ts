@@ -70,7 +70,7 @@ describe('TodoService', () => {
       const spy = jest.spyOn(graphQLService, 'mutation');
 
       const originalTodo: Todo = {
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description'
       } as Todo;
@@ -78,7 +78,7 @@ describe('TodoService', () => {
       const sentTodo = {
         ...originalTodo,
         completed: false,
-        userId: '1'
+        user: '1'
       } as Todo;
       authService.getDecodedToken = jest.fn(() => {
         return {
@@ -100,7 +100,7 @@ describe('TodoService', () => {
 
       const updatedTodo: Todo = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -121,7 +121,7 @@ describe('TodoService', () => {
 
       const todo: Todo = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: true

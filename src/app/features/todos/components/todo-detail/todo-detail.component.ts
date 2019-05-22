@@ -38,7 +38,7 @@ export class TodoDetailComponent implements OnDestroy {
     this.todoForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      completed: [false, Validators.required]
+      completed: [false]
     });
     this.selectedTodo$ = this.facade.selectedTodo$;
 

@@ -123,7 +123,7 @@ export const selectUserTodos = createSelector(
   selectAuthenticatedUser,
   selectAllTodos,
   (user: User, todos: Todo[]) => {
-    return user && todos ? todos.filter(todo => todo.userId === user.id) : [];
+    return user && todos ? todos.filter(todo => todo.user === user.id) : [];
   }
 );
 
