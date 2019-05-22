@@ -209,7 +209,7 @@ describe('TodosComponent', () => {
 
       expect(spy).not.toHaveBeenCalled();
 
-      const todoList = debugEl.query(By.css('demo-todo-list'));
+      const todoList = debugEl.query(By.css('demo-all-todos'));
 
       todoList.triggerEventHandler('delete', todo);
 
