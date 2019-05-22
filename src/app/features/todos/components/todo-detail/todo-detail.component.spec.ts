@@ -53,7 +53,7 @@ describe('TodoDetailComponent', () => {
     it('should be raised when the saved button is clicked', () => {
       const todo: Todo = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: false

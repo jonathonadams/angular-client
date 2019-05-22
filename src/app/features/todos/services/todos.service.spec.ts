@@ -168,7 +168,7 @@ describe('TodoService', () => {
 //     const spy = jest.spyOn(apiService, 'post');
 
 //     const todo: Todo = {
-//       userId: '1',
+//       user: '1',
 //       title: 'some title',
 //       description: 'some description',
 //       completed: true
@@ -195,7 +195,7 @@ describe('TodoService', () => {
 
 //     const todo: Todo = {
 //       id: '1',
-//       userId: '1',
+//       user: '1',
 //       title: 'some title',
 //       description: 'some description',
 //       completed: true
@@ -217,7 +217,7 @@ describe('TodoService', () => {
 
 //     const todo: Todo = {
 //       id: '1',
-//       userId: '1',
+//       user: '1',
 //       title: 'some title',
 //       description: 'some description',
 //       completed: true

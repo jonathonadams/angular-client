@@ -46,7 +46,7 @@ describe('TodoListComponent ', () => {
     it('should displays the todo details when set', () => {
       const todo: Todo = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -63,7 +63,7 @@ describe('TodoListComponent ', () => {
     it('should be raised with current todo when the card is clicked', fakeAsync(() => {
       const todo: Todo = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -90,7 +90,7 @@ describe('TodoListComponent ', () => {
     it('should be raised with the current todo when the delete icon is clicked', fakeAsync(() => {
       const todo: Todo = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -116,7 +116,7 @@ describe('TodoListComponent ', () => {
     it('should be raised when updateTodoCompletedStatus is called', fakeAsync(() => {
       const todo: Todo = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: true
@@ -139,7 +139,7 @@ describe('TodoListComponent ', () => {
     it('should be raised with the updated completed status', fakeAsync(() => {
       const todo: Todo = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: true

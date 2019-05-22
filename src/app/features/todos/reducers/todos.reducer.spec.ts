@@ -19,7 +19,7 @@ describe('TodoReducer', () => {
 
   const todo: Todo = {
     id: '1',
-    userId: '1',
+    user: '1',
     title: 'some title',
     description: 'some description',
     completed: true
@@ -51,14 +51,14 @@ describe('TodoReducer', () => {
       const todos: Todo[] = [
         {
           id: '1',
-          userId: '1',
+          user: '1',
           title: 'some title',
           description: 'some description',
           completed: true
         },
         {
           id: '2',
-          userId: '1',
+          user: '1',
           title: 'another title',
           description: 'another description',
           completed: false
@@ -75,7 +75,7 @@ describe('TodoReducer', () => {
     it('should add a todo to the todo state', () => {
       const newTodo = {
         id: '2',
-        userId: '1',
+        user: '1',
         title: 'another title',
         description: 'another description',
         completed: false
@@ -91,7 +91,7 @@ describe('TodoReducer', () => {
     it('should update the todo state', () => {
       const todo1 = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: false
@@ -124,7 +124,7 @@ describe('TodoReducer', () => {
     it('should delete the todo from the sate', () => {
       const todo1 = {
         id: '1',
-        userId: '1',
+        user: '1',
         title: 'some title',
         description: 'some description',
         completed: true
