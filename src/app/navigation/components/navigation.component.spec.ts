@@ -4,6 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NavigationComponent } from './navigation.component';
 import { Store } from '@ngrx/store';
 import { storeProviderStub } from '~/tests';
+import { RouterModule } from '@angular/router';
 
 describe('NavigationComponent', () => {
   let component: NavigationComponent;
@@ -12,9 +13,11 @@ describe('NavigationComponent', () => {
   let nativeEl: HTMLElement;
   let store: Store<any>;
 
+  // TODO  -> Complete Tests
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterModule, RouterTestingModule],
       providers: [storeProviderStub],
       declarations: [NavigationComponent],
       schemas: [NO_ERRORS_SCHEMA]
