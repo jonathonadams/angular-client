@@ -52,17 +52,18 @@
     ]
   },
   "dependencies": {
-    "@angular/animations": "8.0.0",
+    "@angular/animations": "~7.2.10",
     "@angular/cdk": "^8.1.3",
-    "@angular/common": "8.0.0",
-    "@angular/compiler": "8.0.0",
+    "@angular/common": "~7.2.10",
+    "@angular/compiler": "~7.2.10",
     "@angular/core": "^8.2.2",
     "@angular/flex-layout": "^7.0.0-beta.24",
-    "@angular/forms": "8.0.0",
+    "@angular/forms": "~7.2.10",
+    "@angular/http": "~7.2.10",
     "@angular/material": "^8.1.3",
-    "@angular/platform-browser": "8.0.0",
-    "@angular/platform-browser-dynamic": "8.0.0",
-    "@angular/router": "8.0.0",
+    "@angular/platform-browser": "~7.2.10",
+    "@angular/platform-browser-dynamic": "~7.2.10",
+    "@angular/router": "~7.2.10",
     "@ngrx/effects": "^7.3.0",
     "@ngrx/entity": "^7.3.0",
     "@ngrx/store": "^8.2.0",
@@ -77,20 +78,21 @@
     "hammerjs": "^2.0.8",
     "jwt-decode": "^2.2.0",
     "lodash.omit": "^4.5.0",
-    "nativescript-angular": "8.0.2",
+    "nativescript-angular": "^7.2.3",
+    "nativescript-localstorage": "^2.0.0",
     "nativescript-theme-core": "~1.0.4",
-    "nativescript-ui-sidedrawer": "7.0.0",
+    "nativescript-ui-sidedrawer": "^6.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.4.0",
     "socket.io-client": "^2.1.1",
-    "tns-core-modules": "6.0.1",
-    "zone.js": "0.9.1"
+    "tns-core-modules": "^5.2.2",
+    "zone.js": "~0.8.29"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.800.3",
+    "@angular-devkit/build-angular": "^0.13.6",
     "@angular-devkit/core": "^7.3.6",
     "@angular/cli": "^8.2.2",
-    "@angular/compiler-cli": "8.0.0",
+    "@angular/compiler-cli": "~7.2.10",
     "@angular/language-service": "~7.2.10",
     "@nativescript/schematics": "^0.5.2",
     "@ngrx/schematics": "^7.3.0",
@@ -105,7 +107,9 @@
     "jest-preset-angular": "^7.0.1",
     "jsonwebtoken": "^8.5.1",
     "lint-staged": "^8.1.5",
-    "nativescript-dev-webpack": "1.0.1",
+    "nativescript-dev-sass": "^1.7.0",
+    "nativescript-dev-typescript": "^0.9.0",
+    "nativescript-dev-webpack": "^0.20.3",
     "npm-run-all": "^4.1.3",
     "prettier": "^1.16.4",
     "pretty-quick": "^1.10.0",
@@ -116,16 +120,16 @@
     "ts-jest": "^24.0.0",
     "ts-node": "^8.0.3",
     "tslint": "^5.14.0",
-    "typescript": "3.4.5",
-    "node-sass": "4.12.0"
+    "typescript": "~3.2.4",
+    "uglifyjs-webpack-plugin": "^2.1.2"
   },
   "nativescript": {
     "id": "org.nativescript.client",
     "tns-ios": {
-      "version": "6.0.1"
+      "version": "5.1.0"
     },
     "tns-android": {
-      "version": "6.0.0"
+      "version": "5.1.0"
     }
   }
 }

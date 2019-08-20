@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { getString, setString, remove } from 'application-settings';
 
 // The appropriate local storage will be imported depending on if you are
 // building for the web or for native web development
@@ -7,14 +8,14 @@ import { Injectable } from '@angular/core';
 })
 export class LocalStorageService {
   setItem(key: string, value: string): void {
-    localStorage.setItem(key, value);
+    setString(key, value);
   }
 
   getItem(key: string): string {
-    return localStorage.getItem(key);
+    return getString(key);
   }
 
   removeItem(key: string): void {
-    localStorage.removeItem(key);
+    remove(key);
   }
 }

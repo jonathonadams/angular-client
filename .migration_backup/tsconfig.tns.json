@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "~/*": ["src/*"],
+      "*": ["./node_modules/tns-core-modules/*", "./node_modules/*"],
+      "@env/*": ["src/environments/*"],
+      "@app/*": ["src/app/*"],
+      "@app-core/*": ["src/app/core/*"],
+      "@auth/*": ["src/app/auth/*"],
+      "@nav/*": ["src/app/navigation/*"],
+      "@components/*": ["src/app/components/*"],
+      "@features/*": ["src/app/features/*"],
+      "@shared/*": ["src/app/shared/*"],
+      "@store/*": ["src/app/store/*"],
+      "@tests/*": ["src/tests/*"]
+    },
+    "module": "es2015",
+    "moduleResolution": "node"
+  },
+  "exclude": ["setupJest.ts", "**/tests/**", "**/*.spec.ts"]
+}
