@@ -20,10 +20,15 @@ import { Router } from '@angular/router';
   animations: [ROUTER_ANIMATIONS]
 })
 export class NavigationComponent implements AfterViewInit {
-  @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
+  @ViewChild(RadSideDrawerComponent, { static: true })
+  public drawerComponent: RadSideDrawerComponent;
   private drawer: RadSideDrawer;
 
-  constructor(private store: Store<any>, private cd: ChangeDetectorRef, private router: Router) {}
+  constructor(
+    private store: Store<any>,
+    private cd: ChangeDetectorRef,
+    private router: Router
+  ) {}
   public navLinks = [
     { path: '/home', icon: 'home', label: 'Home' },
     { path: '/todos', icon: 'list', label: 'Todos' }

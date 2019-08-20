@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoListComponent  todo should displays the todo details when set 1`] = `
+<div
+  id="root3"
+  ng-version="8.2.2"
+>
+  <mat-card>
+    <mat-card-subtitle>
+      some title
+    </mat-card-subtitle>
+    <mat-card-content
+      fxlayout="row"
+      fxlayoutalign="space-between center"
+    >
+      <span>
+        some description
+      </span>
+      <mat-slide-toggle>
+        Completed
+      </mat-slide-toggle>
+    </mat-card-content>
+    <mat-card-actions
+      fxlayoutalign="end"
+    >
+      <mat-icon
+        class="button"
+      >
+        delete
+      </mat-icon>
+    </mat-card-actions>
+  </mat-card>
+</div>
+`;

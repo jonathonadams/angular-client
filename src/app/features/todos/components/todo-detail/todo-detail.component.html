@@ -7,11 +7,12 @@
         <input type="text" matInput formControlName="title" />
       </mat-form-field>
     </mat-card-subtitle>
-    <mat-card-content>
+    <mat-card-content fxLayout="column">
       <mat-form-field>
         <mat-label>Description</mat-label>
         <input type="text" matInput formControlName="description" />
       </mat-form-field>
+      <mat-slide-toggle formControlName="completed">Completed</mat-slide-toggle>
     </mat-card-content>
     <mat-card-actions>
       <button mat-stroked-button type="submit">Save</button>

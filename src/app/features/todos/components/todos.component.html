@@ -3,10 +3,15 @@
     <demo-todo-detail (saved)="saveTodo($event)" (cancelled)="clearTodo()"></demo-todo-detail>
   </div>
   <div class="column list" fxFlex="2 0 0">
-    <demo-todo-list
-      [todos]="userTodo$ | async"
+    <demo-all-todos
+      [todo$]="userTodo$"
+      [todoFilter$]="todoFilter$"
       (selected)="navigateTo($event)"
       (delete)="deleteTodo($event)"
-    ></demo-todo-list>
+      (update)="saveTodo($event)"
+      (selectFilterChanged)="selectFilterChanged($event)"
+      (searchFilterChanged)="searchFilterChanged($event)"
+    >
+    </demo-all-todos>
   </div>
 </div>

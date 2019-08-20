@@ -13,10 +13,17 @@ import { AuthFacade } from './services/auth.facade.service';
 export const COMPONENTS = [LoginComponent];
 
 @NgModule({
-  imports: [SharedModule],
   declarations: COMPONENTS,
+  imports: [
+    SharedModule,
+    AuthRoutingModule,
+    EffectsModule.forFeature([AuthEffects])
+  ],
   exports: COMPONENTS
 })
+export class RootAuthModule {}
+
+@NgModule()
 export class AuthModule {
   static forRoot(): ModuleWithProviders<AuthModule> {
     return {
@@ -30,13 +37,3 @@ export class AuthModule {
     };
   }
 }
-
-@NgModule({
-  imports: [
-    AuthModule,
-    AuthRoutingModule,
-    // StoreModule.forFeature('auth', reducers),
-    EffectsModule.forFeature([AuthEffects])
-  ]
-})
-export class RootAuthModule {}

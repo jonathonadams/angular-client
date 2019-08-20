@@ -1,6 +1,6 @@
 {
   "name": "demo-angular-client",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "license": "MIT",
   "author": {
     "name": "Jonathon Adams"
@@ -11,10 +11,10 @@
   },
   "homepage": "https://github.com/jadams88/angular-client#readme",
   "scripts": {
-    "android": "tns run android --bundle",
-    "ios": "tns run ios --bundle",
-    "android:build": "tns build android --bundle",
-    "ios:build": "tns build ios --bundle",
+    "android": "tns run android",
+    "ios": "tns run ios",
+    "mobile": "tns run",
+    "preview": "tns preview",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -24,49 +24,42 @@
     "test:push": "jest --ci=true --coverage --bail",
     "test:staged": "jest --ci=true --passWithNoTests --coverage --bail --findRelatedTests",
     "snapshot:update": "jest --updateSnapshot --testPathPattern",
-    "test:ci": "jest --maxWorkers=2",
+    "test:ci": "jest --coverage --maxWorkers=2",
     "e2e:chrome": "testcafe -c 3 chrome e2e/src/ --r json:e2e/report.json",
     "e2e:firefox": "testcafe -c 3 firefox e2e/src/",
     "e2e:safari": "testcafe -c 3 safari e2e/src/",
     "e2e:edge": "testcafe edge e2e/src/",
     "format:fix": "pretty-quick --staged",
-    "lint": "ng lint client",
-    "lint:fix": "ng lint client --fix",
-    "lint-staged": "lint-staged"
+    "lint": "ng lint demo",
+    "lint:fix": "ng lint demo --fix",
+    "lint-staged": "lint-staged --relative"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "run-s format:fix lint-staged",
-      "pre-push": "run-s format:fix"
+      "pre-commit": "run-s format:fix"
     }
   },
   "lint-staged": {
-    "linters": {
       "*.ts": [
-        "tslint --fix",
+        "npm run lint:fix",
         "git add"
       ]
-    },
-    "ignore": [
-      "**/dist/*.min.js"
-    ]
   },
   "dependencies": {
-    "@angular/animations": "~7.2.10",
-    "@angular/cdk": "^7.3.5",
-    "@angular/common": "~7.2.10",
-    "@angular/compiler": "~7.2.10",
-    "@angular/core": "~7.2.10",
-    "@angular/flex-layout": "^7.0.0-beta.24",
-    "@angular/forms": "~7.2.10",
-    "@angular/http": "~7.2.10",
-    "@angular/material": "^7.3.5",
-    "@angular/platform-browser": "~7.2.10",
-    "@angular/platform-browser-dynamic": "~7.2.10",
-    "@angular/router": "~7.2.10",
-    "@ngrx/effects": "^7.3.0",
-    "@ngrx/entity": "^7.3.0",
-    "@ngrx/store": "^7.3.0",
+    "@angular/animations": "^8.2.1",
+    "@angular/cdk": "^8.1.3",
+    "@angular/common": "^8.2.1",
+    "@angular/compiler": "^8.2.1",
+    "@angular/core": "^8.2.1",
+    "@angular/flex-layout": "^8.0.0-beta.26",
+    "@angular/forms": "^8.2.1",
+    "@angular/material": "^8.1.3",
+    "@angular/platform-browser": "^8.2.1",
+    "@angular/platform-browser-dynamic": "^8.2.1",
+    "@angular/router": "^8.2.1",
+    "@ngrx/effects": "^8.2.0",
+    "@ngrx/entity": "^8.2.0",
+    "@ngrx/store": "^8.2.0",
     "apollo-angular": "^1.5.0",
     "apollo-angular-link-http": "^1.5.0",
     "apollo-cache-inmemory": "^1.5.1",
@@ -78,38 +71,35 @@
     "hammerjs": "^2.0.8",
     "jwt-decode": "^2.2.0",
     "lodash.omit": "^4.5.0",
-    "nativescript-angular": "^7.2.3",
-    "nativescript-localstorage": "^2.0.0",
-    "nativescript-theme-core": "~1.0.4",
-    "nativescript-ui-sidedrawer": "^6.0.0",
+    "nativescript-angular": "~8.2.0",
+    "nativescript-ui-sidedrawer": "7.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.4.0",
     "socket.io-client": "^2.1.1",
-    "tns-core-modules": "^5.2.2",
-    "zone.js": "~0.8.29"
+    "tns-core-modules": "^6.0.6",
+    "zone.js": "0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.13.6",
-    "@angular-devkit/core": "^7.3.6",
-    "@angular/cli": "^7.3.6",
-    "@angular/compiler-cli": "~7.2.10",
-    "@angular/language-service": "~7.2.10",
-    "@nativescript/schematics": "^0.5.2",
-    "@ngrx/schematics": "^7.3.0",
+    "@angular-devkit/build-angular": "^0.802.2",
+    "@angular-devkit/core": "^8.2.2",
+    "@angular/cli": "^8.2.2",
+    "@angular/compiler-cli": "^8.2.2",
+    "@angular/language-service": "^8.2.2",
+    "@nativescript/schematics": "^0.7.0",
+    "@ngrx/schematics": "^8.2.0",
     "@types/jest": "^24.0.11",
     "@types/node": "^10.14.3",
     "bcryptjs": "^2.4.3",
-    "codelyzer": "~4.5.0",
-    "husky": "^1.3.1",
+    "codelyzer": "^5.1.0",
+    "husky": "^3.0.4",
     "jest": "^24.5.0",
     "jest-cli": "^24.5.0",
     "jest-marbles": "^2.3.1",
     "jest-preset-angular": "^7.0.1",
     "jsonwebtoken": "^8.5.1",
-    "lint-staged": "^8.1.5",
-    "nativescript-dev-sass": "^1.7.0",
-    "nativescript-dev-typescript": "^0.9.0",
-    "nativescript-dev-webpack": "^0.20.3",
+    "lint-staged": "^9.2.3",
+    "nativescript-dev-webpack": "^1.1.0",
+    "node-sass": "4.12.0",
     "npm-run-all": "^4.1.3",
     "prettier": "^1.16.4",
     "pretty-quick": "^1.10.0",
@@ -120,16 +110,15 @@
     "ts-jest": "^24.0.0",
     "ts-node": "^8.0.3",
     "tslint": "^5.14.0",
-    "typescript": "~3.2.4",
-    "uglifyjs-webpack-plugin": "^2.1.2"
+    "typescript": "^3.5.3"
   },
   "nativescript": {
     "id": "org.nativescript.client",
     "tns-ios": {
-      "version": "5.1.0"
+      "version": "6.0.2"
     },
     "tns-android": {
-      "version": "5.1.0"
+      "version": "6.0.1"
     }
   }
 }
