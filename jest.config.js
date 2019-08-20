@@ -12,7 +12,13 @@ module.exports = {
       statements: 20
     }
   },
-  coverageReporters: ['json-summary', 'html', 'lcovonly', 'text', 'text-summary'],
+  coverageReporters: [
+    'json-summary',
+    'html',
+    'lcovonly',
+    'text',
+    'text-summary'
+  ],
   moduleNameMapper: {
     '~/(.*)': '<rootDir>/src/$1',
     '@env/(.*)': '<rootDir>/src/environments/$1',

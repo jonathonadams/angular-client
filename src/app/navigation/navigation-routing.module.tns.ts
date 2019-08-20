@@ -21,7 +21,8 @@ export const ROUTES: Routes = [
       },
       {
         path: 'todos',
-        loadChildren: '../features/todos/todos.module#TodoModule'
+        loadChildren: () =>
+          import('../features/todos/todos.module').then(m => m.TodoModule)
       },
       {
         path: '',

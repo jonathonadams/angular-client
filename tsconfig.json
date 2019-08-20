@@ -2,6 +2,16 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": ".",
+    "outDir": "./dist/out-tsc",
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2018", "dom", "es6", "es2015.iterable"],
+    "skipLibCheck": true,
+    "allowJs": true,
     "paths": {
       "~/*": ["src/*"],
       "*": ["./node_modules/tns-core-modules/*", "./node_modules/*"],
@@ -15,16 +25,6 @@
       "@shared/*": ["src/app/shared/*"],
       "@store/*": ["src/app/store/*"],
       "@tests/*": ["src/tests/*"]
-    },
-    "outDir": "./dist/out-tsc",
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "es5",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["es2018", "dom", "es6", "es2015.iterable"],
-    "skipLibCheck": true,
-    "allowJs": true
+    }
   }
 }

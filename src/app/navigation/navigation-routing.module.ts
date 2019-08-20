@@ -23,7 +23,8 @@ export const ROUTES: Routes = [
       },
       {
         path: 'todos',
-        loadChildren: '../features/todos/todos.module#TodoModule'
+        loadChildren: () =>
+          import('../features/todos/todos.module').then(m => m.TodoModule)
       },
       // Move this to a UsersRoutingModule when angular supports a 'loadModuleRoutes' or something that is not lazy loaded
       {
