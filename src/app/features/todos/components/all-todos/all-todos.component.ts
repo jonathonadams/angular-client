@@ -22,7 +22,9 @@ import { MatSelectChange } from '@angular/material';
 })
 export class AllTodosComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  @ViewChild('todoSearch') searchInput: ElementRef<HTMLInputElement>;
+  @ViewChild('todoSearch', { static: true }) searchInput: ElementRef<
+    HTMLInputElement
+  >;
 
   @Input()
   public todo$: Observable<Todo[]>;

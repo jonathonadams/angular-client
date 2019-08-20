@@ -7,7 +7,12 @@ import {
   ViewChild
 } from '@angular/core';
 import { Todo } from '@app/features/todos';
-import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormGroupDirective
+} from '@angular/forms';
 import { TodosFacade } from '../../services/todos.facade';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -24,7 +29,7 @@ export class TodoDetailComponent implements OnDestroy {
    * Need to call resetForm() on the FormGroupDirective, not reset() on the formGroup.
    * Otherwise the validators do not get reset
    */
-  @ViewChild(FormGroupDirective) formDirective;
+  @ViewChild(FormGroupDirective, { static: true }) formDirective;
   public todoForm: FormGroup;
   public selectedTodo$: Observable<Todo>;
   public subscription: Subscription;

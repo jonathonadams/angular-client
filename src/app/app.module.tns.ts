@@ -12,11 +12,9 @@ import { AuthModule } from './auth';
 import { CoreModule } from './core/core.module';
 import { NavigationModule } from './navigation/navigation.module';
 import { FeaturesModule } from './features/features.module';
-import { UsersComponent } from './features/users/components/users.component';
-import { UsersNavigationComponent } from './features/users/components/users-navigation/users-navigation.component';
 
 @NgModule({
-  declarations: [AppComponent, UsersComponent, UsersNavigationComponent],
+  declarations: [AppComponent],
   imports: [
     NativeScriptModule,
     StoreModule.forRoot<AppState>(reducers, { metaReducers }),

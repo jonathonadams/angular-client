@@ -16,7 +16,6 @@
       "@store/*": ["src/app/store/*"],
       "@tests/*": ["src/tests/*"]
     },
-    "module": "es2015",
     "moduleResolution": "node"
   },
   "exclude": ["setupJest.ts", "**/tests/**", "**/*.spec.ts"]
