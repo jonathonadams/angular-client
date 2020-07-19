@@ -1,4 +1,8 @@
-NOTE: This project is a work in progress and will regularly be updated.
+---
+# **ARCHIVED**
+# This repo is no longer maintained.
+# Please see [zero-to-production.dev](https://zero-to-production.dev) for an up to Angular project.
+---
 
 ## About this project.
 
@@ -39,10 +43,6 @@ Unit test are configured to run with the [Jest](https://jestjs.io/) testing fram
 
 To run the tests, run `npm test`
 
-TODO:
-
-- Add additional tests to the todo reducer
-
 ### End to End test.
 
 E2E Test are rung using [TestCafe](https://testcafe.devexpress.com/). These are located in the `/e2e` directory.
@@ -69,28 +69,6 @@ remove the NSAppTransportSecurity from the info.plist in the ios directory
 _android local development_
 
 android:networkSecurityConfig="@xml/network_security_config"
-
-## Configuring your own Application
-
-TODO: Document all app prefixes that need to be changed from `demo` including:
-
-- angular.json
-- src/tslint.json
-- All component.ts, .html and .scss
-
-TODO -> Document Nativescript development setup eg.
-App_Resources -> Android -> app.gradle -> application ID must align with package.json
-
-## Contributing
-
-TODO: Document contributing guidelines, Code of conduct etc
-TODO: Document the Husky Git Hooks
-TODO: Document the code scaffolding with nativescript/schematics
-
-## Road MAP
-
-- Complete Mobile Components
-- Bazel for building
 
 ## Known Issues
 
